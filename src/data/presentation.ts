@@ -1,3 +1,5 @@
+import presentationImage from '../assets/presentation.webp'
+
 export type Social = {
   name: string;
   link: string;
@@ -8,7 +10,7 @@ export type Presentation = {
   title: string;
   description: string;
   socials: Social[];
-  profile?: string;
+  profile: ImageMetadata;
   openToWork?: boolean;
 };
 
@@ -17,7 +19,7 @@ export const presentation: Presentation = {
   title: "Pablo Koll",
   description: "Desarrollador Web con 3 años de experiencia",
   openToWork: true,
-  profile: "profile.webp",
+  profile: presentationImage,
   socials: [
     {
       name: "LinkedIn",
