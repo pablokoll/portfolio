@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 import { experience } from '@data/experience.ts';
 import { projects } from '@data/projects.ts';
@@ -72,4 +73,5 @@ import ContactIcon from '@icons/ContactIcon.astro';
             <Contact />
         </section>
     </main>
+    <SpeedInsights />
 </Layout>
