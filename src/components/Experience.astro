@@ -2,12 +2,13 @@
 import type { Experience } from '@data/experience';
 
 interface Props {
-    experience: Experience;
-    index: number;
+	experience: Experience;
+	index: number;
 }
 
 const { experience, index } = Astro.props;
-const { title, company, date_start, date_end, description, company_link } = experience;
+const { title, company, date_start, date_end, description, company_link } =
+	experience;
 ---
 
 <article class=`flex flex-col gap-5 ${index > 0 ? 'mt-14' : 'mt-0'}`>

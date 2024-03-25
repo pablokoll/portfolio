@@ -1,11 +1,11 @@
 ---
-import { TechIcons, type Project } from '@data/projects.ts';
+import { type Project, TechIcons } from '@data/projects.ts';
 import LinkIcon from '@icons/LinkIcon.astro';
 import { Icon } from 'astro-icon/components';
 import Tooltip from './Tooltip.astro';
 
 interface Props {
-    project: Project;
+	project: Project;
 }
 
 const { project } = Astro.props;
