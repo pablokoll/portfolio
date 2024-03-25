@@ -24,8 +24,8 @@ import TechsIcon from '@icons/TechsIcon.astro';
 ---
 
 <Layout
-    title='Portfolio de Pablo Koll - Desarrollador Backend / Full Stack'
-    description='Desarrollador Backend / Full Stack con experiencia en Nodejs'>
+    title='Portfolio Pablo Koll - Software Developer'
+    description='Software developer with experience in web development'>
     <header
         class='mx-auto max-w-3xl sticky top-0 z-20 h-16 flex justify-end items-center p-6 bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-lg'>
         <ThemeIcon />
@@ -36,13 +36,13 @@ import TechsIcon from '@icons/TechsIcon.astro';
         </section>
         <hr class='border-dashed border-1' />
         <section class='flex flex-col'>
-            <SectionHeader name='Experiencia'>
+            <SectionHeader name='Work Experience'>
                 <ExpirenceIcon className='size-9' />
             </SectionHeader>
             {experience.map((experience, i) => <Experience experience={experience} index={i} />)}
         </section>
         <section>
-            <SectionHeader name='Proyectos'>
+            <SectionHeader name='Projects'>
                 <ProjectIcon className='size-9' />
             </SectionHeader>
             <div class='flex flex-col gap-10'>
@@ -55,19 +55,19 @@ import TechsIcon from '@icons/TechsIcon.astro';
             </div>
         </section>
         <section>
-            <SectionHeader name='Tecnologías'>
+            <SectionHeader name='Technologies'>
                 <TechsIcon className='size-9' />
             </SectionHeader>
             <Techs />
         </section>
         <section>
-            <SectionHeader name='Redes'>
+            <SectionHeader name='Socials'>
                 <SocialsIcon className='size-9' />
             </SectionHeader>
             <Socials />
         </section>
         <section>
-            <SectionHeader name='Contacto'>
+            <SectionHeader name='Contact'>
                 <ContactIcon className='size-9' />
             </SectionHeader>
             <Contact />

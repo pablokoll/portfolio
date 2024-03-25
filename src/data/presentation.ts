@@ -17,7 +17,7 @@ export type Presentation = {
 export const presentation: Presentation = {
 	mail: 'pablokollm@gmail.com',
 	title: 'Pablo Koll',
-	description: 'Desarrollador Web con 3 años de experiencia',
+	description: 'Software Developer with 3 years in experience in Web Development',
 	openToWork: true,
 	profile: presentationImage,
 	socials: [
