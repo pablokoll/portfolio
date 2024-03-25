@@ -11,19 +11,19 @@ import SendIcon from '@icons/SendIcon.astro';
   >
     {presentation.mail}
   </p>
-  <Tooltip text="Enviame un correo" w="w-[5rem]" h="-top-[5.5rem]">
+  <Tooltip text="Send me an email" w="w-[5rem]" h="-top-[5.5rem]">
     <a
-      aria-label="Enviar correo"
+      aria-label="Send me an email"
       href=`mailto:${presentation.mail}`
       class="p-2 text-white rounded-md bg-sky-600/25 dark:bg-slate-700 dark:hover:bg-slate-600"
     >
-      <title>Enviar correo</title>
+      <title>Send me an email</title>
       <SendIcon className="size-7" />
     </a>
   </Tooltip>
-  <Tooltip text="Copiar correo" w="w-[5.5rem]">
+  <Tooltip text="Copy email" w="w-[5.5rem]">
     <button
-      aria-label="Copiar correo"
+      aria-label="Copy email"
       class="p-2 text-white rounded-md bg-sky-600/25 dark:bg-slate-700 dark:hover:bg-slate-600"
       id="copyButton"
     >
