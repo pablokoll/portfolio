@@ -15,10 +15,10 @@ export const experience: Experience[] = [
 		date_start: 'Jan 2023',
 		date_end: 'Present',
 		description: [
-			'My integral components of my technology stack and development environment are Node.js (Typescript/Javascript), Docker, and Ubuntu (Linux). My primary focus lies on Express.js and Nest.js frameworks.',
-			`I'm a Backend Developer specializing in microservices for eCommerce, I bring expertise from working with platforms like Magento and Vtex.`,
+			'My technology stack and development environment are Node.js (Typescript/Javascript), Docker, and Ubuntu (Linux). My primary frameworks are Express.js and Nest.js.',
+			'I led the backend development across various projects, focusing on understanding daily client needs.',
+			`I'm a Backend Developer specializing in microservices for E-Commerce, I bring expertise from working with platforms like Magento and Vtex.`,
 			'I adeptly handle REST, SOAP, and GraphQL APIs, along with protocols such as HTTPS, SFTP, and SMTP to facilitate seamless communication across diverse software systems.',
-			'I implemented robust queuing systems, websockets, and efficient caching mechanisms.',
 			'For secure access management, I employed methods like OAuth 2.0 and JWT.',
 			'To ensure application quality and reliability, I utilize both end-to-end (E2E) and unit testing.',
 			'My deployment process is streamlined through CI/CD practices, and I hosted applications efficiently on cloud services like AWS.',

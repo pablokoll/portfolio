@@ -3,8 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 
 import { experience } from '@data/experience.ts';
-import { projects } from '@data/projects.ts';
-import { otherProjects } from '@data/projects.ts';
+import { otherProjects, projects } from '@data/projects.ts';
 
 import Contact from '@components/Contact.astro';
 import Experience from '@components/Experience.astro';
@@ -41,19 +40,23 @@ import TechsIcon from '@icons/TechsIcon.astro';
             </SectionHeader>
             {experience.map((experience, i) => <Experience experience={experience} index={i} />)}
         </section>
-        <section>
-            <SectionHeader name='Projects'>
-                <ProjectIcon className='size-9' />
-            </SectionHeader>
-            <div class='flex flex-col gap-10'>
-                <div class='grid gap-10'>
-                    {projects.map((project) => <ProjectCard project={project} />)}
+        {
+            projects.length ? 
+            <section>
+                <SectionHeader name='Projects'>
+                    <ProjectIcon className='size-9' />
+                </SectionHeader>
+                <div class='flex flex-col gap-10'>
+                    <div class='grid gap-10'>
+                        {projects.map((project) => <ProjectCard project={project} />)}
+                    </div>
+                    <div class='grid md:grid-cols-2 gap-2 sm:gap-5'>
+                        {otherProjects.map((project) => <OtherProjectCard project={project} />)}
+                    </div>
                 </div>
-                <div class='grid md:grid-cols-2 gap-2 sm:gap-5'>
-                    {otherProjects.map((project) => <OtherProjectCard project={project} />)}
-                </div>
-            </div>
-        </section>
+            </section>
+            : null
+        }
         <section>
             <SectionHeader name='Technologies'>
                 <TechsIcon className='size-9' />
