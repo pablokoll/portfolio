@@ -10,4 +10,5 @@ export default defineConfig({
     integrations: [tailwind(), icon(), playformCompress({ Path: ['./vercel/output', './dist'] })],
     output: 'static',
     adapter: vercelStatic({ webAnalytics: true }),
+    site: 'https://pablokoll.com',
 });
