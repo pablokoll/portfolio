@@ -5,10 +5,10 @@ import AstroIcon from '@icons/AstroIcon.astro';
 interface Props {
 	title: string;
 	description: string;
-	footer?: boolean;
+	notDisplayFooter?: boolean;
 }
 
-const { title, description, footer } = Astro.props;
+const { title, description, notDisplayFooter } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,7 +24,7 @@ const { title, description, footer } = Astro.props;
   <body class="bg-white dark:bg-gray-800">
     <slot />
     <footer
-      class=`h-10 flex flex-col justify-center items-center mt-5 mb-4 text-slate-600 dark:text-slate-300 ${!footer ? 'hidden' : ''}`
+      class=`h-10 flex flex-col justify-center items-center text-slate-600 dark:text-slate-300 ${notDisplayFooter ? 'hidden' : ''}`
     >
       <div class="flex">
         <a class= "flex flex-row" href="https://github.com/pablokoll/portfolio" target="_blank" aria-label="Github Link to Portfolio Pablo Koll">Made with
