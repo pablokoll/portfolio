@@ -1,0 +1,80 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+import { experience } from '@data/experience.ts';
+import { otherProjects, projects } from '@data/projects.ts';
+
+import Contact from '@components/Contact.astro';
+import Experience from '@components/Experience.astro';
+import OtherProjectCard from '@components/OtherProjectCard.astro';
+import Profile from '@components/Profile.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import SectionHeader from '@components/SectionHeader.astro';
+import Socials from '@components/Socials.astro';
+import Techs from '@components/Techs.astro';
+import ThemeIcon from '@components/ThemeIcon.astro';
+
+import ContactIcon from '@icons/ContactIcon.astro';
+import ExpirenceIcon from '@icons/ExpirenceIcon.astro';
+import ProjectIcon from '@icons/ProjectIcon.astro';
+import SocialsIcon from '@icons/SocialsIcon.astro';
+import TechsIcon from '@icons/TechsIcon.astro';
+import HomeIcon from '../components/HomeIcon.astro';
+---
+
+<Layout
+    title='Portfolio Pablo Koll - Software Developer'
+    description='Software developer with experience in web development'>
+    <header
+        class='mx-auto max-w-3xl sticky top-0 z-20 h-16 flex justify-end items-center p-6 bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-lg'>
+        <HomeIcon />
+        <ThemeIcon />
+    </header>
+    <main class='flex flex-col gap-16 sm:max-w-3xl m-auto p-5'>
+        <section class='flex flex-col justify-center sm:flex-row sm:justify-start gap-2 sm:gap-5'>
+            <Profile />
+        </section>
+        <hr class='border-dashed border-1' />
+        <section class='flex flex-col'>
+            <SectionHeader name='Work Experience'>
+                <ExpirenceIcon className='size-9' />
+            </SectionHeader>
+            {experience.map((experience, i) => <Experience experience={experience} index={i} />)}
+        </section>
+        {
+            projects.length ? 
+            <section>
+                <SectionHeader name='Projects'>
+                    <ProjectIcon className='size-9' />
+                </SectionHeader>
+                <div class='flex flex-col gap-10'>
+                    <div class='grid gap-10'>
+                        {projects.map((project) => <ProjectCard project={project} />)}
+                    </div>
+                    <div class='grid md:grid-cols-2 gap-2 sm:gap-5'>
+                        {otherProjects.map((project) => <OtherProjectCard project={project} />)}
+                    </div>
+                </div>
+            </section>
+            : null
+        }
+        <section>
+            <SectionHeader name='Technologies'>
+                <TechsIcon className='size-9' />
+            </SectionHeader>
+            <Techs />
+        </section>
+        <section>
+            <SectionHeader name='Socials'>
+                <SocialsIcon className='size-9' />
+            </SectionHeader>
+            <Socials />
+        </section>
+        <section>
+            <SectionHeader name='Contact'>
+                <ContactIcon className='size-9' />
+            </SectionHeader>
+            <Contact />
+        </section>
+    </main>
+</Layout>

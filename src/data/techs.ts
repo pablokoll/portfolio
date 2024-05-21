@@ -1,4 +1,4 @@
-import { TechIcons } from '@data/projects.ts';
+import { TechIcons } from '../types/types';
 
 export const techs: TechIcons[] = [
 	TechIcons.JavaScript,

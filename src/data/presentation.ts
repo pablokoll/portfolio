@@ -1,23 +1,11 @@
-import presentationImage from '../assets/presentation.webp';
-
-export type Social = {
-	name: string;
-	link: string;
-};
-
-export type Presentation = {
-	mail: string;
-	title: string;
-	description: string;
-	socials: Social[];
-	profile: ImageMetadata;
-	openToWork?: boolean;
-};
+import presentationImage from '../assets/pablo-koll.webp';
+import type { Presentation } from '../types/types';
 
 export const presentation: Presentation = {
 	mail: 'pablokollm@gmail.com',
 	title: 'Pablo Koll',
-	description: 'Software Engineer with 3 years of experience in Web Development',
+	description:
+		'Software Developer with 3 years of experience in Web Development',
 	openToWork: true,
 	profile: presentationImage,
 	socials: [
