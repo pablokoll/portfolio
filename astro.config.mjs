@@ -7,7 +7,7 @@ import playformCompress from '@playform/compress';
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind(), icon(), playformCompress({ Path: ['./dist'] })],
+    integrations: [tailwind(), icon(), playformCompress({ Path: ['./vercel/output', './dist'] })],
     output: 'static',
     adapter: vercelStatic({ webAnalytics: true }),
 });
