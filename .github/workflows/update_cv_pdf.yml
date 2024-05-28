@@ -22,10 +22,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /dist
+        working-directory: /
 
       - name: Run update script
-        run: node /update_cv.js
+        run: node ./update_cv.js
 
       - name: Commit and Push changes
         run: |

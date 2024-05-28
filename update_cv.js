@@ -6,10 +6,10 @@ import { fileURLToPath } from 'node:url';
 // Obtiene la ruta del directorio actual en ES module scope
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-
 const url = 'https://raw.githubusercontent.com/pablokoll/cv/cv/english/cv.pdf';
 
 const localFilePath = path.resolve(dirname, './public/pablo koll cv.pdf');
+console.log('Local file path: ', localFilePath);
 
 async function downloadPDF() {
     try {
