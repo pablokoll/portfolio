@@ -25,7 +25,7 @@ jobs:
         working-directory: /
 
       - name: Run update script
-        run: node ./update_cv.js
+        run: node update_cv.js
 
       - name: Commit and Push changes
         run: |
