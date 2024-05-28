@@ -26,9 +26,9 @@ export const links: Link[] = [
 		target: '_blank',
 	},
 	{
-		name: 'resume',
-		url: '/resume',
-		icon: LinkTreeIcons.Resume,
+		name: 'curriculum',
+		url: '/curriculum',
+		icon: LinkTreeIcons.CURRICULUM,
 		target: '_blank',
 	},
 ];

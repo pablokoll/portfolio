@@ -1,0 +1,39 @@
+name: Update PDF
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Esto se ejecutará todos los días a medianoche UTC
+  workflow_dispatch: # Permite ejecutar manualmente
+
+jobs:
+  update-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          path: portfolio
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Puedes ajustar la versión de Node.js según sea necesario
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: /dist
+
+      - name: Run update script
+        run: node /update_cv.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'GitHub Actions - Update CV'
+          git config --global user.email 'pablokollm@gmail.com'
+          cd portfolio
+          git add /portfolio/public/pablo koll cv.pdf
+          git commit -m "Update PDF file"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

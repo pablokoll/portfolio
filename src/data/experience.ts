@@ -13,7 +13,7 @@ export const experience: Experience[] = [
 			`I'm a Backend Developer specializing in microservices for E-Commerce, I bring expertise from working with platforms like Magento and Vtex.`,
 			'I adeptly handle REST, SOAP, and GraphQL APIs, along with protocols such as HTTPS, SFTP, and SMTP to facilitate seamless communication across diverse software systems.',
 			'For secure access management, I employed methods like OAuth 2.0 and JWT.',
-			'To ensure application quality and reliability, I utilize both end-to-end (E2E) and unit testing.',
+			'To ensure application quality and reliability, I utilize both end-to-end (E2E) and unit testing with tools including Jest and Mocha.',
 			'My deployment process is streamlined through CI/CD practices, and I hosted applications efficiently on cloud services like AWS.',
 		],
 	},

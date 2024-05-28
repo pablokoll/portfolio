@@ -16,7 +16,7 @@ export enum LinkTreeIcons {
 	Portfolio = 'portfolio',
 	LinkedIn = 'linkedintree',
 	GitHub = 'github',
-	Resume = 'resume',
+	CURRICULUM = 'curriculum',
 }
 
 export type Link = {
