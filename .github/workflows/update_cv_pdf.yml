@@ -33,7 +33,7 @@ jobs:
           git config --global user.name 'GitHub Actions - Update CV'
           git config --global user.email 'pablokollm@gmail.com'
           cd portfolio
-          git add ./public/pablo koll cv.pdf
+          git add .
           git commit -m "Update PDF file"
           git push
         env:
