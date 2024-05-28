@@ -22,9 +22,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
+        working-directory: /
+        
       - name: Run update script
         run: npm run workflow-cv
+        working-directory: /
 
       - name: Commit and Push changes
         run: |
