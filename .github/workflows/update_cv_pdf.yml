@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /portfolio
+        working-directory: /
 
       - name: Run update script
         run: node /update_cv.js
