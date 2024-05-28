@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          path: portfolio
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -22,11 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: /
         
       - name: Run update script
         run: npm run workflow-cv
-        working-directory: /
 
       - name: Commit and Push changes
         run: |
