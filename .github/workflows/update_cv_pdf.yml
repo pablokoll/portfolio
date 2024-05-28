@@ -28,7 +28,6 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions - Update CV'
           git config --global user.email 'pablokollm@gmail.com'
-          cd portfolio
           git add .
           git commit -m "Update PDF file"
           git push
