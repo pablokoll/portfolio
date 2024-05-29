@@ -24,6 +24,9 @@ jobs:
       - name: Run update script
         run: npm run workflow-cv
 
+      - name: Compile Vercel
+        run: npm run build
+
       - name: Commit and Push changes
         run: |
           git config --global user.name 'GitHub Actions - Update CV'
