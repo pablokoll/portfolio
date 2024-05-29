@@ -3,6 +3,7 @@ name: Update PDF
 on:
   schedule:
     - cron: '0 0 * * *' # Esto se ejecutará todos los días a medianoche UTC
+  repository_dispatch:
   workflow_dispatch: # Permite ejecutar manualmente
 
 jobs:
@@ -32,7 +33,8 @@ jobs:
           git config --global user.name 'GitHub Actions - Update CV'
           git config --global user.email 'pablokollm@gmail.com'
           git add .
-          git commit -m "Update PDF file"
+          DATE=$(date +"%Y-%m-%d %H:%M:%S")
+          git commit -m "Update PDF file at $DATE"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
