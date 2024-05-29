@@ -1,9 +1,7 @@
 name: Update PDF
 
 on:
-  push:
-    paths:
-      - 'cv.pdf'
+  repository_dispatch:
   workflow_dispatch: # Permite ejecutar manualmente
 
 jobs:
@@ -13,9 +11,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          repository: pablokoll/cv
-          ref: cv/english
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
