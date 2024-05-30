@@ -2,6 +2,7 @@ name: Update PDF
 
 on:
   repository_dispatch:
+    types: [update_cv_pdf]
   workflow_dispatch: # Permite ejecutar manualmente
 
 jobs:
