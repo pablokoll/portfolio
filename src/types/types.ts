@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export type Social = {
 	name: string;
 	link: string;
@@ -34,16 +36,13 @@ export type Linktree = {
 export enum TechIcons {
 	Spring = 'spring',
 	React = 'react',
-	CSharp = 'csharp',
-	Godot = 'godot',
 	Java = 'java',
 	JWT = 'jwt',
-	Hibernate = 'hibernate',
 	JUnit = 'junit',
 	MongoDB = 'mongodb',
 	MySQL = 'mysql',
 	PostgreSQL = 'postgresql',
-	SQLServer = 'sqlserver',
+	'SQL Server' = 'sqlserver',
 	TypeScript = 'typescript',
 	JavaScript = 'javascript',
 	Docker = 'docker',
@@ -51,13 +50,15 @@ export enum TechIcons {
 	Python = 'python',
 	Git = 'git',
 	Swagger = 'swagger',
-	TailwindCSS = 'tailwindcss',
-	Unity = 'unity',
+	'Tailwind CSS' = 'tailwindcss',
+	CSS = 'css',
+	HTML5 = 'html5',
 	Gitlab = 'gitlab',
 	AWS = 'aws',
 	Nodejs = 'nodejs',
 	Express = 'express',
 	Nestjs = 'nestjs',
+	Linux = 'linux',
 	Ubuntu = 'ubuntu',
 	Prisma = 'prisma',
 	Sequelize = 'sequelize',
@@ -65,12 +66,26 @@ export enum TechIcons {
 	NoSQL = 'nosql',
 	Redux = 'redux',
 	Vue = 'vue',
+	'Mercado Pago' = 'mercadopago',
+	Stripe = 'stripe',
+	'React Router' = 'reactrouter',
+	Firebase = 'firebase',
+	Cloudinary = 'cloudinary',
+	Bash = 'bash',
+	'C++' = 'c++',
+	C = 'c',
+	Terminal = 'terminal',
+	Latex = 'latex',
+	'GitHub Actions' = 'githubactions',
+	GitHub = 'github',
+	Jest = 'jest',
+	Mocha = 'mocha',
 }
 
 export type Project = {
 	title: string;
 	description: string;
-	image?: string;
+	imagePath: string;
 	techs: TechIcons[];
 	code: string;
 	deploy?: string;
