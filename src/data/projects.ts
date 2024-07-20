@@ -1,5 +1,5 @@
-import cocoMallImage from '../assets/coco-mall-project.webp';
-import taskManagement from '../assets/task_manager_project.webp';
+import cocoMallImage from '@assets/coco-mall.webp';
+import taskManagement from '@assets/task-manager.webp';
 import { type Project, TechIcons } from '../types/types';
 
 export const projects: Project[] = [
