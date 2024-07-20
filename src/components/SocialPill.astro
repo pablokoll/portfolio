@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import TechIcon from './TechIcon.astro';
 
 interface Props {
 	name: string;
@@ -17,6 +17,6 @@ const { name, link, size } = Astro.props;
   hover:shadow transition-all duration-200 ease-in-out hover:-translate-y-1`
   title=`Link to ${name}`
 >
-  <Icon name={`tech/${name.toLowerCase()}`} class=`size-${size}` />
+  <TechIcon id={`tech/${name.toLowerCase()}`} name={`tech/${name.toLowerCase()}`} className=`size-${size}` />
   <p class="text-slate-600 dark:text-slate-300 font-medium">{name}</p>
 </a>

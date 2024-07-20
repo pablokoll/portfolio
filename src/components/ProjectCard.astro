@@ -1,62 +1,61 @@
 ---
 import LinkIcon from '@icons/LinkIcon.astro';
-import { Icon } from 'astro-icon/components';
-import { TechIcons, type Project } from '../types/types';
+import { type Project, TechIcons } from '../types/types';
+import TechIcon from './TechIcon.astro';
 import Tooltip from './Tooltip.astro';
-
 interface Props {
-	project: Project;
+    project: Project;
+    index: number;
 }
 
-const { project } = Astro.props;
-const { title, description, image, deploy, code, techs } = project;
+const { project, index } = Astro.props;
+const { title, description, imagePath, deploy, code, techs } = project;
 ---
 
-<article class='grid md:grid-cols-2 gap-4 sm:gap-7 group'>
+<article class='grid md:grid-cols-2 gap-x-4 gap-y-4 sm:gap-x-7 group'>
     <a
         href={deploy ? deploy : code}
-        class='dark:bg-slate-600 bg-sky-600/10 rounded-xl relative overflow-hidden block aspect-[5/3] shadow'>
+        target="_blank"
+        class=`dark:bg-slate-600 bg-sky-600/10 rounded-xl relative overflow-hidden block aspect-[5/3] shadow max-h-56 w-full order-2 ${index % 2 === 0 ? "md:order-1" : "md:order-2"}`>
         <img
-            class='rounded-xl object-left-top
-          absolute right-0 top-0 left-0 bottom-0 box-content w-full h-full object-contain
-          transition-all translate-x-9 translate-y-9 hover:translate-x-6 hover:translate-y-6 duration-500 ease-in-out
-          z-10'
-            src={image}
+            src={imagePath}
             alt={title}
+            class='rounded-xl box-content w-full h-full object-contain'
+            loading="eager"
         />
     </a>
-    <div class='flex flex-col gap-2.5 justify-center'>
-        <h3 class='font-bold text-3xl text-slate-800 dark:text-white'>{title}</h3>
-        <p class='text-slate-600 dark:text-slate-300 text-lg'>{description}</p>
-        <div class='flex gap-2 items-center mb-1'>
-            {
-                techs.map((tech) => (
-                    <Tooltip
-                        text={
-                            //Map the enum value to the key
-                            Object.keys(TechIcons)[Object.values(TechIcons).indexOf(tech)]
-                        }>
-                        <Icon name={`tech/${tech}`} class='size-8' />
-                    </Tooltip>
-                ))
-            }
-        </div>
-        <div class='flex justify-start gap-3'>
-            {
-                deploy && (
-                    <a
-                        href={deploy}
-                        class='flex gap-2 group/live hover:gap-6 transition-[gap] items-center text-lg py-2 px-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-lg'>
-                        Deploy
-                        <LinkIcon className='size-7 stroke-[1px] group-hover/live:rotate-45 transition-transform' />
-                    </a>
-                )
-            }
-            <a
-                href={code}
-                class='text-lg px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:dark:bg-slate-200 hover:bg-slate-700 font-bold rounded-lg'>
-                Ver código
-            </a>
-        </div>
+    <div class=`flex flex-col gap-2.5 order-1 ${index % 2 === 0 ? "md:order-2" : "md:order-1"}`>
+        <h3 class='font-bold text-xl md:text-2xl text-slate-800 dark:text-white'>{title}</h3>
+        <p class='text-slate-600 dark:text-slate-300 text-base md:text-lg'>{description}</p>
+    </div>
+    <div
+        class=`flex justify-start gap-3 h-100 items-center order-4 ${index % 2 === 0 ? "md:order-3" : "md:order-3"}`>
+        {
+            deploy && (
+                <a
+                    title={deploy}
+                    href={deploy}
+                    class='flex gap-2 group/live hover:gap-6 transition-[gap] items-center text-base md:text-lg py-2 px-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-lg'>
+                    Deploy
+                    <LinkIcon className='size-6 md:size-7 stroke-[1px] group-hover/live:rotate-45 transition-transform' />
+                </a>
+            )
+        }
+        <a
+            title={code}
+            href={code}
+            class='text-base md:text-lg px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:dark:bg-slate-200 hover:bg-slate-700 font-bold rounded-lg'>
+            Code
+        </a>
+    </div>
+    <div
+        class=`flex flex-wrap gap-2 items-center order-3 ${index % 2 === 0 ? "md:order-2" : "md:order-4"}`>
+        {
+            techs.map((tech, i) => (
+                <Tooltip text={Object.keys(TechIcons)[Object.values(TechIcons).indexOf(tech)]}>
+                    <TechIcon id={`${i}`} name={`tech/${tech}`} className='size-8' />
+                </Tooltip>
+            ))
+        }
     </div>
 </article>

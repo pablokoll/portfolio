@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Obtiene la ruta del directorio actual en ES module scope
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const url = 'https://raw.githubusercontent.com/pablokoll/cv/cv/english/cv.pdf';
@@ -20,7 +19,6 @@ async function downloadPDF() {
         });
 
         response.data.pipe(fs.createWriteStream(localFilePath));
-        // response.data.pipe(fs.createWriteStream(localFileDistPath));
 
         return new Promise((resolve, reject) => {
             response.data.on('end', () => {
