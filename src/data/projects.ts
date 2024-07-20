@@ -57,7 +57,6 @@ export const otherProjects: Project[] = [
             'This project is a comprehensive task management system (TODO App) featuring a PHP backend and two similar graphical interfaces, one written in jQuery with AJAX and the other in React.',
         techs: [TechIcons.PHP, TechIcons.jQuery, TechIcons.React, TechIcons.CSS, TechIcons.HTML5],
         code: 'https://github.com/pablokoll/url-shortener',
-        deploy: 'https://url-shortener-nwr5.onrender.com',
     },
     {
         title: 'Simple URL Shortener',
