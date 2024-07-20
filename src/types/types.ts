@@ -97,7 +97,7 @@ export interface IconMap {
 export type Project = {
 	title: string;
 	description: string;
-	imagePath: string;
+	image?: ImageMetadata;
 	techs: TechIcons[];
 	code: string;
 	deploy?: string;

@@ -1,11 +1,13 @@
+import cocoMallImage from '../assets/coco-mall-project.webp';
+import taskManagement from '../assets/task_manager_project.webp';
 import { type Project, TechIcons } from '../types/types';
 
 export const projects: Project[] = [
-	{
+    {
         title: 'Task Manager',
         description:
             'The Task Management application enables users to create, update, delete, and manage tasks across different states: to-do, in-progress, and done. The project is built with an Angular frontend and a NestJS backend, utilizing a MongoDB database for storage.',
-        imagePath: '/src/assets/task_manager_project.webp',
+        image: taskManagement,
         techs: [
             TechIcons.TypeScript,
             TechIcons.Nestjs,
@@ -23,11 +25,11 @@ export const projects: Project[] = [
         ],
         code: 'https://github.com/pablokoll/task-management',
     },
-	{
+    {
         title: 'CocoMall E-Commerce',
         description:
             'Coco Mall is an online shopping, a marketplace where you can shop in different stores or create your own store to sell your products. This website offers a comprehensive platform for both shoppers and sellers, enhancing the online shopping experience.',
-        imagePath: '/src/assets/coco-mall-project.webp',
+        image: cocoMallImage,
         techs: [
             TechIcons.JavaScript,
             TechIcons.Nodejs,
@@ -53,14 +55,7 @@ export const otherProjects: Project[] = [
         title: 'Todo List',
         description:
             'This project is a comprehensive task management system (TODO App) featuring a PHP backend and two similar graphical interfaces, one written in jQuery with AJAX and the other in React.',
-        imagePath: '',
-        techs: [
-            TechIcons.PHP,
-            TechIcons.jQuery,
-            TechIcons.React,
-            TechIcons.CSS,
-            TechIcons.HTML5,
-        ],
+        techs: [TechIcons.PHP, TechIcons.jQuery, TechIcons.React, TechIcons.CSS, TechIcons.HTML5],
         code: 'https://github.com/pablokoll/url-shortener',
         deploy: 'https://url-shortener-nwr5.onrender.com',
     },
@@ -68,7 +63,6 @@ export const otherProjects: Project[] = [
         title: 'Simple URL Shortener',
         description:
             'A Simple URL Shortener is a web-based servicethat takes a long URL and converts it into a shorter, more manageable version. This shortened URL redirects users to the original.',
-        imagePath: '',
         techs: [
             TechIcons.Nodejs,
             TechIcons.Express,
@@ -85,7 +79,6 @@ export const otherProjects: Project[] = [
         title: 'CV Maker',
         description:
             'Awesome CV is a LaTeX template for a CV (Curriculum Vitae), Résumé, or Cover Letter ,it is easy to customize your own template. Additionally, I have customized it using GitHub Actions to update my CV in my portfolio every time the file is updated.',
-        imagePath: '',
         techs: [TechIcons.Latex, TechIcons.Bash, TechIcons.GitHub, TechIcons['GitHub Actions']],
         code: 'https://github.com/pablokoll/cv/tree/cv/english',
     },
@@ -93,7 +86,6 @@ export const otherProjects: Project[] = [
         title: 'The Big Pig Game',
         description:
             'Pig is a simple dice game first described in print by John Scarne in 1945. Players take turns to roll a single die as many times as they wish, adding all roll results to a running total, but losing their gained score for the turn if they roll a 1.',
-        imagePath: '',
         techs: [TechIcons.Cplusplus, TechIcons.Terminal],
         code: 'https://github.com/pablokoll/BigPigGame',
     },
