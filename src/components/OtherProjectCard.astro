@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { TechIcons, type Project } from '../types/types';
+import { type Project, TechIcons } from '../types/types';
+import TechIcon from './TechIcon.astro';
 import Tooltip from './Tooltip.astro';
 
 interface Props {
@@ -19,13 +19,12 @@ const { title, description, deploy, code, techs } = project;
         <p class='text-sm md:text-base text-slate-600 dark:text-slate-300'>{description}</p>
         <div class='flex gap-2 items-center mt-2'>
             {
-                techs.map((tech) => (
+                techs.map((tech, i) => (
                     <Tooltip
                         text={
-                            //Map the enum value to the key
                             Object.keys(TechIcons)[Object.values(TechIcons).indexOf(tech)]
                         }>
-                        <Icon name={`tech/${tech}`} class='size-6' />
+                        <TechIcon id={`${i}`} name={`tech/${tech}`} className='size-6' />
                     </Tooltip>
                 ))
             }

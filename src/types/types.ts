@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+import type { Icon } from 'astro/runtime/client/dev-toolbar/ui-library/icons.js';
 
 export type Social = {
 	name: string;
@@ -36,10 +37,13 @@ export type Linktree = {
 export enum TechIcons {
 	Spring = 'spring',
 	React = 'react',
+	Angular = 'angular',
+	RxJS = 'rxjs',
 	Java = 'java',
 	JWT = 'jwt',
 	JUnit = 'junit',
 	MongoDB = 'mongodb',
+	Mongoose = 'mongoose',
 	MySQL = 'mysql',
 	PostgreSQL = 'postgresql',
 	'SQL Server' = 'sqlserver',
@@ -48,6 +52,8 @@ export enum TechIcons {
 	Docker = 'docker',
 	Django = 'django',
 	Python = 'python',
+	PHP = 'php',
+	jQuery = 'jquery',
 	Git = 'git',
 	Swagger = 'swagger',
 	'Tailwind CSS' = 'tailwindcss',
@@ -72,7 +78,7 @@ export enum TechIcons {
 	Firebase = 'firebase',
 	Cloudinary = 'cloudinary',
 	Bash = 'bash',
-	'C++' = 'c++',
+	Cplusplus = 'cplusplus',
 	C = 'c',
 	Terminal = 'terminal',
 	Latex = 'latex',
@@ -80,7 +86,13 @@ export enum TechIcons {
 	GitHub = 'github',
 	Jest = 'jest',
 	Mocha = 'mocha',
+	Jasmine = 'jasmine',
+	Karma = 'karma'
 }
+
+export interface IconMap {
+	[key: string]: (props: { className?: string }) => Icon;
+  }
 
 export type Project = {
 	title: string;

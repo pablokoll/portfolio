@@ -1,0 +1,20 @@
+---
+import { techsIcons } from '../data/techs';
+
+interface Props {
+    id: string;
+    name: string;
+    className?: string;
+}
+
+const { id, name, className } = Astro.props;
+const IconComponent = techsIcons[name];
+---
+
+{
+    IconComponent ? (
+        <IconComponent className={className} />
+    ) : (
+        <div class='icon-placeholder'>Icon not found</div>
+    )
+}

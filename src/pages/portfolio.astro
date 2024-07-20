@@ -10,16 +10,16 @@ import Profile from '@components/Profile.astro';
 import SectionHeader from '@components/SectionHeader.astro';
 import Socials from '@components/Socials.astro';
 import Techs from '@components/Techs.astro';
-import ThemeIcon from '@components/ThemeIcon.astro';
+import ThemeIcon from '@icons/ThemeIcon.astro';
 
 import HomeIcon from '@components/HomeIcon.astro';
 import OtherProjectCard from '@components/OtherProjectCard.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import ContactIcon from '@icons/ContactIcon.astro';
-import ExpirenceIcon from '@icons/ExpirenceIcon.astro';
 import ProjectIcon from '@icons/ProjectIcon.astro';
 import SocialsIcon from '@icons/SocialsIcon.astro';
-import TechsIcon from '@icons/TechsIcon.astro';
+import TechnologyIcon from '@icons/TechnologyIcon.astro';
+import ExperienceIcon from '../icons/ExperienceIcon.astro';
 ---
 
 <Layout
@@ -37,7 +37,7 @@ import TechsIcon from '@icons/TechsIcon.astro';
         <hr class='border-dashed border-1' />
         <section class='flex flex-col'>
             <SectionHeader name='Work Experience'>
-                <ExpirenceIcon className='size-9' />
+                <ExperienceIcon className='size-9' />
             </SectionHeader>
             {experience.map((experience, i) => <Experience experience={experience} index={i} />)}
         </section>
@@ -60,7 +60,7 @@ import TechsIcon from '@icons/TechsIcon.astro';
         </section>
         <section>
             <SectionHeader name='Primary Technologies'>
-                <TechsIcon className='size-9' />
+                <TechnologyIcon className='size-9' />
             </SectionHeader>
             <Techs />
         </section>
