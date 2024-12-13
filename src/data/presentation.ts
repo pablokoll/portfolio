@@ -5,7 +5,7 @@ export const presentation: Presentation = {
 	mail: 'pablokollm@gmail.com',
 	title: 'Pablo Koll',
 	description:
-		'Software Developer with 3 years of experience in Web Development',
+		'Software Developer with more than 3 years of experience in Web Development',
 	openToWork: true,
 	profile: presentationImage,
 	socials: [
