@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import  SpeedInsights  from "@vercel/speed-insights/astro";
 
 interface Props {
   title: string;
@@ -78,6 +79,7 @@ const { title, description, ogImage = '/og-image.png', url } = Astro.props;
       const theme = localStorage.getItem('theme') || 'mocha';
       document.documentElement.setAttribute('data-theme', theme);
     </script>
+    <SpeedInsights />
   </head>
   <body class="min-h-screen bg-ctp-base text-ctp-text antialiased">
     <slot />
