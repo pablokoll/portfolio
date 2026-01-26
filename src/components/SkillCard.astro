@@ -1,0 +1,39 @@
+---
+import type { SkillCategory } from '../lib/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  skill: SkillCategory;
+}
+
+const { skill } = Astro.props;
+
+// Map color token to Tailwind class
+const colorMap: Record<string, string> = {
+  'ctp-green': 'text-ctp-green',
+  'ctp-blue': 'text-ctp-blue',
+  'ctp-peach': 'text-ctp-peach',
+  'ctp-red': 'text-ctp-red',
+  'ctp-mauve': 'text-ctp-mauve',
+  'ctp-yellow': 'text-ctp-yellow',
+};
+
+const iconColorClass = colorMap[skill.iconColor] || 'text-ctp-blue';
+---
+
+<article class="h-full p-6 bg-ctp-surface0 rounded card-hover flex flex-col">
+  <!-- Icon -->
+  <div class:list={['mb-4', iconColorClass]}>
+    <Icon name={skill.icon} class="w-8 h-8" />
+  </div>
+
+  <!-- Title (snake_case) -->
+  <h3 class="text-base font-semibold text-ctp-text mb-3">
+    {skill.name}
+  </h3>
+
+  <!-- Comma-separated list -->
+  <p class="text-sm text-ctp-overlay2 leading-relaxed flex-grow">
+    {skill.description}
+  </p>
+</article>

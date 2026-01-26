@@ -1,0 +1,50 @@
+---
+import type { Footer as FooterType } from '../lib/types';
+
+interface Props {
+  data: FooterType;
+}
+
+const { data } = Astro.props;
+---
+
+<footer id="contact" class="px-6 md:px-24 lg:px-32 py-12 md:py-16">
+  <div class="max-w-6xl mx-auto">
+    <!-- Divider -->
+    <div class="h-px bg-ctp-surface1 mb-8"></div>
+
+    <!-- Footer content -->
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-8">
+      <!-- Left: Terminal brand -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-1">
+          <span class="text-ctp-green font-medium">{data.brand.prompt}</span>
+          <span class="text-ctp-overlay2 font-medium">{data.brand.name}</span>
+          <span class="w-2 h-[18px] bg-ctp-green animate-pulse"></span>
+        </div>
+        <p class="text-xs text-ctp-overlay0">{data.tagline}</p>
+      </div>
+
+      <!-- Right: Command-style links -->
+      <nav class="flex flex-col gap-2">
+        {data.commandLinks.map((link) => (
+          <a
+            href={link.url}
+            target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+            rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            class="text-sm text-ctp-overlay2 hover:text-ctp-text transition-colors"
+          >
+            {link.text}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center">
+      <p class="text-xs text-ctp-surface2">
+        {data.copyright}
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,78 @@
+---
+import type { LearningItem } from '../lib/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  item: LearningItem;
+}
+
+const { item } = Astro.props;
+
+// Map color tokens to Tailwind classes
+const colorMap: Record<string, { text: string; bg: string; bar: string }> = {
+  'ctp-blue': {
+    text: 'text-ctp-blue',
+    bg: 'bg-ctp-blue/20',
+    bar: 'bg-ctp-blue',
+  },
+  'ctp-green': {
+    text: 'text-ctp-green',
+    bg: 'bg-ctp-green/20',
+    bar: 'bg-ctp-green',
+  },
+  'ctp-peach': {
+    text: 'text-ctp-peach',
+    bg: 'bg-ctp-peach/20',
+    bar: 'bg-ctp-peach',
+  },
+  'ctp-mauve': {
+    text: 'text-ctp-mauve',
+    bg: 'bg-ctp-mauve/20',
+    bar: 'bg-ctp-mauve',
+  },
+};
+
+const iconColors = colorMap[item.iconColor] || colorMap['ctp-blue'];
+const badgeColors = colorMap[item.badgeColor] || colorMap['ctp-blue'];
+
+// Progress bar color matches the icon color
+const barColor = iconColors.bar;
+---
+
+<article class="h-full p-6 md:p-7 bg-ctp-surface0 rounded card-hover flex flex-col">
+  <!-- Badge -->
+  <div class="mb-4">
+    <span class:list={[
+      'px-3 py-1.5 text-[10px] font-medium rounded',
+      `bg-ctp-surface1 ${badgeColors.text}`
+    ]}>
+      {item.badge}
+    </span>
+  </div>
+
+  <!-- Header: Icon + Title -->
+  <div class="flex items-center gap-3 mb-4">
+    <div class:list={[iconColors.text]}>
+      <Icon name={item.icon} class="w-7 h-7" />
+    </div>
+    <h3 class="text-lg font-semibold text-ctp-text">
+      {item.name}
+    </h3>
+  </div>
+
+  <!-- Description -->
+  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-5 flex-grow">
+    {item.description}
+  </p>
+
+  <!-- Progress Bar -->
+  <div class="mt-auto">
+    <p class="text-xs text-ctp-overlay0 mb-2">{item.progressComment}</p>
+    <div class="w-full h-1.5 bg-ctp-surface1 rounded overflow-hidden">
+      <div
+        class:list={['h-full rounded', barColor]}
+        style={`width: ${item.progressPercent}%`}
+      ></div>
+    </div>
+  </div>
+</article>

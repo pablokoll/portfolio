@@ -1,0 +1,308 @@
+---
+// Vim-style keyboard navigation
+// j/k = scroll down/up
+// gg = top, G = bottom
+// 1-5 = jump to sections
+// ? = toggle help overlay
+---
+
+<!-- Help overlay -->
+<div
+  id="kb-help"
+  class="fixed inset-0 z-[100] bg-ctp-crust/90 flex items-center justify-center hidden"
+  role="dialog"
+  aria-label="Keyboard shortcuts"
+>
+  <div class="bg-ctp-surface0 rounded-lg p-8 max-w-md w-full mx-4 border border-ctp-surface1">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-lg font-semibold text-ctp-text">:help keyboard</h2>
+      <span class="text-xs text-ctp-overlay0">press ? or Esc to close</span>
+    </div>
+
+    <div class="space-y-4 text-sm">
+      <div>
+        <p class="text-ctp-blue font-medium mb-2">// navigation</p>
+        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
+          <kbd class="text-ctp-green">j / k</kbd>
+          <span class="text-ctp-subtext1">Scroll down / up</span>
+          <kbd class="text-ctp-green">d / u</kbd>
+          <span class="text-ctp-subtext1">Half page down / up</span>
+          <kbd class="text-ctp-green">gg</kbd>
+          <span class="text-ctp-subtext1">Go to top</span>
+          <kbd class="text-ctp-green">G</kbd>
+          <span class="text-ctp-subtext1">Go to bottom</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-ctp-blue font-medium mb-2">// sections</p>
+        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
+          <kbd class="text-ctp-green">0</kbd>
+          <span class="text-ctp-subtext1">hero</span>
+          <kbd class="text-ctp-green">1</kbd>
+          <span class="text-ctp-subtext1">work_experience</span>
+          <kbd class="text-ctp-green">2</kbd>
+          <span class="text-ctp-subtext1">technical_stack</span>
+          <kbd class="text-ctp-green">3</kbd>
+          <span class="text-ctp-subtext1">featured_projects</span>
+          <kbd class="text-ctp-green">4</kbd>
+          <span class="text-ctp-subtext1">current_focus</span>
+          <kbd class="text-ctp-green">5</kbd>
+          <span class="text-ctp-subtext1">contact</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-ctp-blue font-medium mb-2">// actions</p>
+        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
+          <kbd class="text-ctp-green">t</kbd>
+          <span class="text-ctp-subtext1">Toggle theme</span>
+          <kbd class="text-ctp-green">?</kbd>
+          <span class="text-ctp-subtext1">Toggle this help</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Current mode indicator -->
+<div
+  id="kb-indicator"
+  class="fixed bottom-4 left-4 z-50 px-3 py-1.5 bg-ctp-surface0 rounded text-xs text-ctp-overlay0 opacity-0 transition-opacity duration-300"
+  aria-hidden="true"
+>
+  <span id="kb-indicator-text">NORMAL</span>
+</div>
+
+<script>
+  const sections = ['experience', 'skills', 'projects', 'learning', 'contact'];
+  const helpOverlay = document.getElementById('kb-help');
+  const indicator = document.getElementById('kb-indicator');
+  const indicatorText = document.getElementById('kb-indicator-text');
+
+  // Vimium-style smooth scroller
+  const SCROLL_STEP = 60;
+  const HALF_PAGE = Math.floor(window.innerHeight / 2);
+  const MIN_CALIBRATION = 0.5;
+  const MAX_CALIBRATION = 1.6;
+  const CALIBRATION_BOUNDARY = 150;
+
+  let gPressed = false;
+  let gTimeout: ReturnType<typeof setTimeout> | null = null;
+  let indicatorTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  // Scroller state
+  let scrollTime = 0;
+  let scrollKeyDown: string | null = null;
+
+  function smoothScroll(amount: number, continuous: boolean = true) {
+    const sign = Math.sign(amount);
+    const absAmount = Math.abs(amount);
+    const duration = Math.max(100, 20 * Math.log(absAmount));
+    const activationTime = ++scrollTime;
+
+    const keyIsStillDown = () =>
+      scrollTime === activationTime && scrollKeyDown != null;
+
+    let totalDelta = 0;
+    let totalElapsed = 0;
+    let calibration = 1.0;
+    let prevTs: number | null = null;
+
+    function animate(ts: number) {
+      if (prevTs == null) { prevTs = ts; }
+      if (ts === prevTs) { requestAnimationFrame(animate); return; }
+
+      const elapsed = ts - prevTs;
+      totalElapsed += elapsed;
+      prevTs = ts;
+
+      // Calibration for held keys (after 75ms)
+      if (
+        keyIsStillDown() && totalElapsed >= 75 &&
+        calibration >= MIN_CALIBRATION && calibration <= MAX_CALIBRATION
+      ) {
+        if (1.05 * calibration * absAmount < CALIBRATION_BOUNDARY) {
+          calibration *= 1.05;
+        }
+        if (CALIBRATION_BOUNDARY < 0.95 * calibration * absAmount) {
+          calibration *= 0.95;
+        }
+      }
+
+      let delta = Math.ceil(absAmount * (elapsed / duration) * calibration);
+
+      // Clamp to avoid overshoot on discrete presses
+      if (!keyIsStillDown()) {
+        delta = Math.max(0, Math.min(delta, absAmount - totalDelta));
+      }
+
+      if (delta > 0) {
+        window.scrollBy({ top: sign * delta, behavior: 'instant' });
+        totalDelta += delta;
+        requestAnimationFrame(animate);
+      }
+    }
+
+    if (!continuous) { ++scrollTime; }
+
+    requestAnimationFrame(animate);
+  }
+
+  function showIndicator(text: string) {
+    if (!indicator || !indicatorText) return;
+    indicatorText.textContent = text;
+    indicator.classList.remove('opacity-0');
+    indicator.classList.add('opacity-100');
+
+    if (indicatorTimeout) clearTimeout(indicatorTimeout);
+    indicatorTimeout = setTimeout(() => {
+      indicator.classList.remove('opacity-100');
+      indicator.classList.add('opacity-0');
+    }, 1200);
+  }
+
+  function isHelpVisible(): boolean {
+    return !helpOverlay?.classList.contains('hidden');
+  }
+
+  function toggleHelp() {
+    helpOverlay?.classList.toggle('hidden');
+  }
+
+  function scrollToSection(index: number) {
+    const sectionId = sections[index];
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showIndicator(`:${index + 1} → ${sectionId}`);
+    }
+  }
+
+  function isTyping(e: KeyboardEvent): boolean {
+    const tag = (e.target as HTMLElement)?.tagName;
+    return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+  }
+
+  // Key down: start continuous scroll for j/k, single actions for others
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (isTyping(e)) return;
+
+    const key = e.key;
+
+    // ? = toggle help
+    if (key === '?') {
+      e.preventDefault();
+      toggleHelp();
+      return;
+    }
+
+    // Escape = close help
+    if (key === 'Escape' && isHelpVisible()) {
+      e.preventDefault();
+      toggleHelp();
+      return;
+    }
+
+    if (isHelpVisible()) return;
+
+    // j/k = Vimium smooth scroll (60px, continuous when held)
+    if (key === 'j' || key === 'k') {
+      e.preventDefault();
+      if (e.repeat) return; // existing animation handles held key via calibration
+      scrollKeyDown = key;
+      smoothScroll(key === 'j' ? SCROLL_STEP : -SCROLL_STEP);
+      return;
+    }
+
+    // Prevent repeat for all other keys
+    if (e.repeat) return;
+
+    // d = half page down (non-continuous, single animation)
+    if (key === 'd') {
+      e.preventDefault();
+      smoothScroll(HALF_PAGE, false);
+      showIndicator('SCROLL ↓');
+      return;
+    }
+
+    // u = half page up (non-continuous, single animation)
+    if (key === 'u') {
+      e.preventDefault();
+      smoothScroll(-HALF_PAGE, false);
+      showIndicator('SCROLL ↑');
+      return;
+    }
+
+    // G = go to bottom
+    if (key === 'G') {
+      e.preventDefault();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      showIndicator(':$ → bottom');
+      return;
+    }
+
+    // gg = go to top
+    if (key === 'g') {
+      e.preventDefault();
+      if (gPressed) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showIndicator(':0 → top');
+        gPressed = false;
+        if (gTimeout) clearTimeout(gTimeout);
+      } else {
+        gPressed = true;
+        showIndicator('g...');
+        gTimeout = setTimeout(() => {
+          gPressed = false;
+        }, 800);
+      }
+      return;
+    }
+
+    // 0 = hero (top), 1-5 = jump to sections
+    if (key === '0') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showIndicator(':0 → hero');
+      return;
+    }
+
+    if (key >= '1' && key <= '5') {
+      e.preventDefault();
+      scrollToSection(parseInt(key) - 1);
+      return;
+    }
+
+    // t = toggle theme
+    if (key === 't') {
+      e.preventDefault();
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle?.click();
+      const current = document.documentElement.getAttribute('data-theme');
+      showIndicator(`:colorscheme ${current}`);
+      return;
+    }
+
+    gPressed = false;
+  });
+
+  // Key up: release scroll key so animation clamps and stops
+  document.addEventListener('keyup', (e: KeyboardEvent) => {
+    if (e.key === 'j' || e.key === 'k') {
+      scrollKeyDown = null;
+    }
+  });
+
+  // Stop scrolling if window loses focus
+  window.addEventListener('blur', () => {
+    scrollKeyDown = null;
+  });
+
+  // Click outside help to close
+  helpOverlay?.addEventListener('click', (e: Event) => {
+    if (e.target === helpOverlay) {
+      toggleHelp();
+    }
+  });
+</script>

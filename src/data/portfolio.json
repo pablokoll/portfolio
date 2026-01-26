@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Pablo Koll | Software Developer",
+    "description": "Self-taught Software Developer with +4 years specializing in Backend & Full Stack Development. Node.js, TypeScript, Python, React. eCommerce platforms (Shopify, SFCC), API integrations, and scalable architectures across international markets.",
+    "ogImage": "/og-image.png",
+    "url": "https://pablokoll.com"
+  },
+  "hero": {
+    "prompt": "$ whoami",
+    "headline": "Software Developer",
+    "subline": "// Self-taught dev, building scalable systems, APIs, and clean architectures",
+    "cta": {
+      "primary": {
+        "text": "view_projects()",
+        "href": "#projects"
+      },
+      "secondary": {
+        "text": "$ contact --email",
+        "href": "mailto:pablokollm@gmail.com"
+      }
+    }
+  },
+  "experience": {
+    "title": "work_experience",
+    "subtitle": "// Recent positions and achievements",
+    "items": [
+      {
+        "role": "it_technical_specialist && backend_developer",
+        "company": "// TENDAM",
+        "period": "Dec 2024 - Present",
+        "isCurrent": true,
+        "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing SFCC ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
+        "stack": ["JavaScript", "Node.js", "SFCC", "ISML", "OCAPI/SCAPI", "REST", "SOAP", "Payment Gateways"]
+      },
+      {
+        "role": "software_engineer && full_stack_developer",
+        "company": "// Webmefy - Shopify Plus Agency",
+        "period": "Jul 2024 - Dec 2024",
+        "isCurrent": false,
+        "description": "Full Stack development in Shopify ecosystem. Integrating systems and adding functionalities using Shopify's GraphQL, REST, and StoreFront APIs. Implementing ERPs, CRMs, and web services integrations. Direct communication with clients to gather requirements and deliver solutions. Using AWS for hosting and deploying backend applications.",
+        "stack": ["Shopify", "JavaScript", "TypeScript", "Express.js", "Python", "GraphQL", "AWS"]
+      },
+      {
+        "role": "software_developer && backend_developer",
+        "company": "// Balloon Group as FastForward",
+        "period": "Jul 2022 - Jul 2024",
+        "isCurrent": false,
+        "description": "Self-managing projects from technical perspective with direct client communication. Developed and maintained backend for Abbott's multi-instance Magento eCommerce synchronization with Salesforce CRM across eight countries in Latin America. Created middleware in NestJS to orchestrate client systems. Applied design patterns and implemented OAuth2, JWT authentication. Implemented CI/CD pipelines on GitLab.",
+        "stack": ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker", "AWS"]
+      },
+      {
+        "role": "full_stack_developer",
+        "company": "// Balloon Group as FastForward",
+        "period": "Nov 2021 - Jul 2022",
+        "isCurrent": false,
+        "description": "Collaborated closely with design and product teams creating interactive UIs. Worked on maintenance and development for Toyota's CMS using Laravel and PHP. Developed Toyota's Hino trucks landing page using VueJS. Prioritized SEO strategies and participated in code reviews.",
+        "stack": ["JavaScript", "HTML", "CSS", "Tailwind", "React", "PHP", "Laravel", "VueJS"]
+      }
+    ]
+  },
+  "skills": {
+    "title": "technical_stack",
+    "subtitle": "// Core technologies and tools",
+    "items": [
+      {
+        "name": "backend && languages",
+        "icon": "server",
+        "iconColor": "ctp-blue",
+        "description": "Node.js, Express.js, NestJS, TypeScript, JavaScript, Python, C/C++"
+      },
+      {
+        "name": "databases && orms",
+        "icon": "database",
+        "iconColor": "ctp-green",
+        "description": "PostgreSQL, MySQL, MongoDB, Redis, Prisma, Sequelize"
+      },
+      {
+        "name": "devops && infra",
+        "icon": "cloud",
+        "iconColor": "ctp-peach",
+        "description": "Docker, AWS (EC2, S3, Lambda), Git, GitLab CI/CD, GitHub Actions, Linux"
+      },
+      {
+        "name": "frontend && apis",
+        "icon": "monitor",
+        "iconColor": "ctp-red",
+        "description": "React, Next.js, Vue.js, Astro, Tailwind, REST, GraphQL, SOAP, Webhooks"
+      }
+    ]
+  },
+  "projects": {
+    "title": "featured_projects",
+    "subtitle": "// Selected work and side projects",
+    "items": [
+      {
+        "name": "kit_customization_widget",
+        "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
+        "image": "kit_image_widget.png",
+        "stack": ["Shopify", "JavaScript", "Canvas", "GraphQL"],
+        "badge": "freelance"
+      },
+      {
+        "name": "asset_image_scraper",
+        "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image. Built as a headless scraper-style pipeline with browser pool management for concurrent requests and smart caching.",
+        "image": "asset_image_scraper.png",
+        "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker"],
+        "badge": "freelance"
+      }
+    ]
+  },
+  "learning": {
+    "title": "current_focus",
+    "subtitle": "// What I'm learning and working on",
+    "items": [
+      {
+        "name": "learning_golang",
+        "icon": "code",
+        "iconColor": "ctp-blue",
+        "badge": "IN PROGRESS",
+        "badgeColor": "ctp-blue",
+        "description": "Diving into Go's concurrency patterns, goroutines, and channels. Building microservices to understand its performance benefits and simplicity for backend systems.",
+        "progressPercent": 35,
+        "progressComment": "// progress: 35%"
+      },
+      {
+        "name": "mastering_vim",
+        "icon": "terminal",
+        "iconColor": "ctp-green",
+        "badge": "DAILY",
+        "badgeColor": "ctp-green",
+        "description": "Practicing VIM motions and keybindings to boost coding efficiency. Using Neovim as my daily driver with custom configurations and plugins for a powerful development workflow.",
+        "progressPercent": 60,
+        "progressComment": "// progress: 60%"
+      },
+      {
+        "name": "obsidian_notes",
+        "icon": "book-open",
+        "iconColor": "ctp-mauve",
+        "badge": "COMPLETE",
+        "badgeColor": "ctp-green",
+        "description": "Using Obsidian for knowledge management and building a personal knowledge base. Creating interconnected notes, linking ideas, and maintaining a second brain for technical concepts and learnings.",
+        "progressPercent": 100,
+        "progressComment": "// progress: 100%"
+      },
+      {
+        "name": "ai_tools_mastery",
+        "icon": "sparkles",
+        "iconColor": "ctp-peach",
+        "badge": "EXPLORING",
+        "badgeColor": "ctp-peach",
+        "description": "Integrating AI-powered development tools into my workflow. Learning prompt engineering, using Claude Code, GitHub Copilot, and building AI agents to boost productivity and automate tasks.",
+        "progressPercent": 75,
+        "progressComment": "// progress: 75%"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "prompt": "~",
+      "name": "pablo_koll"
+    },
+    "tagline": "// Arch Linux & Neovim enthusiast",
+    "commandLinks": [
+      {
+        "text": "$ github --profile",
+        "url": "https://github.com/pablokoll"
+      },
+      {
+        "text": "$ linkedin --connect",
+        "url": "https://linkedin.com/in/pablo-koll"
+      },
+      {
+        "text": "$ email --send",
+        "url": "mailto:pablokollm@gmail.com"
+      }
+    ],
+    "copyright": "© 2026 Pablo Koll - Built with code and coffee"
+  }
+}

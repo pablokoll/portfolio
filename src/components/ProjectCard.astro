@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import type { ProjectItem } from '../lib/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  project: ProjectItem;
+}
+
+const { project } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/*.png');
+const imageSrc = project.image ? images[`../assets/screenshots/${project.image}`] : null;
+const resolvedImage = imageSrc ? (await imageSrc()).default : null;
+---
+
+<article class="h-full p-6 md:p-7 bg-ctp-surface0 rounded card-hover flex flex-col">
+  <!-- Screenshot -->
+  <div class="bg-ctp-surface1 rounded h-44 mb-5 overflow-hidden">
+    {resolvedImage ? (
+      <Image
+        src={resolvedImage}
+        alt={`${project.name} screenshot`}
+        class="w-full h-full object-cover object-center"
+        loading="lazy"
+        widths={[400, 800]}
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+    ) : (
+      <div class="flex items-center justify-center h-full">
+        <span class="text-xs text-ctp-overlay0">[Project Screenshot]</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Header: Title + Badge -->
+  <header class="flex items-center justify-between mb-3">
+    <h3 class="text-lg font-semibold text-ctp-text">
+      {project.name}
+    </h3>
+    {project.badge && (
+      <span class="px-2.5 py-1 text-[10px] font-medium bg-ctp-surface1 text-ctp-peach rounded uppercase">
+        {project.badge}
+      </span>
+    )}
+    {project.github && !project.badge && (
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-ctp-surface2 hover:text-ctp-text transition-colors"
+        aria-label={`View ${project.name} on GitHub`}
+      >
+        <Icon name="github" class="w-5 h-5" />
+      </a>
+    )}
+  </header>
+
+  <!-- Description -->
+  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-4 flex-grow">
+    {project.description}
+  </p>
+
+  <!-- Stack Tags -->
+  <footer class="flex flex-wrap gap-2">
+    {project.stack.map((tech) => (
+      <span class="px-3 py-1.5 text-xs font-medium bg-ctp-surface1 text-ctp-green rounded">
+        {tech}
+      </span>
+    ))}
+  </footer>
+</article>
