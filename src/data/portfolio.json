@@ -29,7 +29,7 @@
         "company": "// TENDAM",
         "period": "Dec 2024 - Present",
         "isCurrent": true,
-        "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing SFCC ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
+        "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud (SFCC) B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
         "stack": ["JavaScript", "Node.js", "SFCC", "ISML", "OCAPI/SCAPI", "REST", "SOAP", "Payment Gateways"]
       },
       {
@@ -84,7 +84,7 @@
         "name": "frontend && apis",
         "icon": "monitor",
         "iconColor": "ctp-red",
-        "description": "React, Next.js, Vue.js, Astro, Tailwind, REST, GraphQL, SOAP, Webhooks"
+        "description": "React, Next.js, Vue.js, Astro, Liquid, Tailwind, REST, GraphQL, SOAP, Webhooks"
       }
     ]
   },
