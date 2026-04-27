@@ -21,7 +21,7 @@
     }
   },
   "experience": {
-    "title": "work_experience",
+    "title": "Work Experience",
     "subtitle": "// Recent positions and achievements",
     "items": [
       {
@@ -59,37 +59,37 @@
     ]
   },
   "skills": {
-    "title": "technical_stack",
+    "title": "Technical Stack",
     "subtitle": "// Core technologies and tools",
     "items": [
       {
-        "name": "backend && languages",
+        "name": "Backend & Languages",
         "icon": "server",
-        "iconColor": "ctp-blue",
+        "iconColor": "pk-sky",
         "description": "Node.js, Express.js, NestJS, TypeScript, JavaScript, Python, C/C++"
       },
       {
-        "name": "databases && orms",
+        "name": "Databases & ORMs",
         "icon": "database",
-        "iconColor": "ctp-green",
+        "iconColor": "pk-mint",
         "description": "PostgreSQL, MySQL, MongoDB, Redis, Prisma, Sequelize"
       },
       {
-        "name": "devops && infra",
+        "name": "DevOps & Infra",
         "icon": "cloud",
-        "iconColor": "ctp-peach",
+        "iconColor": "pk-peach",
         "description": "Docker, AWS (EC2, S3, Lambda), Git, GitLab CI/CD, GitHub Actions, Linux"
       },
       {
-        "name": "frontend && apis",
+        "name": "Frontend & APIs",
         "icon": "monitor",
-        "iconColor": "ctp-red",
+        "iconColor": "pk-mauve",
         "description": "React, Next.js, Vue.js, Astro, Liquid, Tailwind, REST, GraphQL, SOAP, Webhooks"
       }
     ]
   },
   "projects": {
-    "title": "featured_projects",
+    "title": "Featured Projects",
     "subtitle": "// Selected work and side projects",
     "items": [
       {
@@ -109,15 +109,15 @@
     ]
   },
   "learning": {
-    "title": "current_focus",
+    "title": "Current Focus",
     "subtitle": "// What I'm learning and working on",
     "items": [
       {
         "name": "learning_golang",
         "icon": "code",
-        "iconColor": "ctp-blue",
+        "iconColor": "pk-sky",
         "badge": "IN PROGRESS",
-        "badgeColor": "ctp-blue",
+        "badgeColor": "pk-sky",
         "description": "Diving into Go's concurrency patterns, goroutines, and channels. Building microservices to understand its performance benefits and simplicity for backend systems.",
         "progressPercent": 35,
         "progressComment": "// progress: 35%"
@@ -125,9 +125,9 @@
       {
         "name": "mastering_vim",
         "icon": "terminal",
-        "iconColor": "ctp-green",
+        "iconColor": "pk-mint",
         "badge": "DAILY",
-        "badgeColor": "ctp-green",
+        "badgeColor": "pk-mint",
         "description": "Practicing VIM motions and keybindings to boost coding efficiency. Using Neovim as my daily driver with custom configurations and plugins for a powerful development workflow.",
         "progressPercent": 60,
         "progressComment": "// progress: 60%"
@@ -135,9 +135,9 @@
       {
         "name": "obsidian_notes",
         "icon": "book-open",
-        "iconColor": "ctp-mauve",
+        "iconColor": "pk-mauve",
         "badge": "COMPLETE",
-        "badgeColor": "ctp-green",
+        "badgeColor": "pk-mint",
         "description": "Using Obsidian for knowledge management and building a personal knowledge base. Creating interconnected notes, linking ideas, and maintaining a second brain for technical concepts and learnings.",
         "progressPercent": 100,
         "progressComment": "// progress: 100%"
@@ -145,9 +145,9 @@
       {
         "name": "ai_tools_mastery",
         "icon": "sparkles",
-        "iconColor": "ctp-peach",
+        "iconColor": "pk-peach",
         "badge": "EXPLORING",
-        "badgeColor": "ctp-peach",
+        "badgeColor": "pk-peach",
         "description": "Integrating AI-powered development tools into my workflow. Learning prompt engineering, using Claude Code, GitHub Copilot, and building AI agents to boost productivity and automate tasks.",
         "progressPercent": 75,
         "progressComment": "// progress: 75%"

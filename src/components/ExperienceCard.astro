@@ -8,34 +8,110 @@ interface Props {
 const { experience } = Astro.props;
 ---
 
-<article class="p-6 md:p-8 bg-ctp-surface0 rounded card-hover">
-  <!-- Header: Role + Date -->
-  <header class="mb-5">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-1">
-      <h3 class="text-lg md:text-xl font-semibold text-ctp-text">
-        {experience.role}
-      </h3>
-      <span class:list={[
-        'text-sm font-mono',
-        experience.isCurrent ? 'text-ctp-green' : 'text-ctp-overlay0'
-      ]}>
-        {experience.period}
-      </span>
+<article class="exp-card">
+  <!-- Header: 2-col grid — role | period -->
+  <div class="exp-header">
+    <h3 class="exp-role">{experience.role}</h3>
+    <div class:list={['exp-period', experience.isCurrent ? 'exp-period--current' : '']}>
+      {experience.isCurrent && <span class="exp-dot"></span>}
+      {experience.period}
     </div>
-    <p class="text-sm text-ctp-overlay2">{experience.company}</p>
-  </header>
+    <p class="exp-company">{experience.company}</p>
+  </div>
 
   <!-- Description -->
-  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-5">
-    {experience.description}
-  </p>
+  <p class="exp-description">{experience.description}</p>
 
   <!-- Stack Tags -->
-  <footer class="flex flex-wrap gap-2">
+  <footer class="exp-stack">
     {experience.stack.map((tech) => (
-      <span class="px-3 py-1.5 text-xs font-medium bg-ctp-surface1 text-ctp-green rounded">
-        {tech}
-      </span>
+      <span class="exp-tag">{tech}</span>
     ))}
   </footer>
 </article>
+
+<style>
+  .exp-card {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-card:last-child {
+    border-bottom: none;
+  }
+
+  .exp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 16px;
+    align-items: start;
+    margin-bottom: 14px;
+  }
+
+  .exp-role {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 0;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    padding-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .exp-period--current {
+    color: var(--pk-green);
+  }
+
+  .exp-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background: var(--pk-green);
+    flex-shrink: 0;
+  }
+
+  .exp-company {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .exp-description {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    line-height: 1.6;
+    margin: 0 0 12px;
+    max-width: 820px;
+  }
+
+  .exp-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .exp-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--bg-surface);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+</style>

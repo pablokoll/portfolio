@@ -14,59 +14,155 @@ const imageSrc = project.image ? images[`../assets/screenshots/${project.image}`
 const resolvedImage = imageSrc ? (await imageSrc()).default : null;
 ---
 
-<article class="h-full p-6 md:p-7 bg-ctp-surface0 rounded card-hover flex flex-col">
+<article class="project-card card card-hover">
   <!-- Screenshot -->
-  <div class="bg-ctp-surface1 rounded h-44 mb-5 overflow-hidden">
+  <div class="project-image">
     {resolvedImage ? (
       <Image
         src={resolvedImage}
         alt={`${project.name} screenshot`}
-        class="w-full h-full object-cover object-center"
+        class="project-img"
         loading="lazy"
         widths={[400, 800]}
         sizes="(max-width: 768px) 100vw, 50vw"
       />
     ) : (
-      <div class="flex items-center justify-center h-full">
-        <span class="text-xs text-ctp-overlay0">[Project Screenshot]</span>
+      <div class="project-img-placeholder">
+        <span>[Project Screenshot]</span>
       </div>
     )}
   </div>
 
-  <!-- Header: Title + Badge -->
-  <header class="flex items-center justify-between mb-3">
-    <h3 class="text-lg font-semibold text-ctp-text">
-      {project.name}
-    </h3>
-    {project.badge && (
-      <span class="px-2.5 py-1 text-[10px] font-medium bg-ctp-surface1 text-ctp-peach rounded uppercase">
-        {project.badge}
-      </span>
-    )}
-    {project.github && !project.badge && (
-      <a
-        href={project.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-ctp-surface2 hover:text-ctp-text transition-colors"
-        aria-label={`View ${project.name} on GitHub`}
-      >
-        <Icon name="github" class="w-5 h-5" />
-      </a>
-    )}
-  </header>
+  <div class="project-body">
+    <!-- Header: Title + Badge -->
+    <header class="project-header">
+      <h3 class="project-name">{project.name}</h3>
+      {project.badge && (
+        <span class="project-badge">{project.badge}</span>
+      )}
+      {project.github && !project.badge && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-github"
+          aria-label={`View ${project.name} on GitHub`}
+        >
+          <Icon name="github" class="w-5 h-5" />
+        </a>
+      )}
+    </header>
 
-  <!-- Description -->
-  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-4 flex-grow">
-    {project.description}
-  </p>
+    <!-- Description -->
+    <p class="project-description">{project.description}</p>
 
-  <!-- Stack Tags -->
-  <footer class="flex flex-wrap gap-2">
-    {project.stack.map((tech) => (
-      <span class="px-3 py-1.5 text-xs font-medium bg-ctp-surface1 text-ctp-green rounded">
-        {tech}
-      </span>
-    ))}
-  </footer>
+    <!-- Stack Tags -->
+    <footer class="project-stack">
+      {project.stack.map((tech) => (
+        <span class="project-tag">{tech}</span>
+      ))}
+    </footer>
+  </div>
 </article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .project-image {
+    aspect-ratio: 16 / 10;
+    background: var(--bg-surface);
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .project-img-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+
+  .project-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .project-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 0;
+  }
+
+  .project-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--bg-surface);
+    color: var(--fg-secondary);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .project-github {
+    color: var(--fg-muted);
+    transition: color var(--duration-2) var(--ease);
+  }
+
+  .project-github:hover {
+    color: var(--fg);
+  }
+
+  .project-description {
+    font-size: 13px;
+    color: var(--fg-secondary);
+    line-height: 1.55;
+    margin: 0 0 14px;
+    flex-grow: 1;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--bg-surface);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+</style>

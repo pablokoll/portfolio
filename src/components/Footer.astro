@@ -8,31 +8,31 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<footer id="contact" class="px-6 md:px-24 lg:px-32 py-12 md:py-16">
-  <div class="max-w-6xl mx-auto">
+<footer id="contact" class="footer">
+  <div class="footer-inner">
     <!-- Divider -->
-    <div class="h-px bg-ctp-surface1 mb-8"></div>
+    <div class="footer-divider"></div>
 
     <!-- Footer content -->
-    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-8">
+    <div class="footer-content">
       <!-- Left: Terminal brand -->
-      <div class="space-y-3">
-        <div class="flex items-center gap-1">
-          <span class="text-ctp-green font-medium">{data.brand.prompt}</span>
-          <span class="text-ctp-overlay2 font-medium">{data.brand.name}</span>
-          <span class="w-2 h-[18px] bg-ctp-green animate-pulse"></span>
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <span class="footer-prompt">~</span>
+          <span class="footer-name">{data.brand.name}</span>
+          <span class="footer-cursor" id="footer-cursor"></span>
         </div>
-        <p class="text-xs text-ctp-overlay0">{data.tagline}</p>
+        <p class="footer-tagline">{data.tagline}</p>
       </div>
 
       <!-- Right: Command-style links -->
-      <nav class="flex flex-col gap-2">
+      <nav class="footer-links">
         {data.commandLinks.map((link) => (
           <a
             href={link.url}
             target={link.url.startsWith('mailto:') ? undefined : '_blank'}
             rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-            class="text-sm text-ctp-overlay2 hover:text-ctp-text transition-colors"
+            class="footer-link"
           >
             {link.text}
           </a>
@@ -41,10 +41,117 @@ const { data } = Astro.props;
     </div>
 
     <!-- Copyright -->
-    <div class="text-center">
-      <p class="text-xs text-ctp-surface2">
-        {data.copyright}
-      </p>
+    <div class="footer-copyright">
+      {data.copyright}
     </div>
   </div>
 </footer>
+
+<style>
+  .footer {
+    padding: 48px 64px 64px;
+    max-width: 1120px;
+    margin: 64px auto 0;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 32px;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .footer-brand-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .footer-prompt {
+    color: var(--fg-muted);
+    margin-right: 6px;
+  }
+
+  .footer-cursor {
+    display: inline-block;
+    width: 0.12em;
+    height: 1em;
+    background: var(--pk-steel);
+    vertical-align: -0.1em;
+    margin-left: 2px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-style: italic;
+    margin: 4px 0 0;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--link);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: background var(--duration-2) var(--ease),
+                box-shadow var(--duration-2) var(--ease),
+                border-color var(--duration-2) var(--ease);
+  }
+
+  .footer-link:hover {
+    background: var(--bg-surface);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+    color: var(--fg-muted);
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    .footer {
+      padding: 32px 24px 48px;
+    }
+
+    .footer-links {
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  // Blinking cursor
+  const cursor = document.getElementById('footer-cursor');
+  if (cursor) {
+    let visible = true;
+    setInterval(() => {
+      visible = !visible;
+      cursor.style.opacity = visible ? '1' : '0';
+    }, 500);
+  }
+</script>

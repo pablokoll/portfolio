@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Navbar from '../components/Navbar.astro';
 import KeyboardNav from '../components/KeyboardNav.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
@@ -28,10 +28,10 @@ const data = await getPortfolioData();
     Skip to content
   </a>
 
-  <ThemeToggle />
+  <Navbar />
   <KeyboardNav />
 
-  <main id="main-content" role="main">
+  <main id="main-content" role="main" class="main-content">
     <!-- Hero Section -->
     <Hero data={data.hero} />
 
@@ -99,3 +99,15 @@ const data = await getPortfolioData();
   <!-- Footer -->
   <Footer data={data.footer} />
 </Layout>
+
+<style>
+  .main-content {
+    padding-top: 56px;
+  }
+
+  @media (max-width: 767px) {
+    .main-content {
+      padding-top: 52px;
+    }
+  }
+</style>

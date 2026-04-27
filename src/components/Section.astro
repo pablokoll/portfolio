@@ -9,19 +9,52 @@ interface Props {
 const { id, title, subtitle, class: className = '' } = Astro.props;
 ---
 
-<section id={id} class:list={['px-6 md:px-24 lg:px-32 py-16 md:py-20', className]}>
-  <div class="max-w-6xl mx-auto">
+<section id={id} class:list={['section', className]}>
+  <div class="section-inner">
     <!-- Section Header -->
-    <header class="mb-10 md:mb-12">
-      <h2 class="text-2xl md:text-3xl font-semibold text-ctp-text mb-2">
-        {title}
-      </h2>
-      <p class="text-sm md:text-base text-ctp-overlay0">
-        {subtitle}
-      </p>
+    <header class="section-header">
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
     </header>
 
     <!-- Section Content -->
     <slot />
   </div>
 </section>
+
+<style>
+  .section {
+    padding: 64px 64px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: var(--fg-muted);
+    font-style: italic;
+    margin: 6px 0 0;
+  }
+
+  @media (max-width: 720px) {
+    .section {
+      padding: 48px 24px;
+    }
+  }
+</style>

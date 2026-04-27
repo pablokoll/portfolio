@@ -6,62 +6,229 @@ interface Props {
 }
 
 const { data } = Astro.props;
+
+// Check if avatar exists in public/
+const avatarPath = '/avatar.png';
 ---
 
-<section class="min-h-screen flex flex-col justify-center px-6 md:px-24 lg:px-32 py-20">
-  <div class="max-w-6xl mx-auto w-full">
-    <!-- Terminal prompt -->
-    <p class="text-ctp-blue font-medium text-base md:text-lg mb-4">
-      {data.prompt}
-    </p>
+<section id="hero" class="hero-section">
+  <div class="hero-inner">
+    <!-- Left: text content -->
+    <div class="hero-content">
+      <p class="hero-prompt">{data.prompt}</p>
 
-    <!-- Headline -->
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-semibold text-ctp-text mb-6">
-      {data.headline}
-    </h1>
+      <h1 class="hero-headline">
+        {data.headline}<span class="hero-dot">.</span>
+      </h1>
 
-    <!-- Subline -->
-    <p class="text-ctp-overlay0 text-lg md:text-xl mb-10 max-w-2xl">
-      {data.subline}
-    </p>
+      <p class="hero-subline">{data.subline}</p>
 
-    <!-- CTA Buttons -->
-    <div class="flex flex-wrap gap-3">
-      {data.cta.primary.href.startsWith('#') ? (
-        <button
-          type="button"
-          data-scroll-to={data.cta.primary.href.replace('#', '')}
-          class="px-6 py-3 bg-ctp-blue text-ctp-base font-medium text-sm rounded hover:opacity-90 transition-opacity cursor-pointer"
-        >
-          {data.cta.primary.text}
-        </button>
-      ) : (
-        <a
-          href={data.cta.primary.href}
-          class="px-6 py-3 bg-ctp-blue text-ctp-base font-medium text-sm rounded hover:opacity-90 transition-opacity"
-        >
-          {data.cta.primary.text}
-        </a>
-      )}
-      {data.cta.secondary.href.startsWith('#') ? (
-        <button
-          type="button"
-          data-scroll-to={data.cta.secondary.href.replace('#', '')}
-          class="px-6 py-3 bg-ctp-surface0 text-ctp-overlay2 font-medium text-sm rounded hover:bg-ctp-surface1 transition-colors cursor-pointer"
-        >
-          {data.cta.secondary.text}
-        </button>
-      ) : (
-        <a
-          href={data.cta.secondary.href}
-          class="px-6 py-3 bg-ctp-surface0 text-ctp-overlay2 font-medium text-sm rounded hover:bg-ctp-surface1 transition-colors"
-        >
-          {data.cta.secondary.text}
-        </a>
-      )}
+      <div class="hero-ctas">
+        {data.cta.primary.href.startsWith('#') ? (
+          <button type="button" data-scroll-to={data.cta.primary.href.replace('#', '')} class="btn-primary">
+            {data.cta.primary.text}
+          </button>
+        ) : (
+          <a href={data.cta.primary.href} class="btn-primary">{data.cta.primary.text}</a>
+        )}
+        {data.cta.secondary.href.startsWith('#') ? (
+          <button type="button" data-scroll-to={data.cta.secondary.href.replace('#', '')} class="btn-secondary">
+            {data.cta.secondary.text}
+          </button>
+        ) : (
+          <a href={data.cta.secondary.href} class="btn-secondary">{data.cta.secondary.text}</a>
+        )}
+      </div>
+
+      <div class="hero-availability">
+        <span class="availability-dot"></span>
+        <span>// available for freelance</span>
+      </div>
+    </div>
+
+    <!-- Right: avatar -->
+    <div class="hero-avatar-wrap">
+      <div class="hero-avatar" id="hero-avatar-container">
+        <!-- Avatar image loaded client-side; falls back to initials if missing -->
+        <img
+          src={avatarPath}
+          alt="Pablo Koll"
+          class="hero-avatar-img"
+          id="hero-avatar-img"
+          onerror="this.style.display='none'; document.getElementById('hero-avatar-fallback').style.display='flex';"
+        />
+        <div class="hero-avatar-fallback" id="hero-avatar-fallback" style="display:none">
+          <span class="hero-avatar-initials">PK</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-section {
+    padding: 96px 64px 120px;
+  }
+
+  .hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-content {
+    min-width: 0;
+  }
+
+  .hero-prompt {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin: 0 0 16px;
+  }
+
+  .hero-headline {
+    font-size: clamp(44px, 8vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--fg);
+    margin: 0;
+  }
+
+  .hero-dot {
+    color: var(--pk-steel);
+  }
+
+  .hero-subline {
+    margin: 20px 0 0;
+    font-size: 15px;
+    color: var(--fg-muted);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  .hero-ctas {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: var(--pk-steel);
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background var(--duration-2) var(--ease);
+  }
+
+  .btn-primary:hover { background: var(--pk-steel-hover); }
+
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background var(--duration-2) var(--ease);
+  }
+
+  .btn-secondary:hover { background: var(--bg-surface); }
+
+  .hero-availability {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-style: italic;
+  }
+
+  .availability-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 99px;
+    background: var(--pk-green);
+    flex-shrink: 0;
+  }
+
+  /* Avatar */
+  .hero-avatar-wrap {
+    flex-shrink: 0;
+  }
+
+  .hero-avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-avatar-fallback {
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-avatar-initials {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fg-muted);
+    letter-spacing: -0.02em;
+  }
+
+  /* Mobile: stack vertically, hide avatar */
+  @media (max-width: 720px) {
+    .hero-section {
+      padding: 72px 24px 48px;
+    }
+
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-avatar-wrap {
+      display: none;
+    }
+  }
+</style>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-scroll-to]').forEach((btn) => {
