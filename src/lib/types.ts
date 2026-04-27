@@ -20,6 +20,7 @@ export interface Meta {
 export interface Hero {
   prompt: string;
   headline: string;
+  subtitle: string;
   subline: string;
   availability?: string;
   cta: {

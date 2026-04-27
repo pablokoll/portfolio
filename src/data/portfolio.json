@@ -7,8 +7,9 @@
   },
   "hero": {
     "prompt": "$ whoami",
-    "headline": "Pablo / Koll",
-    "subline": "// self-taught. systems thinker. turning complexity into working software.",
+    "headline": "Pablo Koll",
+    "subtitle": "Software Engineer & System Builder",
+    "subline": "// self-taught engineer who builds scalable systems and clean architectures. passionate about solving real problems with the right tools — from APIs and backend services to full-stack products. always learning, currently leveraging AI to move faster and build smarter.",
     "availability": "available for freelance",
     "cta": {
       "primary": {

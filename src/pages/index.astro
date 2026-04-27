@@ -40,6 +40,7 @@ const data = await getPortfolioData();
       id="experience"
       title={data.experience.title}
       subtitle={data.experience.subtitle}
+      class="section--first"
     >
       <div class="space-y-6" role="list">
         {data.experience.items.map((exp) => (
@@ -53,6 +54,7 @@ const data = await getPortfolioData();
     <!-- Skills Section -->
     <Section
       id="skills"
+      index={2}
       title={data.skills.title}
       subtitle={data.skills.subtitle}
     >
@@ -68,6 +70,7 @@ const data = await getPortfolioData();
     <!-- Projects Section -->
     <Section
       id="projects"
+      index={3}
       title={data.projects.title}
       subtitle={data.projects.subtitle}
     >
@@ -83,6 +86,7 @@ const data = await getPortfolioData();
     <!-- Learning Section -->
     <Section
       id="learning"
+      index={4}
       title={data.learning.title}
       subtitle={data.learning.subtitle}
     >
