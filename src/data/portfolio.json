@@ -7,16 +7,17 @@
   },
   "hero": {
     "prompt": "$ whoami",
-    "headline": "Software Developer",
-    "subline": "// Self-taught dev, building scalable systems, APIs, and clean architectures",
+    "headline": "Pablo / Koll",
+    "subline": "// self-taught. systems thinker. turning complexity into working software.",
+    "availability": "available for freelance",
     "cta": {
       "primary": {
-        "text": "view_projects()",
+        "text": "View my work →",
         "href": "#projects"
       },
       "secondary": {
-        "text": "$ contact --email",
-        "href": "mailto:pablokollm@gmail.com"
+        "text": "Let's talk",
+        "href": "#contact"
       }
     }
   },

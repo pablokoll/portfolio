@@ -1,3 +1,98 @@
+# Hero Refactor Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Refactor the Hero section with a large "Pablo / Koll." headline, updated subline, new CTA buttons with scroll+tooltip behavior, and an availability indicator repositioned above the avatar on desktop / below CTAs on mobile.
+
+**Architecture:** Three files change: `types.ts` gets `availability?: string` on the `Hero` interface; `portfolio.json` gets updated content; `Hero.astro` gets new layout, styles, and script. No new components — the availability indicator lives inline in Hero. Tooltips use CSS `::after` with `data-tooltip` attribute, matching the navbar pattern.
+
+**Tech Stack:** Astro, TypeScript, CSS custom properties (`--pk-*` tokens), vanilla JS for scroll behavior.
+
+---
+
+## File Structure
+
+| File | Change |
+|------|--------|
+| `src/lib/types.ts` | Add `availability?: string` to `Hero` interface |
+| `src/data/portfolio.json` | Update headline, subline, availability, CTA text/href |
+| `src/components/Hero.astro` | New layout, styles, script |
+
+---
+
+### Task 1: Update Hero type and data
+
+**Files:**
+- Modify: `src/lib/types.ts:20-28`
+- Modify: `src/data/portfolio.json` (hero object)
+
+- [ ] **Step 1: Add `availability` to Hero interface**
+
+Open `src/lib/types.ts`. Replace lines 20–28:
+
+```typescript
+export interface Hero {
+  prompt: string;
+  headline: string;
+  subline: string;
+  availability?: string;
+  cta: {
+    primary: CTAButton;
+    secondary: CTAButton;
+  };
+}
+```
+
+- [ ] **Step 2: Update portfolio.json hero section**
+
+Open `src/data/portfolio.json`. Replace the `"hero"` object (currently lines 8–22) with:
+
+```json
+"hero": {
+  "prompt": "$ whoami",
+  "headline": "Pablo / Koll",
+  "subline": "// self-taught. systems thinker. turning complexity into working software.",
+  "availability": "available for freelance",
+  "cta": {
+    "primary": {
+      "text": "View my work →",
+      "href": "#projects"
+    },
+    "secondary": {
+      "text": "Let's talk",
+      "href": "#contact"
+    }
+  }
+},
+```
+
+- [ ] **Step 3: Verify type check passes**
+
+```bash
+cd /home/pablo/Work/personal/profile/portfolio
+npx astro check
+```
+
+Expected: no type errors.
+
+---
+
+### Task 2: Rewrite Hero.astro
+
+**Files:**
+- Modify: `src/components/Hero.astro` (full rewrite)
+
+This task replaces the entire file. The key changes:
+- Headline enlarged to `clamp(64px, 9vw, 100px)`, text is `{data.headline}<span class="hero-dot">.</span>`
+- Availability indicator: rendered in **both** columns but toggled via CSS (shown above avatar on desktop, shown below CTAs on mobile)
+- CTAs get `data-tooltip` attribute for CSS tooltip
+- Script handles `data-scroll-to` for both CTAs (same as current, both CTAs now use `#projects` / `#contact` anchors)
+
+- [ ] **Step 1: Replace Hero.astro with new implementation**
+
+Replace the entire contents of `src/components/Hero.astro` with:
+
+```astro
 ---
 import type { Hero as HeroType } from '../lib/types';
 
@@ -26,7 +121,7 @@ const avatarPath = '/avatar.png';
           type="button"
           class="btn-primary"
           data-scroll-to={data.cta.primary.href.replace('#', '')}
-          data-tooltip="scroll_to_projects()"
+          data-tooltip={data.cta.primary.href.startsWith('#') ? data.cta.primary.href.replace('#', '') + '_scroll()' : undefined}
         >
           {data.cta.primary.text}
         </button>
@@ -34,7 +129,7 @@ const avatarPath = '/avatar.png';
           type="button"
           class="btn-secondary"
           data-scroll-to={data.cta.secondary.href.replace('#', '')}
-          data-tooltip="scroll_to_contact()"
+          data-tooltip={data.cta.secondary.href.startsWith('#') ? data.cta.secondary.href.replace('#', '') + '_scroll()' : undefined}
         >
           {data.cta.secondary.text}
         </button>
@@ -42,7 +137,7 @@ const avatarPath = '/avatar.png';
 
       <!-- Availability — mobile only (below CTAs) -->
       {data.availability && (
-        <div class="hero-availability hero-availability--mobile" aria-hidden="true">
+        <div class="hero-availability hero-availability--mobile">
           <span class="availability-dot"></span>
           <span>{data.availability}</span>
         </div>
@@ -147,8 +242,7 @@ const avatarPath = '/avatar.png';
     display: inline-block;
     position: relative;
     transition: background var(--duration-2) var(--ease),
-                color var(--duration-2) var(--ease),
-                border-color var(--duration-2) var(--ease);
+                color var(--duration-2) var(--ease);
   }
 
   .btn-primary {
@@ -300,3 +394,49 @@ const avatarPath = '/avatar.png';
     });
   });
 </script>
+```
+
+- [ ] **Step 2: Start dev server and verify visually**
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:4321` and check:
+- Headline "Pablo / Koll." renders large (~100px desktop, scales down on small viewports)
+- `.` is blue/steel color
+- Subline italic muted text below
+- "View my work →" primary button, "Let's talk" secondary button
+- Hovering each button shows tooltip (`projects_scroll()` / `contact_scroll()`)
+- Clicking each button smooth-scrolls to the correct section
+- Green pulsing dot + "available for freelance" appears **above the avatar** on desktop
+- On mobile (≤720px): right column hidden, availability appears **below the CTAs**
+
+- [ ] **Step 3: Verify type check**
+
+```bash
+npx astro check
+```
+
+Expected: no errors.
+
+---
+
+### Task 3: Final check and commit
+
+**Files:** all modified files
+
+- [ ] **Step 1: Check git diff looks clean**
+
+```bash
+git diff --stat
+```
+
+Expected: 3 files changed — `src/lib/types.ts`, `src/data/portfolio.json`, `src/components/Hero.astro` + `.claude/docs/superpowers/specs/2026-04-27-hero-refactor-design.md`
+
+- [ ] **Step 2: Commit everything**
+
+```bash
+git add src/lib/types.ts src/data/portfolio.json src/components/Hero.astro .claude/docs/superpowers/specs/2026-04-27-hero-refactor-design.md
+git commit -m "feat: hero refactor with large headline, updated copy and CTAs"
+```

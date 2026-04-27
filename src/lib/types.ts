@@ -21,6 +21,7 @@ export interface Hero {
   prompt: string;
   headline: string;
   subline: string;
+  availability?: string;
   cta: {
     primary: CTAButton;
     secondary: CTAButton;
