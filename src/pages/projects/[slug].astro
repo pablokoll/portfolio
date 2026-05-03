@@ -1,22 +1,28 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
+import KeyboardNav from '../../components/KeyboardNav.astro';
+import Footer from '../../components/Footer.astro';
 import { getProjectsData } from '../../lib/get-projects-data';
+import { getPortfolioData } from '../../lib/get-portfolio-data';
 import type { ProjectDetail } from '../../lib/types';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   const projects = getProjectsData();
-  return projects.map((p) => ({
+  return projects.map((p, i) => ({
     params: { slug: p.id },
-    props: { project: p },
+    props: { project: p, prevProject: projects[i - 1] ?? null, nextProject: projects[i + 1] ?? null },
   }));
 }
 
 interface Props {
   project: ProjectDetail;
+  prevProject: ProjectDetail | null;
+  nextProject: ProjectDetail | null;
 }
 
-const { project } = Astro.props;
+const { project, prevProject, nextProject } = Astro.props;
+const data = await getPortfolioData();
 
 const badgeColor = project.badge === 'freelance' ? 'green'
   : project.badge === 'personal' ? 'sky'
@@ -31,6 +37,7 @@ const allImages = [project.image, ...(project.gallery ?? [])];
   description={project.description}
 >
   <Navbar />
+  <KeyboardNav />
 
   <main class="project-detail-main">
     <div class="project-detail-container">
@@ -41,16 +48,6 @@ const allImages = [project.image, ...(project.gallery ?? [])];
         <span class="breadcrumb-sep">/</span>
         <span class="breadcrumb-current">{project.id}</span>
       </nav>
-
-      <!-- Hero Image -->
-      <div class="hero-image-wrap">
-        <img
-          src={project.image}
-          alt={`${project.name} screenshot`}
-          class="hero-image"
-          data-lightbox-index="0"
-        />
-      </div>
 
       <!-- Project Header -->
       <div class="project-header">
@@ -73,6 +70,21 @@ const allImages = [project.image, ...(project.gallery ?? [])];
             </a>
           )}
         </div>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="hero-image-outer">
+        <div class="hero-image-wrap">
+          <img
+            src={project.image}
+            alt={`${project.name} screenshot`}
+            class="hero-image"
+            data-lightbox-index="0"
+          />
+        </div>
+        {project.imageBadge && (
+          <span class="image-badge" data-tooltip={project.imageBadge}>mockup</span>
+        )}
       </div>
 
       <!-- Short Description -->
@@ -118,11 +130,28 @@ const allImages = [project.image, ...(project.gallery ?? [])];
         </div>
       )}
 
-      <!-- Back Link -->
-      <a href="/#projects" class="back-link">← back_to_projects()</a>
+      <!-- Bottom navigation -->
+      <nav class="project-nav" aria-label="Project navigation">
+        {prevProject ? (
+          <a href={`/projects/${prevProject.id}`} class="project-nav-link project-nav-link--prev">
+            ← go_to_prev()
+          </a>
+        ) : (
+          <a href="/#projects" class="project-nav-link project-nav-link--prev">
+            ← back_to_projects()
+          </a>
+        )}
+        {nextProject && (
+          <a href={`/projects/${nextProject.id}`} class="project-nav-link project-nav-link--next">
+            go_to_next() →
+          </a>
+        )}
+      </nav>
 
     </div>
   </main>
+
+  <Footer data={data.footer} />
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
@@ -233,24 +262,75 @@ const allImages = [project.image, ...(project.gallery ?? [])];
     color: var(--fg);
   }
 
+  .hero-image-outer {
+    position: relative;
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+
   .hero-image-wrap {
     width: 100%;
-    margin-bottom: 32px;
+    height: 320px;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--border);
     cursor: zoom-in;
   }
 
+  @media (max-width: 640px) {
+    .hero-image-wrap { height: 200px; }
+  }
+
   .hero-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
+    object-position: center;
     transition: opacity var(--duration-2) var(--ease);
   }
 
   .hero-image:hover {
     opacity: 0.9;
+  }
+
+  .image-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--fg-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: default;
+    backdrop-filter: blur(4px);
+  }
+
+  .image-badge::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    right: 0;
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-secondary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+  }
+
+  .image-badge:hover::after {
+    opacity: 1;
   }
 
   .project-title-row {
@@ -280,7 +360,7 @@ const allImages = [project.image, ...(project.gallery ?? [])];
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 12px;
+    margin: 12px 0px;
   }
 
   .project-badge {
@@ -388,9 +468,14 @@ const allImages = [project.image, ...(project.gallery ?? [])];
     filter: brightness(0.85);
   }
 
-  .back-link {
-    display: inline-block;
-    margin-top: 64px;
+  .project-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+  }
+
+  .project-nav-link {
     font-family: var(--font-mono);
     font-size: 13px;
     color: var(--fg-muted);
@@ -398,7 +483,7 @@ const allImages = [project.image, ...(project.gallery ?? [])];
     transition: color var(--duration-2) var(--ease);
   }
 
-  .back-link:hover {
+  .project-nav-link:hover {
     color: var(--pk-mauve);
   }
 

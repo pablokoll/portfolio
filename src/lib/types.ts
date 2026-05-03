@@ -83,6 +83,7 @@ export interface ProjectDetail {
   github?: string;
   live?: string;
   image: string;
+  imageBadge?: string;
   gallery?: string[];
   longDescription: {
     problem: string;

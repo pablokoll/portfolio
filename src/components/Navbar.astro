@@ -10,11 +10,11 @@ import Icon from './Icon.astro';
 
     <!-- Center: Nav links (desktop) -->
     <nav class="navbar-links" aria-label="Main navigation">
-      <a href="#about"      class="nav-link" data-spy="about"      data-tooltip='go_to("about")'>About</a>
-      <a href="#projects"   class="nav-link" data-spy="projects"   data-tooltip='go_to("projects")'>Projects</a>
-      <a href="#experience" class="nav-link" data-spy="experience" data-tooltip='go_to("experience")'>Experience</a>
-      <a href="#learning"   class="nav-link" data-spy="learning"   data-tooltip='go_to("learning")'>Learning</a>
-      <a href="#contact"    class="nav-link" data-spy="contact"    data-tooltip='go_to("contact")'>Contact</a>
+      <a href="#about"      class="nav-link" data-section="about"      data-spy="about"      data-tooltip='go_to("about")'>About</a>
+      <a href="#projects"   class="nav-link" data-section="projects"   data-spy="projects"   data-tooltip='go_to("projects")'>Projects</a>
+      <a href="#experience" class="nav-link" data-section="experience" data-spy="experience" data-tooltip='go_to("experience")'>Experience</a>
+      <a href="#learning"   class="nav-link" data-section="learning"   data-spy="learning"   data-tooltip='go_to("learning")'>Learning</a>
+      <a href="#contact"    class="nav-link" data-section="contact"    data-spy="contact"    data-tooltip='go_to("contact")'>Contact</a>
     </nav>
 
     <!-- Right: Action icons (desktop) + Hamburger (mobile) -->
@@ -91,11 +91,11 @@ import Icon from './Icon.astro';
   </button>
 
   <nav class="nav-overlay-inner" aria-label="Mobile navigation">
-    <a href="#about"      class="overlay-link" data-spy="about">About</a>
-    <a href="#projects"   class="overlay-link" data-spy="projects">Projects</a>
-    <a href="#experience" class="overlay-link" data-spy="experience">Experience</a>
-    <a href="#learning"   class="overlay-link" data-spy="learning">Learning</a>
-    <a href="#contact"    class="overlay-link" data-spy="contact">Contact</a>
+    <a href="#about"      class="overlay-link" data-section="about"      data-spy="about">About</a>
+    <a href="#projects"   class="overlay-link" data-section="projects"   data-spy="projects">Projects</a>
+    <a href="#experience" class="overlay-link" data-section="experience" data-spy="experience">Experience</a>
+    <a href="#learning"   class="overlay-link" data-section="learning"   data-spy="learning">Learning</a>
+    <a href="#contact"    class="overlay-link" data-section="contact"    data-spy="contact">Contact</a>
   </nav>
 </div>
 
@@ -441,15 +441,22 @@ import Icon from './Icon.astro';
     }
   }
 
+  const isHome = window.location.pathname === '/';
+
   [...desktopLinks, ...overlayLinks].forEach((link) => {
     link.addEventListener('click', (e) => {
+      const section = link.dataset.section || '';
+      if (!isHome) {
+        // Navigate to home with anchor — let browser handle it
+        window.location.href = `/#${section}`;
+        return;
+      }
       e.preventDefault();
-      const target = link.getAttribute('href')?.replace('#', '') || '';
-      setActive(target);
+      setActive(section);
       spyFrozen = true;
       if (spyFreezeTimer) clearTimeout(spyFreezeTimer);
       spyFreezeTimer = setTimeout(() => { spyFrozen = false; }, 1000);
-      scrollToId(target);
+      scrollToId(section);
       closeOverlay();
     });
   });

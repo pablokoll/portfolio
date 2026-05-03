@@ -1,38 +1,51 @@
 [
   {
+    "id": "asset-image-scraper",
+    "name": "Asset Image Scraper",
+    "badge": "freelance",
+    "year": "2025",
+    "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image.",
+    "descriptionHtml": "<em>Node.js/TypeScript</em> service that renders personalized product images on a dynamic canvas via <em>Puppeteer</em>, captures the output as a screenshot, and serves it as an optimized image. Built as a <strong>headless</strong> scraper-style pipeline with <strong>browser pool management</strong> for concurrent requests and smart caching.",
+    "stack": [
+      "Node.js",
+      "TypeScript",
+      "Puppeteer",
+      "Docker",
+      "Azure"
+    ],
+    "github": null,
+    "live": null,
+    "image": "/images/projects/asset-image-scraper/main-ais.png",
+    "imageBadge": "mockup — real UI under NDA",
+    "gallery": [],
+    "longDescription": {
+      "problem": "A client needed to generate thousands of personalized product images programmatically — each with dynamic text, custom fonts, and color overlays rendered on a canvas — to serve as product thumbnails in their catalog.",
+      "approach": "Built a headless Node.js/TypeScript service using Puppeteer to spin up a browser pool, load a dynamic canvas page, inject personalization parameters, and capture the result as an optimized screenshot. Implemented smart caching to avoid re-rendering identical configurations and Docker-based deployment on Azure.",
+      "outcome": "The service reliably generates personalized product images at scale, handling concurrent requests via browser pool management. Deployed on Azure with Docker, it reduced manual image creation overhead and enabled automated catalog updates."
+    }
+  },
+  {
     "id": "kit-customization-widget",
     "name": "Kit Customization Widget",
     "badge": "freelance",
     "year": "2024",
     "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
     "descriptionHtml": "<strong>Interactive widget</strong> for <em>Shopify</em> that lets customers <strong>personalize products</strong> in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
-    "stack": ["Shopify", "JavaScript", "Canvas", "GraphQL"],
+    "stack": [
+      "Shopify",
+      "JavaScript",
+      "Canvas",
+      "GraphQL"
+    ],
     "github": null,
     "live": null,
-    "image": "/images/projects/kit-customization-widget/hero.jpg",
+    "image": "/images/projects/kit-customization-widget/main-kcw.png",
+    "imageBadge": "mockup — real UI under NDA",
     "gallery": [],
     "longDescription": {
       "problem": "The client needed a way for customers to fully personalize kit products (sports uniforms) directly in the Shopify storefront — selecting colors, adding custom text with curved rendering, and previewing the result in real time before purchasing.",
       "approach": "Built a vanilla JavaScript widget embedded in a Shopify theme section. Used the HTML5 Canvas API for real-time rendering of curved text, custom fonts, and multi-color effects. Integrated Shopify's GraphQL Storefront API for live inventory checks per variant combination.",
       "outcome": "Delivered a fully functional customization widget integrated into the client's live Shopify store. Customers can preview personalized kits in real time, reducing back-and-forth with the client and improving conversion on custom orders."
-    }
-  },
-  {
-    "id": "asset-image-scraper",
-    "name": "Asset Image Scraper",
-    "badge": "freelance",
-    "year": "2024",
-    "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image.",
-    "descriptionHtml": "<em>Node.js/TypeScript</em> service that renders personalized product images on a dynamic canvas via <em>Puppeteer</em>, captures the output as a screenshot, and serves it as an optimized image. Built as a <strong>headless</strong> scraper-style pipeline with <strong>browser pool management</strong> for concurrent requests and smart caching.",
-    "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker", "Azure"],
-    "github": null,
-    "live": null,
-    "image": "/images/projects/asset-image-scraper/hero.jpg",
-    "gallery": [],
-    "longDescription": {
-      "problem": "A client needed to generate thousands of personalized product images programmatically — each with dynamic text, custom fonts, and color overlays rendered on a canvas — to serve as product thumbnails in their catalog.",
-      "approach": "Built a headless Node.js/TypeScript service using Puppeteer to spin up a browser pool, load a dynamic canvas page, inject personalization parameters, and capture the result as an optimized screenshot. Implemented smart caching to avoid re-rendering identical configurations and Docker-based deployment on Azure.",
-      "outcome": "The service reliably generates personalized product images at scale, handling concurrent requests via browser pool management. Deployed on Azure with Docker, it reduced manual image creation overhead and enabled automated catalog updates."
     }
   }
 ]
