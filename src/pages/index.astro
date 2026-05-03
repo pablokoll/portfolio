@@ -10,8 +10,10 @@ import ConstellationGraph from '../components/ConstellationGraph.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { getPortfolioData } from '../lib/get-portfolio-data';
+import { getProjectsData } from '../lib/get-projects-data';
 
 const data = await getPortfolioData();
+const projects = getProjectsData();
 ---
 
 <Layout
@@ -44,7 +46,7 @@ const data = await getPortfolioData();
       class="section--first"
     >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch" role="list">
-        {data.projects.items.map((project, i) => (
+        {projects.map((project, i) => (
           <div role="listitem" class="flex">
             <ProjectCard project={project} index={i + 1} />
           </div>

@@ -5,7 +5,10 @@ export interface PortfolioData {
   about: About;
   experience: Section<ExperienceItem>;
   skills: Section<SkillCategory>;
-  projects: Section<ProjectItem>;
+  projects: {
+    title: string;
+    subtitle: string;
+  };
   learning: Section<LearningItem>;
   contact: Contact;
   footer: Footer;
@@ -67,6 +70,25 @@ export interface ProjectItem {
   stack: string[];
   github?: string;
   badge?: string;
+}
+
+export interface ProjectDetail {
+  id: string;
+  name: string;
+  badge?: string;
+  year?: string;
+  description: string;
+  descriptionHtml?: string;
+  stack: string[];
+  github?: string;
+  live?: string;
+  image: string;
+  gallery?: string[];
+  longDescription: {
+    problem: string;
+    approach: string;
+    outcome: string;
+  };
 }
 
 export interface LearningItem {

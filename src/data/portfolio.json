@@ -148,36 +148,7 @@
   },
   "projects": {
     "title": "Featured Projects",
-    "subtitle": "// Selected work and side projects",
-    "items": [
-      {
-        "name": "Kit Customization Widget",
-        "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
-        "descriptionHtml": "<strong>Interactive widget</strong> for <em>Shopify</em> that lets customers <strong>personalize products</strong> in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
-        "image": "kit_image_widget.png",
-        "stack": [
-          "Shopify",
-          "JavaScript",
-          "Canvas",
-          "GraphQL"
-        ],
-        "badge": "freelance"
-      },
-      {
-        "name": "Asset Image Scraper",
-        "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image. Built as a headless scraper-style pipeline with browser pool management for concurrent requests and smart caching.",
-        "descriptionHtml": "<em>Node.js/TypeScript</em> service that renders personalized product images on a dynamic canvas via <em>Puppeteer</em>, captures the output as a screenshot, and serves it as an optimized image. Built as a <strong>headless</strong> scraper-style pipeline with <strong>browser pool management</strong> for concurrent requests and smart caching.",
-        "image": "asset_image_scraper.png",
-        "stack": [
-          "Node.js",
-          "TypeScript",
-          "Puppeteer",
-          "Docker",
-          "Azure"
-        ],
-        "badge": "freelance"
-      }
-    ]
+    "subtitle": "// Selected work and side projects"
   },
   "learning": {
     "title": "Current Focus",

@@ -1,16 +1,15 @@
 ---
-import type { ProjectItem } from '../lib/types';
+import type { ProjectDetail } from '../lib/types';
 
 interface Props {
-  project: ProjectItem;
+  project: ProjectDetail;
   index: number;
 }
 
 const { project, index } = Astro.props;
 
 const indexStr = String(index).padStart(2, '0');
-const slug = project.name.toLowerCase().replace(/\s+/g, '-');
-const href = `/projects/${slug}`;
+const href = `/projects/${project.id}`;
 const badgeColor = project.badge === 'freelance' ? 'green'
   : project.badge === 'personal' ? 'sky'
   : project.badge === 'open-source' ? 'mauve'
