@@ -95,13 +95,24 @@ const NODE_H = 56;
       const label = nodeLabels[item.name];
       if (!pos || !label) return null;
       const color = `var(--${item.iconColor})`;
+      const shortDesc = item.description.length > 110
+        ? item.description.slice(0, 107) + '...'
+        : item.description;
       return (
         <g
           class="constellation-node"
           data-name={item.name}
+          data-desc={shortDesc}
+          data-progress={item.progressPercent}
+          data-progress-label={item.progressComment}
+          data-color={`var(--${item.iconColor})`}
+          tabindex="0"
+          role="button"
+          aria-label={`${label.top} ${label.bottom}`}
           transform={`translate(${pos.x - NODE_W / 2}, ${pos.y - NODE_H / 2})`}
         >
           <rect
+            class="node-rect"
             width={NODE_W}
             height={NODE_H}
             rx="8"
@@ -111,6 +122,7 @@ const NODE_H = 56;
             stroke-width="1"
           />
           <text
+            class="node-label-top"
             x={NODE_W / 2}
             y="18"
             text-anchor="middle"
@@ -119,6 +131,7 @@ const NODE_H = 56;
             fill="var(--fg-muted)"
           >{label.top}</text>
           <text
+            class="node-label-bottom"
             x={NODE_W / 2}
             y="38"
             text-anchor="middle"
@@ -133,6 +146,80 @@ const NODE_H = 56;
   </svg>
 </div>
 
+<div class="node-tooltip" id="node-tooltip" aria-hidden="true">
+  <div class="node-tooltip-top"></div>
+  <div class="node-tooltip-bottom"></div>
+  <div class="node-tooltip-divider"></div>
+  <p class="node-tooltip-desc"></p>
+  <span class="node-tooltip-progress-label"></span>
+  <div class="node-tooltip-bar-track">
+    <div class="node-tooltip-bar-fill"></div>
+  </div>
+</div>
+
+<script>
+  const tooltip = document.getElementById('node-tooltip') as HTMLElement;
+  const nodes = document.querySelectorAll<SVGGElement>('.constellation-node');
+
+  function showTooltip(node: SVGGElement) {
+    const desc = node.dataset.desc ?? '';
+    const progress = parseInt(node.dataset.progress ?? '0');
+    const progressLabel = node.dataset.progressLabel ?? '';
+    const color = node.dataset.color ?? 'var(--pk-sky)';
+
+    const rect = node.getBoundingClientRect();
+
+    const texts = node.querySelectorAll('text');
+    const topLabel = texts[0]?.textContent ?? '';
+    const bottomLabel = texts[1]?.textContent ?? '';
+
+    tooltip.querySelector('.node-tooltip-top')!.textContent = topLabel;
+    const bottomEl = tooltip.querySelector('.node-tooltip-bottom') as HTMLElement;
+    bottomEl.textContent = bottomLabel;
+    bottomEl.style.color = color;
+    tooltip.querySelector('.node-tooltip-desc')!.textContent = desc;
+    tooltip.querySelector('.node-tooltip-progress-label')!.textContent = progressLabel;
+    const fill = tooltip.querySelector('.node-tooltip-bar-fill') as HTMLElement;
+    fill.style.width = `${progress}%`;
+    fill.style.background = color;
+
+    const tooltipW = 200;
+    let left = rect.left + rect.width / 2 - tooltipW / 2;
+
+    tooltip.style.width = `${tooltipW}px`;
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${rect.bottom + 8}px`;
+    tooltip.style.borderColor = color;
+    tooltip.setAttribute('aria-hidden', 'false');
+    tooltip.classList.add('visible');
+
+    requestAnimationFrame(() => {
+      const tRect = tooltip.getBoundingClientRect();
+      if (tRect.bottom > window.innerHeight - 16) {
+        tooltip.style.top = `${rect.top - tRect.height - 8}px`;
+      }
+      if (tRect.right > window.innerWidth - 8) {
+        tooltip.style.left = `${window.innerWidth - tooltipW - 8}px`;
+      }
+      if (tRect.left < 8) {
+        tooltip.style.left = '8px';
+      }
+    });
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+    tooltip.setAttribute('aria-hidden', 'true');
+  }
+
+  nodes.forEach((node) => {
+    node.addEventListener('mouseenter', () => showTooltip(node));
+    node.addEventListener('mouseleave', hideTooltip);
+    node.addEventListener('focus', () => showTooltip(node));
+    node.addEventListener('blur', hideTooltip);
+  });
+</script>
+
 <style>
   .constellation-wrap {
     width: 100%;
@@ -146,5 +233,75 @@ const NODE_H = 56;
   }
   .constellation-node {
     cursor: pointer;
+  }
+
+  .node-tooltip {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 150ms ease, transform 150ms ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  }
+
+  .node-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .node-tooltip-top {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--fg-muted);
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+  }
+
+  .node-tooltip-bottom {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .node-tooltip-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 8px;
+  }
+
+  .node-tooltip-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--fg-secondary);
+    margin: 0 0 10px;
+  }
+
+  .node-tooltip-progress-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--fg-muted);
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+
+  .node-tooltip-bar-track {
+    height: 5px;
+    background: var(--bg-base);
+    border-radius: 99px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .node-tooltip-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 300ms ease;
   }
 </style>
