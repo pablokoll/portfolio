@@ -10,46 +10,20 @@ const { data } = Astro.props;
 
 <footer class="footer">
   <div class="footer-inner">
-    <!-- Divider -->
     <div class="footer-divider"></div>
-
-    <!-- Footer content -->
-    <div class="footer-content">
-      <!-- Left: Terminal brand -->
-      <div class="footer-brand">
-        <div class="footer-brand-name">
-          <span class="footer-prompt">~</span>
-          <span class="footer-name">{data.brand.name}</span>
-          <span class="footer-cursor" id="footer-cursor"></span>
-        </div>
-        <p class="footer-tagline">{data.tagline}</p>
-      </div>
-
-      <!-- Right: Command-style links -->
-      <nav class="footer-links">
-        {data.commandLinks.map((link) => (
-          <a
-            href={link.url}
-            target={link.url.startsWith('mailto:') ? undefined : '_blank'}
-            rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-            class="footer-link"
-          >
-            {link.text}
-          </a>
-        ))}
-      </nav>
-    </div>
-
-    <!-- Copyright -->
-    <div class="footer-copyright">
-      {data.copyright}
+    <div class="footer-row">
+      <span class="footer-brand">
+        <span class="footer-prompt">~</span>{data.brand.name}<span class="footer-cursor" id="footer-cursor"></span>
+      </span>
+      <span class="footer-tagline">{data.tagline}</span>
+      <span class="footer-location">Madrid, Spain · <span class="footer-year">2026</span></span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding: 48px 64px 64px;
+    padding: 0 64px 48px;
     max-width: 1120px;
     margin: 0 auto;
   }
@@ -57,30 +31,21 @@ const { data } = Astro.props;
   .footer-divider {
     height: 1px;
     background: var(--border);
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
-  .footer-content {
+  .footer-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 24px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-
-  .footer-brand-name {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--fg);
-    display: flex;
-    align-items: center;
-    gap: 0;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
   }
 
   .footer-prompt {
-    color: var(--fg-muted);
-    margin-right: 6px;
+    color: var(--pk-steel);
+    margin-right: 2px;
   }
 
   .footer-cursor {
@@ -93,65 +58,49 @@ const { data } = Astro.props;
   }
 
   .footer-tagline {
-    font-size: 13px;
-    color: var(--fg-muted);
-    font-style: italic;
-    margin: 4px 0 0;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
-  .footer-link {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--link);
-    text-decoration: none;
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: 1px solid transparent;
-    transition: background var(--duration-2) var(--ease),
-                box-shadow var(--duration-2) var(--ease),
-                border-color var(--duration-2) var(--ease);
-  }
-
-  .footer-link:hover {
-    background: var(--bg-surface);
-    border-color: var(--border);
-    box-shadow: var(--shadow-xs);
-  }
-
-  .footer-copyright {
-    font-size: 12px;
-    color: var(--fg-muted);
-    padding-top: 20px;
-    border-top: 1px dashed var(--border);
     text-align: center;
+    flex: 1;
+    padding: 0 24px;
+    font-weight: 700;
+  }
+
+  .footer-location {
+    text-align: right;
+  }
+
+  .footer-year {
+    color: var(--pk-steel);
   }
 
   @media (max-width: 720px) {
     .footer {
-      padding: 32px 24px 48px;
+      padding: 0 24px 40px;
     }
 
-    .footer-links {
+    .footer-row {
+      flex-direction: column;
+      gap: 8px;
       align-items: flex-start;
+    }
+
+    .footer-tagline {
+      padding: 0;
+      text-align: left;
+    }
+
+    .footer-location {
+      text-align: left;
     }
   }
 </style>
 
 <script>
-  // Blinking cursor
   const cursor = document.getElementById('footer-cursor');
   if (cursor) {
     let visible = true;
     setInterval(() => {
       visible = !visible;
       cursor.style.opacity = visible ? '1' : '0';
-    }, 500);
+    }, 1000);
   }
 </script>

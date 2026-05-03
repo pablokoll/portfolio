@@ -214,7 +214,7 @@
       "prompt": "~",
       "name": "pablo_koll"
     },
-    "tagline": "// Arch Linux & Neovim enthusiast",
+    "tagline": "Arch Linux & Vim enthusiast",
     "commandLinks": [
       {
         "text": "$ github --profile",
@@ -229,6 +229,6 @@
         "url": "mailto:pablokollm@gmail.com"
       }
     ],
-    "copyright": "© 2026 Pablo Koll - Built with code and coffee"
+    "copyright": "Madrid, Spain · 2026"
   }
 }
