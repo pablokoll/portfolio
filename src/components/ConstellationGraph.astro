@@ -8,10 +8,10 @@ interface Props {
 const { items } = Astro.props;
 
 const nodePositions: Record<string, { x: number; y: number }> = {
-  learning_golang:   { x: 150, y: 120 },
-  mastering_vim:     { x: 420, y: 90  },
-  obsidian_notes:    { x: 120, y: 300 },
-  ai_tools_mastery:  { x: 430, y: 280 },
+  learning_golang:   { x: 150, y: 80  },
+  mastering_vim:     { x: 420, y: 50  },
+  obsidian_notes:    { x: 120, y: 260 },
+  ai_tools_mastery:  { x: 430, y: 240 },
 };
 
 const nodeLabels: Record<string, { top: string; bottom: string }> = {
@@ -22,15 +22,15 @@ const nodeLabels: Record<string, { top: string; bottom: string }> = {
 };
 
 const decorativeNodes = [
-  { x: 60,  y: 80  },
-  { x: 230, y: 55  },
-  { x: 310, y: 160 },
-  { x: 500, y: 170 },
-  { x: 540, y: 60  },
-  { x: 270, y: 340 },
-  { x: 370, y: 370 },
-  { x: 510, y: 340 },
-  { x: 75,  y: 210 },
+  { x: 60,  y: 40  },
+  { x: 230, y: 20  },
+  { x: 310, y: 120 },
+  { x: 500, y: 130 },
+  { x: 540, y: 20  },
+  { x: 270, y: 300 },
+  { x: 370, y: 330 },
+  { x: 510, y: 300 },
+  { x: 75,  y: 170 },
 ];
 
 const lines: [string, string][] = [
@@ -78,15 +78,15 @@ const NODE_H = 56;
           x1={ca.x} y1={ca.y}
           x2={cb.x} y2={cb.y}
           stroke="var(--border)"
-          stroke-width="1"
-          opacity="0.4"
+          stroke-width="1.5"
+          opacity="0.5"
         />
       );
     })}
 
     <!-- Decorative nodes -->
     {decorativeNodes.map((n) => (
-      <circle cx={n.x} cy={n.y} r="3" fill="var(--fg-muted)" opacity="0.5" />
+      <circle cx={n.x} cy={n.y} r="4" fill="var(--fg-muted)" opacity="0.6" />
     ))}
 
     <!-- Main nodes -->
@@ -238,6 +238,13 @@ const NODE_H = 56;
   .constellation-svg {
     width: 100%;
     height: auto;
+    min-height: 220px;
+  }
+
+  @media (max-width: 767px) {
+    .constellation-svg {
+      min-height: 300px;
+    }
   }
   .constellation-node {
     cursor: pointer;

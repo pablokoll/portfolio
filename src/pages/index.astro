@@ -147,7 +147,6 @@ const data = await getPortfolioData();
   .learning-about {
     display: flex;
     align-items: flex-start;
-    padding-top: 8px;
   }
 
   .learning-about-text {
@@ -159,5 +158,11 @@ const data = await getPortfolioData();
 
   .learning-graph {
     min-height: 260px;
+  }
+
+  @media (max-width: 767px) {
+    .learning-graph {
+      min-height: 320px;
+    }
   }
 </style>

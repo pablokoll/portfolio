@@ -38,7 +38,16 @@
           "Built <strong>order management, returns & exchanges</strong> workflows for <em>SFCC B2C</em> platform processing 10k+ daily orders",
           "Implemented <strong>compliant billing systems</strong> across multiple countries and participated in <em>OMS</em> rollout"
         ],
-        "stack": ["JavaScript", "Node.js", "SFCC", "ISML", "OCAPI/SCAPI", "REST", "SOAP", "Payment Gateways"]
+        "stack": [
+          "JavaScript",
+          "Node.js",
+          "SFCC",
+          "ISML",
+          "OCAPI/SCAPI",
+          "REST",
+          "SOAP",
+          "Payment Gateways"
+        ]
       },
       {
         "role": "Software Engineer & Full Stack Developer",
@@ -52,7 +61,15 @@
           "Integrated <strong>ERPs, CRMs and third-party services</strong> with backend apps hosted on <em>AWS</em>",
           "Maintained direct client communication to gather requirements and ship solutions end-to-end"
         ],
-        "stack": ["Shopify", "JavaScript", "TypeScript", "Express.js", "Python", "GraphQL", "AWS"]
+        "stack": [
+          "Shopify",
+          "JavaScript",
+          "TypeScript",
+          "Express.js",
+          "Python",
+          "GraphQL",
+          "AWS"
+        ]
       },
       {
         "role": "Software Developer & Backend Developer",
@@ -66,7 +83,14 @@
           "Designed <em>NestJS</em> middleware orchestrating client systems with <em>OAuth2 & JWT</em> authentication",
           "Implemented <strong>CI/CD pipelines</strong> on GitLab and applied SOLID design patterns"
         ],
-        "stack": ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker", "AWS"]
+        "stack": [
+          "NestJS",
+          "TypeScript",
+          "PostgreSQL",
+          "Redis",
+          "Docker",
+          "AWS"
+        ]
       },
       {
         "role": "Full Stack Developer",
@@ -79,7 +103,16 @@
           "Built interactive UIs for <strong>Toyota's CMS</strong> using <em>Laravel/PHP</em> and Hino trucks landing page in <em>Vue.js</em>",
           "Prioritized <strong>SEO strategies</strong> and participated in code reviews with design and product teams"
         ],
-        "stack": ["JavaScript", "HTML", "CSS", "Tailwind", "React", "PHP", "Laravel", "VueJS"]
+        "stack": [
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Tailwind",
+          "React",
+          "PHP",
+          "Laravel",
+          "VueJS"
+        ]
       }
     ]
   },
@@ -122,7 +155,12 @@
         "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
         "descriptionHtml": "<strong>Interactive widget</strong> for <em>Shopify</em> that lets customers <strong>personalize products</strong> in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
         "image": "kit_image_widget.png",
-        "stack": ["Shopify", "JavaScript", "Canvas", "GraphQL"],
+        "stack": [
+          "Shopify",
+          "JavaScript",
+          "Canvas",
+          "GraphQL"
+        ],
         "badge": "freelance"
       },
       {
@@ -130,7 +168,13 @@
         "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image. Built as a headless scraper-style pipeline with browser pool management for concurrent requests and smart caching.",
         "descriptionHtml": "<em>Node.js/TypeScript</em> service that renders personalized product images on a dynamic canvas via <em>Puppeteer</em>, captures the output as a screenshot, and serves it as an optimized image. Built as a <strong>headless</strong> scraper-style pipeline with <strong>browser pool management</strong> for concurrent requests and smart caching.",
         "image": "asset_image_scraper.png",
-        "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker", "Azure"],
+        "stack": [
+          "Node.js",
+          "TypeScript",
+          "Puppeteer",
+          "Docker",
+          "Azure"
+        ],
         "badge": "freelance"
       }
     ]
@@ -183,6 +227,7 @@
   },
   "contact": {
     "headline": "Let's talk.",
+    "subtitle": "// Contact to drink a coffee.",
     "paragraph": "Open and available for <strong>freelance</strong> and remote work. I enjoy working with a clear <em>plan</em>, helping teams make sharp <em>decisions</em>, <em>shipping</em> with Docker, and <em>building</em> products from scratch to <em>deploy</em>.",
     "email": "pablokollm@gmail.com",
     "links": [
