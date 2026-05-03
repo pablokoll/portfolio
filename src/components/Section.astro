@@ -12,7 +12,7 @@ const indexStr = index !== undefined ? String(index).padStart(2, '0') : undefine
 ---
 
 <section id={id} class:list={['section', className]}>
-  {indexStr && (
+  {indexStr && !className.includes('section--first') && (
     <div class="section-divider" aria-hidden="true">
       <span class="section-divider-label">{indexStr} — {title}</span>
     </div>

@@ -5,7 +5,6 @@ import KeyboardNav from '../components/KeyboardNav.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
-import SkillCard from '../components/SkillCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import LearningCard from '../components/LearningCard.astro';
 import Footer from '../components/Footer.astro';
@@ -35,26 +34,41 @@ const data = await getPortfolioData();
     <!-- Hero Section -->
     <Hero data={data.hero} />
 
-    <!-- Experience Section -->
+    <!-- Projects Section — 01 -->
     <Section
-      id="experience"
-      title={data.experience.title}
-      subtitle={data.experience.subtitle}
+      id="projects"
+      index={1}
+      title={data.projects.title}
+      subtitle={data.projects.subtitle}
       class="section--first"
     >
-      <div class="space-y-6" role="list">
-        {data.experience.items.map((exp) => (
-          <div role="listitem">
-            <ExperienceCard experience={exp} />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch" role="list">
+        {data.projects.items.map((project, i) => (
+          <div role="listitem" class="flex">
+            <ProjectCard project={project} index={i + 1} />
           </div>
         ))}
       </div>
     </Section>
 
-    <!-- Skills Section -->
+    <!-- Experience Section — 02 -->
     <Section
-      id="skills"
+      id="experience"
       index={2}
+      title={data.experience.title}
+      subtitle={data.experience.subtitle}
+    >
+      <div role="list">
+        {data.experience.items.map((exp) => (
+          <ExperienceCard experience={exp} />
+        ))}
+      </div>
+    </Section>
+
+    <!-- Skills Section — HIDDEN (to be redesigned) -->
+    {/* <Section
+      id="skills"
+      index={3}
       title={data.skills.title}
       subtitle={data.skills.subtitle}
     >
@@ -65,28 +79,12 @@ const data = await getPortfolioData();
           </div>
         ))}
       </div>
-    </Section>
+    </Section> */}
 
-    <!-- Projects Section -->
-    <Section
-      id="projects"
-      index={3}
-      title={data.projects.title}
-      subtitle={data.projects.subtitle}
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" role="list">
-        {data.projects.items.map((project) => (
-          <div role="listitem">
-            <ProjectCard project={project} />
-          </div>
-        ))}
-      </div>
-    </Section>
-
-    <!-- Learning Section -->
+    <!-- Learning Section — 03 -->
     <Section
       id="learning"
-      index={4}
+      index={3}
       title={data.learning.title}
       subtitle={data.learning.subtitle}
     >

@@ -27,35 +27,58 @@
     "subtitle": "// Recent positions and achievements",
     "items": [
       {
-        "role": "it_technical_specialist && backend_developer",
+        "role": "IT Technical Specialist & Backend Developer",
         "company": "// TENDAM",
         "period": "Dec 2024 - Present",
         "isCurrent": true,
+        "type": "Corporate",
         "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud (SFCC) B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
+        "bulletsHtml": [
+          "Integrated <em>payment gateways</em> (Adyen, Redsys, Cybersource) across international markets",
+          "Built <strong>order management, returns & exchanges</strong> workflows for <em>SFCC B2C</em> platform processing 10k+ daily orders",
+          "Implemented <strong>compliant billing systems</strong> across multiple countries and participated in <em>OMS</em> rollout"
+        ],
         "stack": ["JavaScript", "Node.js", "SFCC", "ISML", "OCAPI/SCAPI", "REST", "SOAP", "Payment Gateways"]
       },
       {
-        "role": "software_engineer && full_stack_developer",
+        "role": "Software Engineer & Full Stack Developer",
         "company": "// Webmefy - Shopify Plus Agency",
         "period": "Jul 2024 - Dec 2024",
         "isCurrent": false,
+        "type": "Agency",
         "description": "Full Stack development in Shopify ecosystem. Integrating systems and adding functionalities using Shopify's GraphQL, REST, and StoreFront APIs. Implementing ERPs, CRMs, and web services integrations. Direct communication with clients to gather requirements and deliver solutions. Using AWS for hosting and deploying backend applications.",
+        "bulletsHtml": [
+          "Delivered full-stack features in the <em>Shopify</em> ecosystem using <em>GraphQL, REST & StoreFront APIs</em>",
+          "Integrated <strong>ERPs, CRMs and third-party services</strong> with backend apps hosted on <em>AWS</em>",
+          "Maintained direct client communication to gather requirements and ship solutions end-to-end"
+        ],
         "stack": ["Shopify", "JavaScript", "TypeScript", "Express.js", "Python", "GraphQL", "AWS"]
       },
       {
-        "role": "software_developer && backend_developer",
+        "role": "Software Developer & Backend Developer",
         "company": "// Balloon Group as FastForward",
         "period": "Jul 2022 - Jul 2024",
         "isCurrent": false,
+        "type": "Startup",
         "description": "Self-managing projects from technical perspective with direct client communication. Developed and maintained backend for Abbott's multi-instance Magento eCommerce synchronization with Salesforce CRM across eight countries in Latin America. Created middleware in NestJS to orchestrate client systems. Applied design patterns and implemented OAuth2, JWT authentication. Implemented CI/CD pipelines on GitLab.",
+        "bulletsHtml": [
+          "Built and maintained backend for <strong>Abbott's multi-instance Magento sync with Salesforce CRM</strong> across 8 Latin American countries",
+          "Designed <em>NestJS</em> middleware orchestrating client systems with <em>OAuth2 & JWT</em> authentication",
+          "Implemented <strong>CI/CD pipelines</strong> on GitLab and applied SOLID design patterns"
+        ],
         "stack": ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker", "AWS"]
       },
       {
-        "role": "full_stack_developer",
+        "role": "Full Stack Developer",
         "company": "// Balloon Group as FastForward",
         "period": "Nov 2021 - Jul 2022",
         "isCurrent": false,
+        "type": "Startup",
         "description": "Collaborated closely with design and product teams creating interactive UIs. Worked on maintenance and development for Toyota's CMS using Laravel and PHP. Developed Toyota's Hino trucks landing page using VueJS. Prioritized SEO strategies and participated in code reviews.",
+        "bulletsHtml": [
+          "Built interactive UIs for <strong>Toyota's CMS</strong> using <em>Laravel/PHP</em> and Hino trucks landing page in <em>Vue.js</em>",
+          "Prioritized <strong>SEO strategies</strong> and participated in code reviews with design and product teams"
+        ],
         "stack": ["JavaScript", "HTML", "CSS", "Tailwind", "React", "PHP", "Laravel", "VueJS"]
       }
     ]
@@ -95,17 +118,19 @@
     "subtitle": "// Selected work and side projects",
     "items": [
       {
-        "name": "kit_customization_widget",
+        "name": "Kit Customization Widget",
         "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
+        "descriptionHtml": "<strong>Interactive widget</strong> for <em>Shopify</em> that lets customers <strong>personalize products</strong> in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
         "image": "kit_image_widget.png",
         "stack": ["Shopify", "JavaScript", "Canvas", "GraphQL"],
         "badge": "freelance"
       },
       {
-        "name": "asset_image_scraper",
+        "name": "Asset Image Scraper",
         "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image. Built as a headless scraper-style pipeline with browser pool management for concurrent requests and smart caching.",
+        "descriptionHtml": "<em>Node.js/TypeScript</em> service that renders personalized product images on a dynamic canvas via <em>Puppeteer</em>, captures the output as a screenshot, and serves it as an optimized image. Built as a <strong>headless</strong> scraper-style pipeline with <strong>browser pool management</strong> for concurrent requests and smart caching.",
         "image": "asset_image_scraper.png",
-        "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker"],
+        "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker", "Azure"],
         "badge": "freelance"
       }
     ]

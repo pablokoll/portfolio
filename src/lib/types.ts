@@ -45,7 +45,9 @@ export interface ExperienceItem {
   company: string;
   period: string;
   isCurrent?: boolean;
+  type: string;
   description: string;
+  bulletsHtml?: string[];
   stack: string[];
 }
 
@@ -59,6 +61,7 @@ export interface SkillCategory {
 export interface ProjectItem {
   name: string;
   description: string;
+  descriptionHtml?: string;
   image?: string;
   stack: string[];
   github?: string;
