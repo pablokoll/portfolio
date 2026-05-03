@@ -6,7 +6,7 @@ import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import LearningCard from '../components/LearningCard.astro';
+import ConstellationGraph from '../components/ConstellationGraph.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { getPortfolioData } from '../lib/get-portfolio-data';
@@ -89,12 +89,15 @@ const data = await getPortfolioData();
       title={data.learning.title}
       subtitle={data.learning.subtitle}
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" role="list">
-        {data.learning.items.map((item) => (
-          <div role="listitem">
-            <LearningCard item={item} />
-          </div>
-        ))}
+      <div class="learning-layout">
+        <div class="learning-about">
+          <p class="learning-about-text">
+            I'm always looking to grow beyond the day-to-day — currently deepening my expertise in <span style="color: var(--pk-sky)">Go</span>, sharpening my workflow with <span style="color: var(--pk-mint)">Vim</span> and <span style="color: var(--pk-mauve)">Obsidian</span>, and pushing the limits of <span style="color: var(--pk-peach)">AI tools</span> to move faster and build smarter.
+          </p>
+        </div>
+        <div class="learning-graph">
+          <ConstellationGraph items={data.learning.items} />
+        </div>
       </div>
     </Section>
 
@@ -104,7 +107,7 @@ const data = await getPortfolioData();
       index={4}
       title="Contact"
       titleHtml={`Let's <a href="mailto:${data.contact.email}" class="contact-title-link">talk to</a> build something good.`}
-      subtitle="// contact to drink a coffee."
+      subtitle={data.contact.subtitle}
       class="section--contact"
     >
       <Contact data={data.contact} />
@@ -124,5 +127,36 @@ const data = await getPortfolioData();
     .main-content {
       padding-top: 52px;
     }
+  }
+
+  .learning-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .learning-layout {
+      grid-template-columns: 45fr 55fr;
+      gap: 48px;
+      align-items: start;
+    }
+  }
+
+  .learning-about {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 8px;
+  }
+
+  .learning-about-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--fg-secondary);
+    margin: 0;
+  }
+
+  .learning-graph {
+    min-height: 260px;
   }
 </style>
