@@ -1,0 +1,149 @@
+---
+import type { LearningItem } from '../lib/types';
+
+interface Props {
+  items: LearningItem[];
+}
+
+const { items } = Astro.props;
+
+const nodePositions: Record<string, { x: number; y: number }> = {
+  learning_golang:   { x: 150, y: 120 },
+  mastering_vim:     { x: 420, y: 90  },
+  obsidian_notes:    { x: 120, y: 300 },
+  ai_tools_mastery:  { x: 430, y: 280 },
+};
+
+const nodeLabels: Record<string, { top: string; bottom: string }> = {
+  learning_golang:  { top: 'learning', bottom: 'Go'       },
+  mastering_vim:    { top: 'mastering', bottom: 'Vim'     },
+  obsidian_notes:   { top: 'mastering', bottom: 'Obsidian'},
+  ai_tools_mastery: { top: 'mastering', bottom: 'AI Tools'},
+};
+
+const decorativeNodes = [
+  { x: 60,  y: 80  },
+  { x: 230, y: 55  },
+  { x: 310, y: 160 },
+  { x: 500, y: 170 },
+  { x: 540, y: 60  },
+  { x: 270, y: 340 },
+  { x: 370, y: 370 },
+  { x: 510, y: 340 },
+  { x: 75,  y: 210 },
+];
+
+const lines: [string, string][] = [
+  ['learning_golang',  'mastering_vim'    ],
+  ['learning_golang',  'obsidian_notes'   ],
+  ['mastering_vim',    'ai_tools_mastery' ],
+  ['obsidian_notes',   'ai_tools_mastery' ],
+  ['learning_golang',  'd0'               ],
+  ['learning_golang',  'd1'               ],
+  ['mastering_vim',    'd4'               ],
+  ['mastering_vim',    'd3'               ],
+  ['obsidian_notes',   'd8'               ],
+  ['obsidian_notes',   'd5'               ],
+  ['ai_tools_mastery','d7'               ],
+  ['ai_tools_mastery','d6'               ],
+  ['d1',               'd2'               ],
+  ['d2',               'd3'               ],
+];
+
+function getCoords(key: string): { x: number; y: number } {
+  if (key.startsWith('d')) {
+    return decorativeNodes[parseInt(key.slice(1))];
+  }
+  return nodePositions[key];
+}
+
+const NODE_W = 124;
+const NODE_H = 56;
+---
+
+<div class="constellation-wrap">
+  <svg
+    viewBox="0 0 600 400"
+    xmlns="http://www.w3.org/2000/svg"
+    class="constellation-svg"
+    aria-hidden="true"
+  >
+    <!-- Lines -->
+    {lines.map(([a, b]) => {
+      const ca = getCoords(a);
+      const cb = getCoords(b);
+      return (
+        <line
+          x1={ca.x} y1={ca.y}
+          x2={cb.x} y2={cb.y}
+          stroke="var(--border)"
+          stroke-width="1"
+          opacity="0.4"
+        />
+      );
+    })}
+
+    <!-- Decorative nodes -->
+    {decorativeNodes.map((n) => (
+      <circle cx={n.x} cy={n.y} r="3" fill="var(--fg-muted)" opacity="0.5" />
+    ))}
+
+    <!-- Main nodes -->
+    {items.map((item) => {
+      const pos = nodePositions[item.name];
+      if (!pos) return null;
+      const label = nodeLabels[item.name];
+      const color = `var(--${item.iconColor})`;
+      return (
+        <g
+          class="constellation-node"
+          data-name={item.name}
+          transform={`translate(${pos.x - NODE_W / 2}, ${pos.y - NODE_H / 2})`}
+        >
+          <rect
+            width={NODE_W}
+            height={NODE_H}
+            rx="8"
+            fill="var(--bg-surface)"
+            stroke={color}
+            stroke-opacity="0.5"
+            stroke-width="1"
+          />
+          <text
+            x={NODE_W / 2}
+            y="18"
+            text-anchor="middle"
+            font-family="var(--font-mono)"
+            font-size="10"
+            fill="var(--fg-muted)"
+          >{label.top}</text>
+          <text
+            x={NODE_W / 2}
+            y="38"
+            text-anchor="middle"
+            font-family="var(--font-mono)"
+            font-size="15"
+            font-weight="600"
+            fill={color}
+          >{label.bottom}</text>
+        </g>
+      );
+    })}
+  </svg>
+</div>
+
+<style>
+  .constellation-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .constellation-svg {
+    width: 100%;
+    height: auto;
+  }
+  .constellation-node {
+    cursor: pointer;
+  }
+</style>
