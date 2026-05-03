@@ -50,7 +50,7 @@ const lines: [string, string][] = [
   ['d2',               'd3'               ],
 ];
 
-function getCoords(key: string): { x: number; y: number } {
+function getCoords(key: string): { x: number; y: number } | undefined {
   if (key.startsWith('d')) {
     return decorativeNodes[parseInt(key.slice(1))];
   }
@@ -72,6 +72,7 @@ const NODE_H = 56;
     {lines.map(([a, b]) => {
       const ca = getCoords(a);
       const cb = getCoords(b);
+      if (!ca || !cb) return null;
       return (
         <line
           x1={ca.x} y1={ca.y}
@@ -91,8 +92,8 @@ const NODE_H = 56;
     <!-- Main nodes -->
     {items.map((item) => {
       const pos = nodePositions[item.name];
-      if (!pos) return null;
       const label = nodeLabels[item.name];
+      if (!pos || !label) return null;
       const color = `var(--${item.iconColor})`;
       return (
         <g
