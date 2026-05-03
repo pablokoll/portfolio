@@ -6,16 +6,17 @@ interface Props {
   index?: number;
   class?: string;
   titleHtml?: string;
+  dividerLabel?: string;
 }
 
-const { id, title, subtitle, index, class: className = '', titleHtml } = Astro.props;
+const { id, title, subtitle, index, class: className = '', titleHtml, dividerLabel } = Astro.props;
 const indexStr = index !== undefined ? String(index).padStart(2, '0') : undefined;
 ---
 
 <section id={id} class:list={['section', className]}>
   {indexStr && !className.includes('section--first') && (
     <div class="section-divider" aria-hidden="true">
-      <span class="section-divider-label">{indexStr} — {title}</span>
+      <span class="section-divider-label">{indexStr} — {dividerLabel ?? title}</span>
     </div>
   )}
   <div class="section-inner">
