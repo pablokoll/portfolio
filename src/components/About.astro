@@ -1,29 +1,29 @@
 ---
-import type { Hero as HeroType } from '../lib/types';
+import type { About as AboutType } from '../lib/types';
 
 interface Props {
-  data: HeroType;
+  data: AboutType;
 }
 
 const { data } = Astro.props;
 const avatarPath = '/avatar.png';
 ---
 
-<section id="hero" class="hero-section">
-  <div class="hero-inner">
+<section id="about" class="about-section">
+  <div class="about-inner">
     <!-- Left: text content -->
-    <div class="hero-content">
-      <p class="hero-prompt">{data.prompt}</p>
+    <div class="about-content">
+      <p class="about-prompt">{data.prompt}</p>
 
-      <h1 class="hero-headline">
-        {data.headline}<span class="hero-dot">.</span>
+      <h1 class="about-headline">
+        {data.headline}<span class="about-dot">.</span>
       </h1>
 
-      <p class="hero-subtitle">{data.subtitle}</p>
+      <p class="about-subtitle">{data.subtitle}</p>
 
-      <p class="hero-subline">{data.subline}</p>
+      <p class="about-subline">{data.subline}</p>
 
-      <div class="hero-ctas">
+      <div class="about-ctas">
         <button
           type="button"
           class="btn-primary"
@@ -44,7 +44,7 @@ const avatarPath = '/avatar.png';
 
       <!-- Availability — mobile only (below CTAs) -->
       {data.availability && (
-        <div class="hero-availability hero-availability--mobile" aria-hidden="true">
+        <div class="about-availability about-availability--mobile" aria-hidden="true">
           <span class="availability-dot"></span>
           <span>{data.availability}</span>
         </div>
@@ -52,24 +52,24 @@ const avatarPath = '/avatar.png';
     </div>
 
     <!-- Right: avatar + availability (desktop) -->
-    <div class="hero-right">
-      <div class="hero-avatar-wrap">
-        <div class="hero-avatar">
+    <div class="about-right">
+      <div class="about-avatar-wrap">
+        <div class="about-avatar">
           <img
             src={avatarPath}
             alt="Pablo Koll"
-            class="hero-avatar-img"
-            id="hero-avatar-img"
-            onerror="this.style.display='none'; document.getElementById('hero-avatar-fallback').style.display='flex';"
+            class="about-avatar-img"
+            id="about-avatar-img"
+            onerror="this.style.display='none'; document.getElementById('about-avatar-fallback').style.display='flex';"
           />
-          <div class="hero-avatar-fallback" id="hero-avatar-fallback" style="display:none">
-            <span class="hero-avatar-initials">PK</span>
+          <div class="about-avatar-fallback" id="about-avatar-fallback" style="display:none">
+            <span class="about-avatar-initials">PK</span>
           </div>
         </div>
       </div>
 
       {data.availability && (
-        <div class="hero-availability hero-availability--desktop">
+        <div class="about-availability about-availability--desktop">
           <span class="availability-dot"></span>
           <span>{data.availability}</span>
         </div>
@@ -78,22 +78,23 @@ const avatarPath = '/avatar.png';
   </div>
 
   <!-- First section divider pinned to bottom -->
-  <div class="hero-divider" aria-hidden="true">
-    <span class="hero-divider-label">01 — Featured Projects</span>
+  <div class="about-divider" aria-hidden="true">
+    <span class="about-divider-label">01 — Featured Projects</span>
   </div>
 </section>
 
 <style>
   /* ── Section shell ───────────────────────────────────── */
-  .hero-section {
+  .about-section {
     min-height: 100vh;
     padding: 0 64px 100px;
+    scroll-margin-top: 56px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .hero-inner {
+  .about-inner {
     flex: 1;
     max-width: 1120px;
     width: 100%;
@@ -105,7 +106,7 @@ const avatarPath = '/avatar.png';
   }
 
   /* ── Bottom divider ──────────────────────────────────── */
-  .hero-divider {
+  .about-divider {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,7 +114,7 @@ const avatarPath = '/avatar.png';
     padding-bottom: 8px;
   }
 
-  .hero-divider::before {
+  .about-divider::before {
     content: '';
     position: absolute;
     left: 0;
@@ -123,7 +124,7 @@ const avatarPath = '/avatar.png';
     background: var(--border);
   }
 
-  .hero-divider-label {
+  .about-divider-label {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
@@ -138,19 +139,19 @@ const avatarPath = '/avatar.png';
 
 
 
-  .hero-content {
+  .about-content {
     min-width: 0;
   }
 
   /* ── Typography ──────────────────────────────────────── */
-  .hero-prompt {
+  .about-prompt {
     font-family: var(--font-mono);
     font-size: 14px;
     color: var(--fg-muted);
     margin: 0 0 16px;
   }
 
-  .hero-headline {
+  .about-headline {
     font-family: var(--font-mono);
     font-size: clamp(64px, 9vw, 100px);
     font-weight: 700;
@@ -160,11 +161,11 @@ const avatarPath = '/avatar.png';
     margin: 0;
   }
 
-  .hero-dot {
+  .about-dot {
     color: var(--pk-steel);
   }
 
-  .hero-subtitle {
+  .about-subtitle {
     font-family: var(--font-mono);
     font-size: clamp(18px, 2.5vw, 26px);
     font-weight: 500;
@@ -173,7 +174,7 @@ const avatarPath = '/avatar.png';
     letter-spacing: -0.01em;
   }
 
-  .hero-subline {
+  .about-subline {
     margin: 16px 0 0;
     font-size: 15px;
     color: var(--fg-muted);
@@ -183,7 +184,7 @@ const avatarPath = '/avatar.png';
   }
 
   /* ── CTAs ────────────────────────────────────────────── */
-  .hero-ctas {
+  .about-ctas {
     margin-top: 32px;
     display: flex;
     gap: 12px;
@@ -248,7 +249,7 @@ const avatarPath = '/avatar.png';
   }
 
   /* ── Availability ────────────────────────────────────── */
-  .hero-availability {
+  .about-availability {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -274,11 +275,11 @@ const avatarPath = '/avatar.png';
   }
 
   /* desktop: shown in right column below avatar; hidden in left column */
-  .hero-availability--mobile  { display: none; }
-  .hero-availability--desktop { display: flex; margin-top: 16px; justify-content: center; }
+  .about-availability--mobile  { display: none; }
+  .about-availability--desktop { display: flex; margin-top: 16px; justify-content: center; }
 
   /* ── Right column ────────────────────────────────────── */
-  .hero-right {
+  .about-right {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -286,11 +287,11 @@ const avatarPath = '/avatar.png';
   }
 
   /* ── Avatar ──────────────────────────────────────────── */
-  .hero-avatar-wrap {
+  .about-avatar-wrap {
     flex-shrink: 0;
   }
 
-  .hero-avatar {
+  .about-avatar {
     width: 320px;
     height: 320px;
     border-radius: 16px;
@@ -303,7 +304,7 @@ const avatarPath = '/avatar.png';
     position: relative;
   }
 
-  .hero-avatar-img {
+  .about-avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -311,14 +312,14 @@ const avatarPath = '/avatar.png';
     display: block;
   }
 
-  .hero-avatar-fallback {
+  .about-avatar-fallback {
     position: absolute;
     inset: 0;
     align-items: center;
     justify-content: center;
   }
 
-  .hero-avatar-initials {
+  .about-avatar-initials {
     font-family: var(--font-mono);
     font-size: 32px;
     font-weight: 700;
@@ -328,24 +329,24 @@ const avatarPath = '/avatar.png';
 
   /* ── Avatar responsive sizes ────────────────────────── */
   @media (min-width: 1000px) {
-    .hero-avatar { width: 360px; height: 360px; }
+    .about-avatar { width: 360px; height: 360px; }
   }
 
   /* ── No avatar (≤849px) ─────────────────────────────── */
   @media (max-width: 849px) {
-    .hero-section {
+    .about-section {
       padding: 0 40px 80px;
     }
 
-    .hero-inner {
+    .about-inner {
       grid-template-columns: 1fr;
     }
 
-    .hero-right {
+    .about-right {
       display: none;
     }
 
-    .hero-availability--mobile {
+    .about-availability--mobile {
       display: flex;
       margin-top: 28px;
     }
@@ -353,31 +354,31 @@ const avatarPath = '/avatar.png';
 
   /* ── Mobile ──────────────────────────────────────────── */
   @media (max-width: 720px) {
-    .hero-section {
+    .about-section {
       padding: 0 24px 72px;
     }
   }
 
   /* ── Small mobile (320–425px) ────────────────────────── */
   @media (max-width: 425px) {
-    .hero-section {
+    .about-section {
       padding: 0 20px 60px;
     }
 
-    .hero-headline {
+    .about-headline {
       font-size: clamp(38px, 11vw, 56px);
     }
 
-    .hero-subtitle {
+    .about-subtitle {
       font-size: 16px;
     }
 
-    .hero-subline {
+    .about-subline {
       font-size: 13px;
       margin-top: 12px;
     }
 
-    .hero-ctas {
+    .about-ctas {
       margin-top: 24px;
       gap: 8px;
     }
@@ -388,7 +389,7 @@ const avatarPath = '/avatar.png';
       padding: 9px 16px;
     }
 
-    .hero-availability {
+    .about-availability {
       font-size: 12px;
     }
   }

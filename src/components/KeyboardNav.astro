@@ -38,7 +38,7 @@
         <p class="text-ctp-blue font-medium mb-2">// sections</p>
         <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
           <kbd class="text-ctp-green">0</kbd>
-          <span class="text-ctp-subtext1">hero</span>
+          <span class="text-ctp-subtext1">about</span>
           <kbd class="text-ctp-green">1</kbd>
           <span class="text-ctp-subtext1">work_experience</span>
           <kbd class="text-ctp-green">2</kbd>
@@ -260,11 +260,11 @@
       return;
     }
 
-    // 0 = hero (top), 1-5 = jump to sections
+    // 0 = about (top), 1-5 = jump to sections
     if (key === '0') {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      showIndicator(':0 → hero');
+      showIndicator(':0 → about');
       return;
     }
 

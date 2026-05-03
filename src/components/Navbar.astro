@@ -6,11 +6,11 @@ import Icon from './Icon.astro';
 <header id="navbar" class="navbar" role="banner">
   <div class="navbar-inner">
     <!-- Left: Brand -->
-    <BrandLogo href="#hero" tooltip='go_to("about")' />
+    <BrandLogo tooltip='go_to("about")' />
 
     <!-- Center: Nav links (desktop) -->
     <nav class="navbar-links" aria-label="Main navigation">
-      <a href="#hero"       class="nav-link" data-spy="hero"       data-tooltip='go_to("hero")'>About</a>
+      <a href="#about"      class="nav-link" data-spy="about"      data-tooltip='go_to("about")'>About</a>
       <a href="#projects"   class="nav-link" data-spy="projects"   data-tooltip='go_to("projects")'>Projects</a>
       <a href="#experience" class="nav-link" data-spy="experience" data-tooltip='go_to("experience")'>Experience</a>
       <a href="#learning"   class="nav-link" data-spy="learning"   data-tooltip='go_to("learning")'>Learning</a>
@@ -91,7 +91,7 @@ import Icon from './Icon.astro';
   </button>
 
   <nav class="nav-overlay-inner" aria-label="Mobile navigation">
-    <a href="#hero"       class="overlay-link" data-spy="hero">About</a>
+    <a href="#about"      class="overlay-link" data-spy="about">About</a>
     <a href="#projects"   class="overlay-link" data-spy="projects">Projects</a>
     <a href="#experience" class="overlay-link" data-spy="experience">Experience</a>
     <a href="#learning"   class="overlay-link" data-spy="learning">Learning</a>
@@ -391,7 +391,7 @@ import Icon from './Icon.astro';
   });
 
   // ── Scroll-spy (IntersectionObserver) ────────────────
-  const spySections = ['hero', 'experience', 'projects', 'contact'];
+  const spySections = ['about', 'projects', 'experience', 'learning', 'contact'];
   const desktopLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[data-spy]');
   const overlayLinks = document.querySelectorAll<HTMLAnchorElement>('.overlay-link[data-spy]');
 
@@ -413,7 +413,7 @@ import Icon from './Icon.astro';
         }
       });
     },
-    { threshold: 0.4 }
+    { rootMargin: '-56px 0px 0px 0px', threshold: 0.2 }
   );
 
   spySections.forEach((id) => {

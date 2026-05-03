@@ -5,7 +5,7 @@
     "ogImage": "/og-image.png",
     "url": "https://pablokoll.com"
   },
-  "hero": {
+  "about": {
     "prompt": "$ whoami",
     "headline": "Pablo Koll",
     "subtitle": "Software Engineer & System Builder",

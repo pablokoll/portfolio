@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import KeyboardNav from '../components/KeyboardNav.astro';
-import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
 import Section from '../components/Section.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -32,8 +32,8 @@ const data = await getPortfolioData();
   <KeyboardNav />
 
   <main id="main-content" role="main" class="main-content">
-    <!-- Hero Section -->
-    <Hero data={data.hero} />
+    <!-- About Section -->
+    <About data={data.about} />
 
     <!-- Projects Section — 01 -->
     <Section

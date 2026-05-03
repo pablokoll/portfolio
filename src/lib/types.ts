@@ -2,7 +2,7 @@
 
 export interface PortfolioData {
   meta: Meta;
-  hero: Hero;
+  about: About;
   experience: Section<ExperienceItem>;
   skills: Section<SkillCategory>;
   projects: Section<ProjectItem>;
@@ -18,7 +18,7 @@ export interface Meta {
   url?: string;
 }
 
-export interface Hero {
+export interface About {
   prompt: string;
   headline: string;
   subtitle: string;
