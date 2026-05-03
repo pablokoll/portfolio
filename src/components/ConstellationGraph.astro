@@ -146,24 +146,26 @@ const NODE_H = 56;
   </svg>
 </div>
 
-<div class="node-tooltip" id="node-tooltip" aria-hidden="true">
-  <div class="node-tooltip-top"></div>
-  <div class="node-tooltip-bottom"></div>
-  <div class="node-tooltip-divider"></div>
-  <p class="node-tooltip-desc"></p>
-  <span class="node-tooltip-progress-label"></span>
-  <div class="node-tooltip-bar-track">
-    <div class="node-tooltip-bar-fill"></div>
-  </div>
-</div>
-
 <script>
-  const tooltip = document.getElementById('node-tooltip') as HTMLElement;
+  const tooltip = document.createElement('div');
+  tooltip.className = 'constellation-tooltip';
+  tooltip.setAttribute('aria-hidden', 'true');
+  tooltip.innerHTML = `
+    <div class="node-tooltip-top"></div>
+    <div class="node-tooltip-bottom"></div>
+    <div class="node-tooltip-divider"></div>
+    <p class="node-tooltip-desc"></p>
+    <span class="node-tooltip-progress-label"></span>
+    <div class="node-tooltip-bar-track"><div class="node-tooltip-bar-fill"></div></div>
+  `;
+  document.body.appendChild(tooltip);
+
   const nodes = document.querySelectorAll<SVGGElement>('.constellation-node');
 
   function showTooltip(node: SVGGElement) {
     const desc = node.dataset.desc ?? '';
-    const progress = parseInt(node.dataset.progress ?? '0');
+    const rawProgress = parseInt(node.dataset.progress ?? '0');
+    const progress = isNaN(rawProgress) ? 0 : rawProgress;
     const progressLabel = node.dataset.progressLabel ?? '';
     const color = node.dataset.color ?? 'var(--pk-sky)';
 
@@ -191,7 +193,7 @@ const NODE_H = 56;
     tooltip.style.top = `${rect.bottom + 8}px`;
     tooltip.style.borderColor = color;
     tooltip.setAttribute('aria-hidden', 'false');
-    tooltip.classList.add('visible');
+    tooltip.className = 'constellation-tooltip visible';
 
     requestAnimationFrame(() => {
       const tRect = tooltip.getBoundingClientRect();
@@ -208,7 +210,7 @@ const NODE_H = 56;
   }
 
   function hideTooltip() {
-    tooltip.classList.remove('visible');
+    tooltip.className = 'constellation-tooltip';
     tooltip.setAttribute('aria-hidden', 'true');
   }
 
@@ -217,6 +219,12 @@ const NODE_H = 56;
     node.addEventListener('mouseleave', hideTooltip);
     node.addEventListener('focus', () => showTooltip(node));
     node.addEventListener('blur', hideTooltip);
+    node.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showTooltip(node);
+      }
+    });
   });
 </script>
 
@@ -235,7 +243,7 @@ const NODE_H = 56;
     cursor: pointer;
   }
 
-  .node-tooltip {
+  :global(.constellation-tooltip) {
     position: fixed;
     z-index: 100;
     pointer-events: none;
@@ -249,12 +257,12 @@ const NODE_H = 56;
     box-shadow: 0 4px 24px rgba(0,0,0,0.18);
   }
 
-  .node-tooltip.visible {
+  :global(.constellation-tooltip.visible) {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .node-tooltip-top {
+  :global(.node-tooltip-top) {
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--fg-muted);
@@ -262,27 +270,27 @@ const NODE_H = 56;
     letter-spacing: 0.04em;
   }
 
-  .node-tooltip-bottom {
+  :global(.node-tooltip-bottom) {
     font-family: var(--font-mono);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 8px;
   }
 
-  .node-tooltip-divider {
+  :global(.node-tooltip-divider) {
     height: 1px;
     background: var(--border);
     margin-bottom: 8px;
   }
 
-  .node-tooltip-desc {
+  :global(.node-tooltip-desc) {
     font-size: 12px;
     line-height: 1.5;
     color: var(--fg-secondary);
     margin: 0 0 10px;
   }
 
-  .node-tooltip-progress-label {
+  :global(.node-tooltip-progress-label) {
     display: block;
     font-family: var(--font-mono);
     font-size: 10px;
@@ -291,7 +299,7 @@ const NODE_H = 56;
     margin-bottom: 5px;
   }
 
-  .node-tooltip-bar-track {
+  :global(.node-tooltip-bar-track) {
     height: 5px;
     background: var(--bg-base);
     border-radius: 99px;
@@ -299,7 +307,7 @@ const NODE_H = 56;
     border: 1px solid var(--border);
   }
 
-  .node-tooltip-bar-fill {
+  :global(.node-tooltip-bar-fill) {
     height: 100%;
     border-radius: 99px;
     transition: width 300ms ease;
