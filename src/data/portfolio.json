@@ -181,6 +181,34 @@
       }
     ]
   },
+  "contact": {
+    "headline": "Let's talk.",
+    "paragraph": "Open and available for <strong>freelance</strong> and remote work. I enjoy working with a clear <em>plan</em>, helping teams make sharp <em>decisions</em>, <em>shipping</em> with Docker, and <em>building</em> products from scratch to <em>deploy</em>.",
+    "email": "pablokollm@gmail.com",
+    "links": [
+      {
+        "platform": "GitHub",
+        "handle": "@pablokoll",
+        "cta": "Échale un vistazo →",
+        "url": "https://github.com/pablokoll",
+        "tooltip": "go_to(\"github\")"
+      },
+      {
+        "platform": "LinkedIn",
+        "handle": "pablo-koll",
+        "cta": "Envíame un DM →",
+        "url": "https://linkedin.com/in/pablo-koll",
+        "tooltip": "go_to(\"linkedin\")"
+      },
+      {
+        "platform": "Email",
+        "handle": "pablokollm@gmail.com",
+        "cta": "Esto podría haberse escrito por mail →",
+        "url": null,
+        "tooltip": "copy_to_clipboard()"
+      }
+    ]
+  },
   "footer": {
     "brand": {
       "prompt": "~",

@@ -7,6 +7,7 @@ import Section from '../components/Section.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import LearningCard from '../components/LearningCard.astro';
+import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { getPortfolioData } from '../lib/get-portfolio-data';
 
@@ -95,6 +96,18 @@ const data = await getPortfolioData();
           </div>
         ))}
       </div>
+    </Section>
+
+    <!-- Contact Section — 04 -->
+    <Section
+      id="contact"
+      index={4}
+      title="Contact"
+      titleHtml={`Let's <a href="mailto:${data.contact.email}" class="contact-title-link">talk to</a> build something good.`}
+      subtitle="// contact to drink a coffee."
+      class="section--contact"
+    >
+      <Contact data={data.contact} />
     </Section>
   </main>
 

@@ -7,6 +7,7 @@ export interface PortfolioData {
   skills: Section<SkillCategory>;
   projects: Section<ProjectItem>;
   learning: Section<LearningItem>;
+  contact: Contact;
   footer: Footer;
 }
 
@@ -92,4 +93,19 @@ export interface Footer {
 export interface CommandLink {
   text: string;
   url: string;
+}
+
+export interface ContactLink {
+  platform: string;
+  handle: string;
+  cta: string;
+  url: string | null;
+  tooltip: string;
+}
+
+export interface Contact {
+  headline: string;
+  paragraph: string;
+  email: string;
+  links: ContactLink[];
 }

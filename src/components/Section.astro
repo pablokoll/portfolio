@@ -2,12 +2,13 @@
 interface Props {
   id?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   index?: number;
   class?: string;
+  titleHtml?: string;
 }
 
-const { id, title, subtitle, index, class: className = '' } = Astro.props;
+const { id, title, subtitle, index, class: className = '', titleHtml } = Astro.props;
 const indexStr = index !== undefined ? String(index).padStart(2, '0') : undefined;
 ---
 
@@ -20,8 +21,11 @@ const indexStr = index !== undefined ? String(index).padStart(2, '0') : undefine
   <div class="section-inner">
     <!-- Section Header -->
     <header class="section-header">
-      <h2 class="section-title">{title}</h2>
-      <p class="section-subtitle">{subtitle}</p>
+      {titleHtml
+        ? <h2 class="section-title" set:html={titleHtml} />
+        : <h2 class="section-title">{title}</h2>
+      }
+      {subtitle && <p class="section-subtitle">{subtitle}</p>}
     </header>
 
     <!-- Section Content -->
