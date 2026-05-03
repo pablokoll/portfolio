@@ -423,6 +423,18 @@ import Icon from './Icon.astro';
 
   // ── Smooth scroll on nav link click ──────────────────
   function scrollToId(id: string) {
+    if (id === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (id === 'projects') {
+      const divider = document.getElementById('about-divider');
+      if (divider) {
+        const top = divider.getBoundingClientRect().top + window.scrollY - 56 - 64;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -433,7 +445,6 @@ import Icon from './Icon.astro';
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const target = link.getAttribute('href')?.replace('#', '') || '';
-      // Set active immediately and freeze spy during scroll animation
       setActive(target);
       spyFrozen = true;
       if (spyFreezeTimer) clearTimeout(spyFreezeTimer);

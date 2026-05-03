@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import  SpeedInsights  from "@vercel/speed-insights/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import CustomCursor from '../components/CustomCursor.astro';
 
 interface Props {
   title: string;
@@ -86,6 +87,7 @@ const { title, description, ogImage = '/og-image.png', url } = Astro.props;
     <SpeedInsights />
   </head>
   <body class="min-h-screen antialiased" style="background: var(--bg); color: var(--fg);">
+    <CustomCursor />
     <slot />
   </body>
 </html>

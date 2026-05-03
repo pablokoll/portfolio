@@ -1,0 +1,133 @@
+<!-- Custom cursor: dot + lagging ring -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<style>
+  #cursor-dot,
+  #cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  #cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--pk-steel);
+    transform: translate(-50%, -50%);
+    transition: width 200ms ease, height 200ms ease, opacity 200ms ease;
+  }
+
+  #cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--pk-steel);
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+    transition: width 220ms ease, height 220ms ease,
+                opacity 220ms ease, border-color 220ms ease;
+  }
+
+  /* pointer state */
+  #cursor-dot.is-pointer {
+    width: 8px;
+    height: 8px;
+  }
+
+  #cursor-ring.is-pointer {
+    width: 48px;
+    height: 48px;
+    opacity: 0.4;
+  }
+
+  /* click state */
+  #cursor-dot.is-active {
+    width: 4px;
+    height: 4px;
+  }
+
+  #cursor-ring.is-active {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  const dot  = document.getElementById('cursor-dot')!;
+  const ring = document.getElementById('cursor-ring')!;
+
+  // Mouse real position
+  let mx = window.innerWidth  / 2;
+  let my = window.innerHeight / 2;
+
+  // Ring lagged position
+  let rx = mx;
+  let ry = my;
+
+  const LERP = 0.12; // lower = more lag
+
+  function applyColor() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'mocha';
+    const color  = isDark ? '#89b4fa' : '#4a7bb5';
+    dot.style.background   = color;
+    ring.style.borderColor = color;
+  }
+
+  applyColor();
+  new MutationObserver(applyColor).observe(document.documentElement, {
+    attributes: true, attributeFilter: ['data-theme'],
+  });
+
+  // Animate ring with lerp
+  function animate() {
+    rx += (mx - rx) * LERP;
+    ry += (my - ry) * LERP;
+    ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity  = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity  = '1';
+    ring.style.opacity = '0.6';
+  });
+
+  const POINTER_SEL = 'a, button, [role="button"], [tabindex], input, select, textarea, label';
+
+  document.addEventListener('mouseover', (e) => {
+    if ((e.target as Element).closest(POINTER_SEL)) {
+      dot.classList.add('is-pointer');
+      ring.classList.add('is-pointer');
+    }
+  });
+  document.addEventListener('mouseout', (e) => {
+    if ((e.target as Element).closest(POINTER_SEL)) {
+      dot.classList.remove('is-pointer');
+      ring.classList.remove('is-pointer');
+    }
+  });
+
+  document.addEventListener('mousedown', () => {
+    dot.classList.add('is-active');
+    ring.classList.add('is-active');
+  });
+  document.addEventListener('mouseup', () => {
+    dot.classList.remove('is-active');
+    ring.classList.remove('is-active');
+  });
+</script>

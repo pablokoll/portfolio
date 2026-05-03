@@ -13,7 +13,7 @@ const avatarPath = '/avatar.png';
   <div class="about-inner">
     <!-- Left: text content -->
     <div class="about-content">
-      <p class="about-prompt">{data.prompt}</p>
+      <p class="about-prompt"><span id="about-prompt" data-text={data.prompt}>{data.prompt}</span></p>
 
       <h1 class="about-headline">
         {data.headline}<span class="about-dot">.</span>
@@ -78,7 +78,7 @@ const avatarPath = '/avatar.png';
   </div>
 
   <!-- First section divider pinned to bottom -->
-  <div class="about-divider" aria-hidden="true">
+  <div id="about-divider" class="about-divider" aria-hidden="true">
     <span class="about-divider-label">01 — Featured Projects</span>
   </div>
 </section>
@@ -402,4 +402,53 @@ const avatarPath = '/avatar.png';
       target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  // Matrix scramble on the prompt text
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+  const FRAME_DURATION = 40;   // ms per scramble frame
+  const SCRAMBLE_CYCLES = 8;   // random cycles per character before it locks
+
+  function scramble(el: HTMLElement) {
+    const target = el.dataset.text ?? el.textContent ?? '';
+    const len = target.length;
+    let frame = 0;
+    const resolved = new Array(len).fill(false);
+
+    const tick = () => {
+      let done = true;
+      let display = '';
+
+      for (let i = 0; i < len; i++) {
+        if (target[i] === ' ') { display += ' '; continue; }
+
+        const charFrame = frame - i * 2;
+        if (charFrame >= SCRAMBLE_CYCLES) {
+          resolved[i] = true;
+        }
+
+        if (resolved[i]) {
+          display += target[i];
+        } else if (charFrame >= 0) {
+          done = false;
+          display += CHARS[Math.floor(Math.random() * CHARS.length)];
+        } else {
+          done = false;
+          display += target[i];
+        }
+      }
+
+      el.textContent = display;
+      frame++;
+      if (!done) setTimeout(tick, FRAME_DURATION);
+      else el.textContent = target;
+    };
+
+    tick();
+  }
+
+  const promptEl = document.getElementById('about-prompt') as HTMLElement | null;
+  if (promptEl) {
+    setTimeout(() => scramble(promptEl), 500);
+    promptEl.addEventListener('mouseenter', () => scramble(promptEl));
+  }
 </script>

@@ -237,6 +237,9 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Custom cursor handled by CustomCursor.astro */
+*, *::before, *::after { cursor: none !important; }
+
 body {
   font-family: var(--font-mono);
   font-size: var(--fs-base);
