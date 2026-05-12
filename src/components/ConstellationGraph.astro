@@ -8,17 +8,17 @@ interface Props {
 const { items } = Astro.props;
 
 const nodePositions: Record<string, { x: number; y: number }> = {
-  learning_golang:   { x: 150, y: 80  },
-  mastering_vim:     { x: 420, y: 50  },
-  obsidian_notes:    { x: 120, y: 260 },
-  ai_tools_mastery:  { x: 430, y: 240 },
+  learning_golang: { x: 150, y: 80  },
+  vim:             { x: 420, y: 50  },
+  obsidian_notes:  { x: 120, y: 260 },
+  ai_tooling:      { x: 430, y: 240 },
 };
 
 const nodeLabels: Record<string, { top: string; bottom: string }> = {
-  learning_golang:  { top: 'learning', bottom: 'Go'       },
-  mastering_vim:    { top: 'mastering', bottom: 'Vim'     },
-  obsidian_notes:   { top: 'mastering', bottom: 'Obsidian'},
-  ai_tools_mastery: { top: 'mastering', bottom: 'AI Tools'},
+  learning_golang: { top: 'learning',  bottom: 'Go'       },
+  vim:             { top: 'daily',     bottom: 'Vim'      },
+  obsidian_notes:  { top: 'mastering', bottom: 'Obsidian' },
+  ai_tooling:      { top: 'exploring', bottom: 'AI Tools' },
 };
 
 const decorativeNodes = [
@@ -34,20 +34,20 @@ const decorativeNodes = [
 ];
 
 const lines: [string, string][] = [
-  ['learning_golang',  'mastering_vim'    ],
-  ['learning_golang',  'obsidian_notes'   ],
-  ['mastering_vim',    'ai_tools_mastery' ],
-  ['obsidian_notes',   'ai_tools_mastery' ],
-  ['learning_golang',  'd0'               ],
-  ['learning_golang',  'd1'               ],
-  ['mastering_vim',    'd4'               ],
-  ['mastering_vim',    'd3'               ],
-  ['obsidian_notes',   'd8'               ],
-  ['obsidian_notes',   'd5'               ],
-  ['ai_tools_mastery','d7'               ],
-  ['ai_tools_mastery','d6'               ],
-  ['d1',               'd2'               ],
-  ['d2',               'd3'               ],
+  ['learning_golang', 'vim'           ],
+  ['learning_golang', 'obsidian_notes'],
+  ['vim',             'ai_tooling'    ],
+  ['obsidian_notes',  'ai_tooling'    ],
+  ['learning_golang', 'd0'            ],
+  ['learning_golang', 'd1'            ],
+  ['vim',             'd4'            ],
+  ['vim',             'd3'            ],
+  ['obsidian_notes',  'd8'            ],
+  ['obsidian_notes',  'd5'            ],
+  ['ai_tooling',      'd7'            ],
+  ['ai_tooling',      'd6'            ],
+  ['d1',              'd2'            ],
+  ['d2',              'd3'            ],
 ];
 
 function getCoords(key: string): { x: number; y: number } | undefined {

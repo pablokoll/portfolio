@@ -1,15 +1,15 @@
 {
   "meta": {
-    "title": "Pablo Koll | Software Developer",
-    "description": "Self-taught Software Developer with +4 years specializing in Backend & Full Stack Development. Node.js, TypeScript, Python, React. eCommerce platforms (Shopify, SFCC), API integrations, and scalable architectures across international markets.",
+    "title": "Pablo Koll | Backend Software Engineer",
+    "description": "Backend Software Engineer with 4+ years of experience building scalable APIs, transactional systems, enterprise integrations, async workflows, and multi-tenant platforms.",
     "ogImage": "/og-image.png",
     "url": "https://pablokoll.com"
   },
   "about": {
     "prompt": "$ whoami",
     "headline": "Pablo Koll",
-    "subtitle": "Software Engineer & System Builder",
-    "subline": "// self-taught engineer who builds scalable systems and clean architectures. passionate about solving real problems with the right tools — from APIs and backend services to full-stack products. always learning, currently leveraging AI to move faster and build smarter.",
+    "subtitle": "Backend Software Engineer",
+    "subline": "// Focused on integrations, distributed workflows, and reliable transactional systems. I use AI tooling pragmatically — to validate faster, prototype ideas, and cut through complexity.",
     "availability": "available for freelance",
     "cta": {
       "primary": {
@@ -27,91 +27,94 @@
     "subtitle": "// Recent positions and achievements",
     "items": [
       {
-        "role": "IT Technical Specialist & Backend Developer",
-        "company": "// TENDAM",
+        "role": "Backend Engineer | Platform & Integrations",
+        "company": "// Tendam",
         "period": "Dec 2024 - Present",
         "isCurrent": true,
         "type": "Corporate",
-        "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud (SFCC) B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
+        "description": "Backend engineer working on retail systems processing ~10k daily orders across 12 international brands within an SFCC ecosystem. Focused on payment integrations, OMS migration, and cross-country billing workflows.",
         "bulletsHtml": [
-          "Integrated <em>payment gateways</em> (Adyen, Redsys, Cybersource) across international markets",
-          "Built <strong>order management, returns & exchanges</strong> workflows for <em>SFCC B2C</em> platform processing 10k+ daily orders",
-          "Implemented <strong>compliant billing systems</strong> across multiple countries and participated in <em>OMS</em> rollout"
+          "Worked on <strong>payment gateway integrations</strong> (Adyen, Redsys, Cybersource) for a platform processing ~10k daily events across 12 international brands",
+          "Contributed to <strong>OMS migration</strong> covering the full order lifecycle: orders, invoices, returns, and exchanges across ~80 countries",
+          "Extended and maintained <strong>billing and invoicing workflows</strong> aligned with country-specific tax requirements"
         ],
         "stack": [
           "JavaScript",
-          "Node.js",
-          "SFCC",
-          "ISML",
+          "Salesforce Commerce Cloud (SFCC)",
           "OCAPI/SCAPI",
-          "REST",
-          "SOAP",
-          "Payment Gateways"
+          "Adyen",
+          "Redsys",
+          "Cybersource"
         ]
       },
       {
-        "role": "Software Engineer & Full Stack Developer",
-        "company": "// Webmefy - Shopify Plus Agency",
+        "role": "Full Stack Engineer | Integration Lead",
+        "company": "// Webmefy",
         "period": "Jul 2024 - Dec 2024",
         "isCurrent": false,
         "type": "Agency",
-        "description": "Full Stack development in Shopify ecosystem. Integrating systems and adding functionalities using Shopify's GraphQL, REST, and StoreFront APIs. Implementing ERPs, CRMs, and web services integrations. Direct communication with clients to gather requirements and deliver solutions. Using AWS for hosting and deploying backend applications.",
+        "description": "Led technical delivery for ecommerce integration projects, designing and implementing Shopify Plus integrations with ERPs and third-party services. Worked across architecture, backend systems, and AWS deployments while collaborating directly with clients.",
         "bulletsHtml": [
-          "Delivered full-stack features in the <em>Shopify</em> ecosystem using <em>GraphQL, REST & StoreFront APIs</em>",
-          "Integrated <strong>ERPs, CRMs and third-party services</strong> with backend apps hosted on <em>AWS</em>",
-          "Maintained direct client communication to gather requirements and ship solutions end-to-end"
+          "Built integrations between <strong>Shopify Plus, ERPs, and third-party services</strong> using REST and GraphQL APIs",
+          "Designed and deployed <strong>backend services and infrastructure on AWS</strong> for client ecommerce solutions",
+          "Worked directly with clients to define requirements, scope integrations, and deliver production-ready solutions"
         ],
         "stack": [
-          "Shopify",
+          "TypeScript",
           "JavaScript",
-          "TypeScript",
-          "Express.js",
           "Python",
+          "Express.js",
+          "Shopify Plus",
           "GraphQL",
-          "AWS"
-        ]
-      },
-      {
-        "role": "Software Developer & Backend Developer",
-        "company": "// Balloon Group as FastForward",
-        "period": "Jul 2022 - Jul 2024",
-        "isCurrent": false,
-        "type": "Startup",
-        "description": "Self-managing projects from technical perspective with direct client communication. Developed and maintained backend for Abbott's multi-instance Magento eCommerce synchronization with Salesforce CRM across eight countries in Latin America. Created middleware in NestJS to orchestrate client systems. Applied design patterns and implemented OAuth2, JWT authentication. Implemented CI/CD pipelines on GitLab.",
-        "bulletsHtml": [
-          "Built and maintained backend for <strong>Abbott's multi-instance Magento sync with Salesforce CRM</strong> across 8 Latin American countries",
-          "Designed <em>NestJS</em> middleware orchestrating client systems with <em>OAuth2 & JWT</em> authentication",
-          "Implemented <strong>CI/CD pipelines</strong> on GitLab and applied SOLID design patterns"
-        ],
-        "stack": [
-          "NestJS",
-          "TypeScript",
-          "PostgreSQL",
-          "Redis",
           "Docker",
           "AWS"
         ]
       },
       {
+        "role": "Backend Engineer | Systems Integration",
+        "company": "// Balloon Group",
+        "period": "Jul 2022 - Jul 2024",
+        "isCurrent": false,
+        "type": "Startup",
+        "description": "Built backend systems and integration middleware for ecommerce and B2B platforms, focused on multi-tenant architectures, async workflows, and cross-system data synchronization.",
+        "bulletsHtml": [
+          "Took over and extended a <strong>multi-tenant middleware</strong> orchestrating order, invoice, stock, pricing, and catalog flows across Magento, VTEX, ERP, and carrier systems for 4 clients",
+          "Maintained a <strong>bidirectional Magento–Salesforce synchronization platform</strong> for Abbott across 8 Latin American countries, handling catalog, order, and CRM data flows",
+          "Implemented <strong>async processing pipelines</strong> with Redis and BullMQ for orchestration, notifications, webhook delivery, and background jobs"
+        ],
+        "stack": [
+          "NestJS",
+          "TypeScript",
+          "Node.js",
+          "Redis",
+          "BullMQ",
+          "PostgreSQL",
+          "Docker",
+          "AWS",
+          "Magento",
+          "VTEX"
+        ]
+      },
+      {
         "role": "Full Stack Developer",
-        "company": "// Balloon Group as FastForward",
+        "company": "// Balloon Group",
         "period": "Nov 2021 - Jul 2022",
         "isCurrent": false,
         "type": "Startup",
-        "description": "Collaborated closely with design and product teams creating interactive UIs. Worked on maintenance and development for Toyota's CMS using Laravel and PHP. Developed Toyota's Hino trucks landing page using VueJS. Prioritized SEO strategies and participated in code reviews.",
+        "description": "Worked on frontend and CMS-based web applications for multiple client projects using React, Vue.js, Laravel, and WordPress.",
         "bulletsHtml": [
-          "Built interactive UIs for <strong>Toyota's CMS</strong> using <em>Laravel/PHP</em> and Hino trucks landing page in <em>Vue.js</em>",
-          "Prioritized <strong>SEO strategies</strong> and participated in code reviews with design and product teams"
+          "Developed <strong>Vue.js landing pages for Toyota (Hino Trucks)</strong> optimized for SEO and performance",
+          "Built React-based UI components and admin features for client web platforms",
+          "Maintained and customized <strong>Laravel and WordPress</strong> CMS solutions across client projects"
         ],
         "stack": [
           "JavaScript",
-          "HTML",
-          "CSS",
-          "Tailwind",
           "React",
-          "PHP",
+          "Vue.js",
           "Laravel",
-          "VueJS"
+          "PHP",
+          "WordPress",
+          "Tailwind"
         ]
       }
     ]
@@ -165,12 +168,12 @@
         "progressComment": "// progress: 35%"
       },
       {
-        "name": "mastering_vim",
+        "name": "vim",
         "icon": "terminal",
         "iconColor": "pk-mint",
         "badge": "DAILY",
         "badgeColor": "pk-mint",
-        "description": "Practicing VIM motions and keybindings to boost coding efficiency. Using Neovim as my daily driver with custom configurations and plugins for a powerful development workflow.",
+        "description": "Vim is how I move through a computer. Keyboard-first workflows, low friction, and tools built around speed and focus.",
         "progressPercent": 60,
         "progressComment": "// progress: 60%"
       },
@@ -185,12 +188,12 @@
         "progressComment": "// progress: 100%"
       },
       {
-        "name": "ai_tools_mastery",
+        "name": "ai_tooling",
         "icon": "sparkles",
         "iconColor": "pk-peach",
         "badge": "EXPLORING",
         "badgeColor": "pk-peach",
-        "description": "Integrating AI-powered development tools into my workflow. Learning prompt engineering, using Claude Code, GitHub Copilot, and building AI agents to boost productivity and automate tasks.",
+        "description": "Using AI tooling to accelerate development workflows, prototype integrations, and automate repetitive engineering tasks.",
         "progressPercent": 75,
         "progressComment": "// progress: 75%"
       }
@@ -199,27 +202,27 @@
   "contact": {
     "headline": "Let's talk.",
     "subtitle": "// Contact to drink a coffee.",
-    "paragraph": "Open and available for <strong>freelance</strong> and remote work. I enjoy working with a clear <em>plan</em>, helping teams make sharp <em>decisions</em>, <em>shipping</em> with Docker, and <em>building</em> products from scratch to <em>deploy</em>.",
+    "paragraph": "Available for <strong>freelance</strong> and remote work. I enjoy working with a clear plan, helping teams make sharp technical decisions, and building backend systems from scratch — architecture, deployment, and long-term maintainability.",
     "email": "pablokollm@gmail.com",
     "links": [
       {
         "platform": "GitHub",
         "handle": "@pablokoll",
-        "cta": "Échale un vistazo →",
+        "cta": "Check it out →",
         "url": "https://github.com/pablokoll",
         "tooltip": "go_to(\"github\")"
       },
       {
         "platform": "LinkedIn",
         "handle": "pablo-koll",
-        "cta": "Envíame un DM →",
+        "cta": "Send me a DM →",
         "url": "https://linkedin.com/in/pablo-koll",
         "tooltip": "go_to(\"linkedin\")"
       },
       {
         "platform": "Email",
         "handle": "pablokollm@gmail.com",
-        "cta": "Esto podría haberse escrito por mail →",
+        "cta": "This could've been an email →",
         "url": null,
         "tooltip": "copy_to_clipboard()"
       }
