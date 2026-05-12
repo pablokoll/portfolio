@@ -1,156 +1,230 @@
 {
   "meta": {
-    "title": "Pablo Koll | Software Developer",
-    "description": "Self-taught Software Developer with +4 years specializing in Backend & Full Stack Development. Node.js, TypeScript, Python, React. eCommerce platforms (Shopify, SFCC), API integrations, and scalable architectures across international markets.",
+    "title": "Pablo Koll | Backend Software Engineer",
+    "description": "Backend Software Engineer with 4+ years of experience building scalable APIs, transactional systems, enterprise integrations, async workflows, and multi-tenant platforms.",
     "ogImage": "/og-image.png",
     "url": "https://pablokoll.com"
   },
-  "hero": {
+  "about": {
     "prompt": "$ whoami",
-    "headline": "Software Developer",
-    "subline": "// Self-taught dev, building scalable systems, APIs, and clean architectures",
+    "headline": "Pablo Koll",
+    "subtitle": "Backend Software Engineer",
+    "subline": "// Focused on integrations, distributed workflows, and reliable transactional systems. I use AI tooling pragmatically — to validate faster, prototype ideas, and cut through complexity.",
+    "availability": "available for freelance",
     "cta": {
       "primary": {
-        "text": "view_projects()",
+        "text": "View my work →",
         "href": "#projects"
       },
       "secondary": {
-        "text": "$ contact --email",
-        "href": "mailto:pablokollm@gmail.com"
+        "text": "Let's talk",
+        "href": "#contact"
       }
     }
   },
   "experience": {
-    "title": "work_experience",
+    "title": "Work Experience",
     "subtitle": "// Recent positions and achievements",
     "items": [
       {
-        "role": "it_technical_specialist && backend_developer",
-        "company": "// TENDAM",
+        "role": "Backend Engineer | Platform & Integrations",
+        "company": "// Tendam",
         "period": "Dec 2024 - Present",
         "isCurrent": true,
-        "description": "Developed and maintained payment gateway integrations with Adyen, Redsys, and Cybersource. Developing order management, returns, and exchanges workflows across international markets. Implemented compliant billing systems across multiple countries. Participated in the implementation of a new Order Management System (OMS) integrated with the existing ecosystem. Coordinating with Cloud infrastructure and internal IT teams following Agile methodology with Atlassian tools (Jira). Working with Salesforce Commerce Cloud (SFCC) B2C platform, supporting millions of customers and processing over 10,000 daily orders.",
-        "stack": ["JavaScript", "Node.js", "SFCC", "ISML", "OCAPI/SCAPI", "REST", "SOAP", "Payment Gateways"]
+        "type": "Corporate",
+        "description": "Backend engineer working on retail systems processing ~10k daily orders across 12 international brands within an SFCC ecosystem. Focused on payment integrations, OMS migration, and cross-country billing workflows.",
+        "bulletsHtml": [
+          "Worked on <strong>payment gateway integrations</strong> (Adyen, Redsys, Cybersource) for a platform processing ~10k daily events across 12 international brands",
+          "Contributed to <strong>OMS migration</strong> covering the full order lifecycle: orders, invoices, returns, and exchanges across ~80 countries",
+          "Extended and maintained <strong>billing and invoicing workflows</strong> aligned with country-specific tax requirements"
+        ],
+        "stack": [
+          "JavaScript",
+          "Salesforce Commerce Cloud (SFCC)",
+          "OCAPI/SCAPI",
+          "Adyen",
+          "Redsys",
+          "Cybersource"
+        ]
       },
       {
-        "role": "software_engineer && full_stack_developer",
-        "company": "// Webmefy - Shopify Plus Agency",
+        "role": "Full Stack Engineer | Integration Lead",
+        "company": "// Webmefy",
         "period": "Jul 2024 - Dec 2024",
         "isCurrent": false,
-        "description": "Full Stack development in Shopify ecosystem. Integrating systems and adding functionalities using Shopify's GraphQL, REST, and StoreFront APIs. Implementing ERPs, CRMs, and web services integrations. Direct communication with clients to gather requirements and deliver solutions. Using AWS for hosting and deploying backend applications.",
-        "stack": ["Shopify", "JavaScript", "TypeScript", "Express.js", "Python", "GraphQL", "AWS"]
+        "type": "Agency",
+        "description": "Led technical delivery for ecommerce integration projects, designing and implementing Shopify Plus integrations with ERPs and third-party services. Worked across architecture, backend systems, and AWS deployments while collaborating directly with clients.",
+        "bulletsHtml": [
+          "Built integrations between <strong>Shopify Plus, ERPs, and third-party services</strong> using REST and GraphQL APIs",
+          "Designed and deployed <strong>backend services and infrastructure on AWS</strong> for client ecommerce solutions",
+          "Worked directly with clients to define requirements, scope integrations, and deliver production-ready solutions"
+        ],
+        "stack": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "Express.js",
+          "Shopify Plus",
+          "GraphQL",
+          "Docker",
+          "AWS"
+        ]
       },
       {
-        "role": "software_developer && backend_developer",
-        "company": "// Balloon Group as FastForward",
+        "role": "Backend Engineer | Systems Integration",
+        "company": "// Balloon Group",
         "period": "Jul 2022 - Jul 2024",
         "isCurrent": false,
-        "description": "Self-managing projects from technical perspective with direct client communication. Developed and maintained backend for Abbott's multi-instance Magento eCommerce synchronization with Salesforce CRM across eight countries in Latin America. Created middleware in NestJS to orchestrate client systems. Applied design patterns and implemented OAuth2, JWT authentication. Implemented CI/CD pipelines on GitLab.",
-        "stack": ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker", "AWS"]
+        "type": "Startup",
+        "description": "Built backend systems and integration middleware for ecommerce and B2B platforms, focused on multi-tenant architectures, async workflows, and cross-system data synchronization.",
+        "bulletsHtml": [
+          "Took over and extended a <strong>multi-tenant middleware</strong> orchestrating order, invoice, stock, pricing, and catalog flows across Magento, VTEX, ERP, and carrier systems for 4 clients",
+          "Maintained a <strong>bidirectional Magento–Salesforce synchronization platform</strong> for Abbott across 8 Latin American countries, handling catalog, order, and CRM data flows",
+          "Implemented <strong>async processing pipelines</strong> with Redis and BullMQ for orchestration, notifications, webhook delivery, and background jobs"
+        ],
+        "stack": [
+          "NestJS",
+          "TypeScript",
+          "Node.js",
+          "Redis",
+          "BullMQ",
+          "PostgreSQL",
+          "Docker",
+          "AWS",
+          "Magento",
+          "VTEX"
+        ]
       },
       {
-        "role": "full_stack_developer",
-        "company": "// Balloon Group as FastForward",
+        "role": "Full Stack Developer",
+        "company": "// Balloon Group",
         "period": "Nov 2021 - Jul 2022",
         "isCurrent": false,
-        "description": "Collaborated closely with design and product teams creating interactive UIs. Worked on maintenance and development for Toyota's CMS using Laravel and PHP. Developed Toyota's Hino trucks landing page using VueJS. Prioritized SEO strategies and participated in code reviews.",
-        "stack": ["JavaScript", "HTML", "CSS", "Tailwind", "React", "PHP", "Laravel", "VueJS"]
+        "type": "Startup",
+        "description": "Worked on frontend and CMS-based web applications for multiple client projects using React, Vue.js, Laravel, and WordPress.",
+        "bulletsHtml": [
+          "Developed <strong>Vue.js landing pages for Toyota (Hino Trucks)</strong> optimized for SEO and performance",
+          "Built React-based UI components and admin features for client web platforms",
+          "Maintained and customized <strong>Laravel and WordPress</strong> CMS solutions across client projects"
+        ],
+        "stack": [
+          "JavaScript",
+          "React",
+          "Vue.js",
+          "Laravel",
+          "PHP",
+          "WordPress",
+          "Tailwind"
+        ]
       }
     ]
   },
   "skills": {
-    "title": "technical_stack",
+    "title": "Technical Stack",
     "subtitle": "// Core technologies and tools",
     "items": [
       {
-        "name": "backend && languages",
+        "name": "Backend & Languages",
         "icon": "server",
-        "iconColor": "ctp-blue",
+        "iconColor": "pk-sky",
         "description": "Node.js, Express.js, NestJS, TypeScript, JavaScript, Python, C/C++"
       },
       {
-        "name": "databases && orms",
+        "name": "Databases & ORMs",
         "icon": "database",
-        "iconColor": "ctp-green",
+        "iconColor": "pk-mint",
         "description": "PostgreSQL, MySQL, MongoDB, Redis, Prisma, Sequelize"
       },
       {
-        "name": "devops && infra",
+        "name": "DevOps & Infra",
         "icon": "cloud",
-        "iconColor": "ctp-peach",
+        "iconColor": "pk-peach",
         "description": "Docker, AWS (EC2, S3, Lambda), Git, GitLab CI/CD, GitHub Actions, Linux"
       },
       {
-        "name": "frontend && apis",
+        "name": "Frontend & APIs",
         "icon": "monitor",
-        "iconColor": "ctp-red",
+        "iconColor": "pk-mauve",
         "description": "React, Next.js, Vue.js, Astro, Liquid, Tailwind, REST, GraphQL, SOAP, Webhooks"
       }
     ]
   },
   "projects": {
-    "title": "featured_projects",
-    "subtitle": "// Selected work and side projects",
-    "items": [
-      {
-        "name": "kit_customization_widget",
-        "description": "Interactive widget for Shopify that lets customers personalize products in real time. Features dynamic filtering by multiple attributes, live inventory checks, and a canvas-based preview with curved text, custom fonts, and multi-color effects.",
-        "image": "kit_image_widget.png",
-        "stack": ["Shopify", "JavaScript", "Canvas", "GraphQL"],
-        "badge": "freelance"
-      },
-      {
-        "name": "asset_image_scraper",
-        "description": "Node.js/TypeScript service that renders personalized product images on a dynamic canvas via Puppeteer, captures the output as a screenshot, and serves it as an optimized image. Built as a headless scraper-style pipeline with browser pool management for concurrent requests and smart caching.",
-        "image": "asset_image_scraper.png",
-        "stack": ["Node.js", "TypeScript", "Puppeteer", "Docker"],
-        "badge": "freelance"
-      }
-    ]
+    "title": "Featured Projects",
+    "subtitle": "// Selected work and side projects"
   },
   "learning": {
-    "title": "current_focus",
+    "title": "Current Focus",
     "subtitle": "// What I'm learning and working on",
     "items": [
       {
         "name": "learning_golang",
         "icon": "code",
-        "iconColor": "ctp-blue",
+        "iconColor": "pk-sky",
         "badge": "IN PROGRESS",
-        "badgeColor": "ctp-blue",
+        "badgeColor": "pk-sky",
         "description": "Diving into Go's concurrency patterns, goroutines, and channels. Building microservices to understand its performance benefits and simplicity for backend systems.",
         "progressPercent": 35,
         "progressComment": "// progress: 35%"
       },
       {
-        "name": "mastering_vim",
+        "name": "vim",
         "icon": "terminal",
-        "iconColor": "ctp-green",
+        "iconColor": "pk-mint",
         "badge": "DAILY",
-        "badgeColor": "ctp-green",
-        "description": "Practicing VIM motions and keybindings to boost coding efficiency. Using Neovim as my daily driver with custom configurations and plugins for a powerful development workflow.",
+        "badgeColor": "pk-mint",
+        "description": "Vim is how I move through a computer. Keyboard-first workflows, low friction, and tools built around speed and focus.",
         "progressPercent": 60,
         "progressComment": "// progress: 60%"
       },
       {
         "name": "obsidian_notes",
         "icon": "book-open",
-        "iconColor": "ctp-mauve",
+        "iconColor": "pk-mauve",
         "badge": "COMPLETE",
-        "badgeColor": "ctp-green",
+        "badgeColor": "pk-mint",
         "description": "Using Obsidian for knowledge management and building a personal knowledge base. Creating interconnected notes, linking ideas, and maintaining a second brain for technical concepts and learnings.",
         "progressPercent": 100,
         "progressComment": "// progress: 100%"
       },
       {
-        "name": "ai_tools_mastery",
+        "name": "ai_tooling",
         "icon": "sparkles",
-        "iconColor": "ctp-peach",
+        "iconColor": "pk-peach",
         "badge": "EXPLORING",
-        "badgeColor": "ctp-peach",
-        "description": "Integrating AI-powered development tools into my workflow. Learning prompt engineering, using Claude Code, GitHub Copilot, and building AI agents to boost productivity and automate tasks.",
+        "badgeColor": "pk-peach",
+        "description": "Using AI tooling to accelerate development workflows, prototype integrations, and automate repetitive engineering tasks.",
         "progressPercent": 75,
         "progressComment": "// progress: 75%"
+      }
+    ]
+  },
+  "contact": {
+    "headline": "Let's talk.",
+    "subtitle": "// Contact to drink a coffee.",
+    "paragraph": "Available for <strong>freelance</strong> and remote work. I enjoy working with a clear plan, helping teams make sharp technical decisions, and building backend systems from scratch — architecture, deployment, and long-term maintainability.",
+    "email": "pablokollm@gmail.com",
+    "links": [
+      {
+        "platform": "GitHub",
+        "handle": "@pablokoll",
+        "cta": "Check it out →",
+        "url": "https://github.com/pablokoll",
+        "tooltip": "go_to(\"github\")"
+      },
+      {
+        "platform": "LinkedIn",
+        "handle": "pablo-koll",
+        "cta": "Send me a DM →",
+        "url": "https://linkedin.com/in/pablo-koll",
+        "tooltip": "go_to(\"linkedin\")"
+      },
+      {
+        "platform": "Email",
+        "handle": "pablokollm@gmail.com",
+        "cta": "This could've been an email →",
+        "url": null,
+        "tooltip": "copy_to_clipboard()"
       }
     ]
   },
@@ -159,7 +233,7 @@
       "prompt": "~",
       "name": "pablo_koll"
     },
-    "tagline": "// Arch Linux & Neovim enthusiast",
+    "tagline": "Arch Linux & Vim enthusiast",
     "commandLinks": [
       {
         "text": "$ github --profile",
@@ -174,6 +248,6 @@
         "url": "mailto:pablokollm@gmail.com"
       }
     ],
-    "copyright": "© 2026 Pablo Koll - Built with code and coffee"
+    "copyright": "Madrid, Spain · 2026"
   }
 }

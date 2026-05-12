@@ -1,159 +1,321 @@
+/* ---------- Webfont ----------------------------------------
+   Brand font: CaskaydiaMono Nerd Font (patched Cascadia Mono).
+   Substitute: Cascadia Code from Google Fonts (same metrics,
+   ligatures, cursive italic — missing Nerd Font glyph supplements).
+   ----------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cascadia+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @import "tailwindcss";
 
-/* ============================================
-   Catppuccin Theme Variables
-   Mocha (dark) = default | Latte (light)
-   ============================================ */
+/* ============================================================
+   pablokoll Design System — Foundations
+   Mono-first, developer-native.
+   Default theme: Light (latte). Add data-theme="mocha" on <html> for dark.
+   ============================================================ */
 
 @theme {
-  /* Catppuccin Mocha (Dark) - Base Theme */
+  /* Font */
+  --font-mono: "JetBrains Mono", "CaskaydiaMono Nerd Font", "Cascadia Code",
+               "Cascadia Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Catppuccin Mocha extended palette — available as Tailwind utilities */
   --color-ctp-rosewater: #f5e0dc;
-  --color-ctp-flamingo: #f2cdcd;
-  --color-ctp-pink: #f5c2e7;
-  --color-ctp-mauve: #cba6f7;
-  --color-ctp-red: #f38ba8;
-  --color-ctp-maroon: #eba0ac;
-  --color-ctp-peach: #fab387;
-  --color-ctp-yellow: #f9e2af;
-  --color-ctp-green: #a6e3a1;
-  --color-ctp-teal: #94e2d5;
-  --color-ctp-sky: #89dceb;
-  --color-ctp-sapphire: #74c7ec;
-  --color-ctp-blue: #89b4fa;
-  --color-ctp-lavender: #b4befe;
-
-  --color-ctp-text: #cdd6f4;
-  --color-ctp-subtext1: #bac2de;
-  --color-ctp-subtext0: #a6adc8;
-  --color-ctp-overlay2: #9399b2;
-  --color-ctp-overlay1: #7f849c;
-  --color-ctp-overlay0: #6c7086;
-  --color-ctp-surface2: #585b70;
-  --color-ctp-surface1: #45475a;
-  --color-ctp-surface0: #313244;
-  --color-ctp-base: #1e1e2e;
-  --color-ctp-mantle: #181825;
-  --color-ctp-crust: #11111b;
-
-  /* Font Family */
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-ctp-flamingo:  #f2cdcd;
+  --color-ctp-pink:      #f5c2e7;
+  --color-ctp-mauve:     #cba6f7;
+  --color-ctp-red:       #f38ba8;
+  --color-ctp-maroon:    #eba0ac;
+  --color-ctp-peach:     #fab387;
+  --color-ctp-yellow:    #f9e2af;
+  --color-ctp-green:     #a6e3a1;
+  --color-ctp-teal:      #94e2d5;
+  --color-ctp-sky:       #89dceb;
+  --color-ctp-sapphire:  #74c7ec;
+  --color-ctp-blue:      #89b4fa;
+  --color-ctp-lavender:  #b4befe;
+  --color-ctp-text:      #cdd6f4;
+  --color-ctp-subtext1:  #bac2de;
+  --color-ctp-subtext0:  #a6adc8;
+  --color-ctp-overlay2:  #9399b2;
+  --color-ctp-overlay1:  #7f849c;
+  --color-ctp-overlay0:  #6c7086;
+  --color-ctp-surface2:  #585b70;
+  --color-ctp-surface1:  #45475a;
+  --color-ctp-surface0:  #313244;
+  --color-ctp-base:      #1e1e2e;
+  --color-ctp-mantle:    #181825;
+  --color-ctp-crust:     #11111b;
 }
 
+/* ============================================================
+   LIGHT THEME (default)
+   ============================================================ */
 :root {
-  /* Semantic color mapping */
-  --bg-primary: var(--color-ctp-base);
-  --bg-secondary: var(--color-ctp-surface0);
-  --bg-tertiary: var(--color-ctp-surface1);
+  /* Raw palette — surfaces */
+  --pk-white:        #ffffff;
+  --pk-gray-50:      #f0f3f8;
+  --pk-gray-100:     #e6eaf2;
+  --pk-border:       #dde2ec;
 
-  --text-primary: var(--color-ctp-text);
-  --text-secondary: var(--color-ctp-subtext1);
-  --text-muted: var(--color-ctp-overlay0);
+  /* Raw palette — text */
+  --pk-fg-1:         #1c2333;
+  --pk-fg-2:         #3d4a63;
+  --pk-fg-3:         #8896b0;
 
-  --accent-primary: var(--color-ctp-blue);
-  --accent-secondary: var(--color-ctp-green);
+  /* Raw palette — core accents */
+  --pk-steel:        #4a7bb5;
+  --pk-steel-hover:  #3d6a9f;
+  --pk-tokyo:        #5d8de5;
+  --pk-tokyo-soft:   #7aa2f7;
+  --pk-tokyo-hover:  #4878cc;
+  --pk-crimson:      #e8304a;
+  --pk-crimson-hover:#c91f37;
+  --pk-green:        #4db87a;
+  --pk-green-hover:  #3a9d63;
 
-  --border-color: var(--color-ctp-surface1);
-  --divider-color: var(--color-ctp-surface1);
+  /* Extended accents — Catppuccin-inspired pastels.
+     In light mode: tags, charts, illustrations only.
+     In dark mode: usable as UI accents (contrast sufficient). */
+  --pk-mauve:        #cba6f7;
+  --pk-peach:        #fab387;
+  --pk-yellow:       #f9e2af;
+  --pk-pink:         #f38ba8;
+  --pk-mint:         #a6e3a1;
+  --pk-sky:          #89b4fa;
+
+  /* Semantic tokens */
+  --bg:              var(--pk-white);
+  --bg-rgb:          255, 255, 255;
+  --bg-surface:      var(--pk-gray-50);
+  --bg-hover:        var(--pk-gray-100);
+  --fg:              var(--pk-fg-1);
+  --fg-secondary:    var(--pk-fg-2);
+  --fg-muted:        var(--pk-fg-3);
+  --border:          var(--pk-border);
+  --focus-ring:      var(--pk-steel);
+  --accent:          var(--pk-steel);
+  --link:            var(--pk-tokyo);
+  --link-decorative: var(--pk-tokyo-soft);
+  --cta:             var(--pk-crimson);
+  --success:         var(--pk-green);
+
+  /* Legacy semantic aliases (keep for Tailwind utilities that reference them) */
+  --bg-primary:      var(--bg);
+  --bg-secondary:    var(--bg-surface);
+  --bg-tertiary:     var(--pk-gray-100);
+  --text-primary:    var(--fg);
+  --text-secondary:  var(--fg-secondary);
+  --text-muted:      var(--fg-muted);
+  --accent-primary:  var(--accent);
+  --border-color:    var(--border);
+
+  /* Type scale */
+  --fs-xs:   12px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  32px;
+  --fs-3xl:  44px;
+  --fs-4xl:  60px;
+
+  --lh-xs:   1.5;
+  --lh-sm:   1.55;
+  --lh-base: 1.65;
+  --lh-md:   1.55;
+  --lh-lg:   1.45;
+  --lh-xl:   1.35;
+  --lh-2xl:  1.25;
+  --lh-3xl:  1.15;
+  --lh-4xl:  1.05;
+
+  /* Elevation */
+  --shadow-xs:   0 1px 2px 0 rgba(28, 35, 51, 0.04);
+  --shadow-sm:   0 1px 3px 0 rgba(28, 35, 51, 0.06),
+                 0 1px 2px 0 rgba(28, 35, 51, 0.04);
+  --shadow-md:   0 4px 6px -1px rgba(28, 35, 51, 0.08),
+                 0 2px 4px -1px rgba(28, 35, 51, 0.05);
+  --shadow-lg:   0 10px 25px -5px rgba(28, 35, 51, 0.10),
+                 0 6px 10px -5px rgba(28, 35, 51, 0.06);
+  --shadow-focus: 0 0 0 3px rgba(74, 123, 181, 0.20);
+
+  /* Motion */
+  --ease:       cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-1: 120ms;
+  --duration-2: 180ms;
+  --duration-3: 240ms;
 }
 
-/* Catppuccin Latte (Light Theme) */
-[data-theme="latte"] {
-  --color-ctp-rosewater: #dc8a78;
-  --color-ctp-flamingo: #dd7878;
-  --color-ctp-pink: #ea76cb;
-  --color-ctp-mauve: #8839ef;
-  --color-ctp-red: #d20f39;
-  --color-ctp-maroon: #e64553;
-  --color-ctp-peach: #fe640b;
-  --color-ctp-yellow: #df8e1d;
-  --color-ctp-green: #40a02b;
-  --color-ctp-teal: #179299;
-  --color-ctp-sky: #04a5e5;
-  --color-ctp-sapphire: #209fb5;
-  --color-ctp-blue: #1e66f5;
-  --color-ctp-lavender: #7287fd;
+/* ============================================================
+   DARK THEME — Catppuccin Mocha
+   Activate: <html data-theme="mocha">
+   ============================================================ */
+html[data-theme="mocha"] {
+  --pk-white:        #1c1c22;
+  --bg-rgb:          28, 28, 34;
+  --pk-gray-50:      #2a2a32;
+  --pk-gray-100:     #36363f;
+  --pk-border:       #3a3a44;
 
-  --color-ctp-text: #4c4f69;
-  --color-ctp-subtext1: #5c5f77;
-  --color-ctp-subtext0: #6c6f85;
-  --color-ctp-overlay2: #7c7f93;
-  --color-ctp-overlay1: #8c8fa1;
-  --color-ctp-overlay0: #9ca0b0;
-  --color-ctp-surface2: #acb0be;
-  --color-ctp-surface1: #bcc0cc;
-  --color-ctp-surface0: #ccd0da;
-  --color-ctp-base: #eff1f5;
-  --color-ctp-mantle: #e6e9ef;
-  --color-ctp-crust: #dce0e8;
+  --pk-fg-1:         #cdd6f4;
+  --pk-fg-2:         #bac2de;
+  --pk-fg-3:         #7f849c;
+
+  --pk-steel:        #89b4fa;
+  --pk-steel-hover:  #a4c5fc;
+  --pk-tokyo:        #74c7ec;
+  --pk-tokyo-soft:   #89dceb;
+  --pk-tokyo-hover:  #94d8f0;
+  --pk-crimson:      #f38ba8;
+  --pk-crimson-hover:#f5a6bd;
+  --pk-green:        #a6e3a1;
+  --pk-green-hover:  #b8e8b3;
+
+  /* Extended — on dark these have contrast for UI accents too */
+  --pk-mauve:        #cba6f7;
+  --pk-peach:        #fab387;
+  --pk-yellow:       #f9e2af;
+  --pk-pink:         #f5c2e7;
+  --pk-mint:         #94e2d5;
+  --pk-sky:          #89dceb;
+
+  --bg-hover:        #36363f;
+  --shadow-xs:   0 1px 2px 0 rgba(0, 0, 0, 0.20);
+  --shadow-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.25),
+                 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.30),
+                 0 2px 4px -1px rgba(0, 0, 0, 0.20);
+  --shadow-lg:   0 10px 25px -5px rgba(0, 0, 0, 0.40),
+                 0 6px 10px -5px rgba(0, 0, 0, 0.25);
+  --shadow-focus: 0 0 0 3px rgba(137, 180, 250, 0.25);
 }
 
-/* ============================================
-   Base Styles
-   ============================================ */
+/* Auto dark mode when no explicit theme and OS prefers dark */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="latte"]) {
+    --pk-white:        #1c1c22;
+    --pk-gray-50:      #2a2a32;
+    --pk-gray-100:     #36363f;
+    --pk-border:       #3a3a44;
+    --pk-fg-1:         #cdd6f4;
+    --pk-fg-2:         #bac2de;
+    --pk-fg-3:         #7f849c;
+    --pk-steel:        #89b4fa;
+    --pk-steel-hover:  #a4c5fc;
+    --pk-tokyo:        #74c7ec;
+    --pk-tokyo-soft:   #89dceb;
+    --pk-tokyo-hover:  #94d8f0;
+    --pk-crimson:      #f38ba8;
+    --pk-crimson-hover:#f5a6bd;
+    --pk-green:        #a6e3a1;
+    --pk-green-hover:  #b8e8b3;
+    --pk-mauve:        #cba6f7;
+    --pk-peach:        #fab387;
+    --pk-yellow:       #f9e2af;
+    --pk-pink:         #f5c2e7;
+    --pk-mint:         #94e2d5;
+    --pk-sky:          #89dceb;
+    --bg-rgb:          28, 28, 34;
+    --bg-hover:        #36363f;
+    --shadow-xs:   0 1px 2px 0 rgba(0, 0, 0, 0.20);
+    --shadow-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.25),
+                   0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.30),
+                   0 2px 4px -1px rgba(0, 0, 0, 0.20);
+    --shadow-lg:   0 10px 25px -5px rgba(0, 0, 0, 0.40),
+                   0 6px 10px -5px rgba(0, 0, 0, 0.25);
+    --shadow-focus: 0 0 0 3px rgba(137, 180, 250, 0.25);
+  }
+}
 
+/* ============================================================
+   BASE
+   ============================================================ */
 html {
+  font-size: 100%;
   scroll-behavior: smooth;
 }
 
+/* Custom cursor handled by CustomCursor.astro */
+*, *::before, *::after { cursor: none !important; }
+
 body {
   font-family: var(--font-mono);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "calt" 1, "liga" 1;
 }
 
-/* Selection */
 ::selection {
-  background-color: var(--color-ctp-mauve);
-  color: var(--color-ctp-base);
+  background: rgba(122, 162, 247, 0.30);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: 6px;
 }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-muted); }
+
+/* ============================================================
+   EXTENDED PALETTE — text-on-white utility classes
+   (darkened for AA contrast on light surfaces)
+   ============================================================ */
+.fg-mauve  { color: #8e6dd9; }
+.fg-peach  { color: #d27a3a; }
+.fg-yellow { color: #b8860b; }
+.fg-pink   { color: #d65d80; }
+.fg-mint   { color: #4fa544; }
+.fg-sky    { color: #4a8ce0; }
+
+/* ============================================================
+   COMMENT / PROMPT STYLE
+   ============================================================ */
+.comment, .subline {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.comment::before, .subline::before { content: "// "; }
+.prompt::before { content: "$ "; color: var(--fg-muted); }
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  transition: box-shadow var(--duration-2) var(--ease),
+              transform var(--duration-2) var(--ease);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-ctp-mantle);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-ctp-surface2);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ctp-overlay0);
-}
-
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid var(--color-ctp-blue);
-  outline-offset: 2px;
-}
-
-/* ============================================
-   Utility Classes
-   ============================================ */
-
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-ctp-blue), var(--color-ctp-mauve));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Card hover effect */
 .card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow var(--duration-2) var(--ease),
+              transform var(--duration-2) var(--ease);
 }
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
-/* Theme transition */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* ============================================================
+   THEME TRANSITION — smooth, but only on intentional toggles
+   (applied via JS class to avoid flashing on load)
+   ============================================================ */
+.theme-transitioning,
+.theme-transitioning * {
+  transition: background-color 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease !important;
 }

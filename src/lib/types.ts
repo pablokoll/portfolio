@@ -2,11 +2,15 @@
 
 export interface PortfolioData {
   meta: Meta;
-  hero: Hero;
+  about: About;
   experience: Section<ExperienceItem>;
   skills: Section<SkillCategory>;
-  projects: Section<ProjectItem>;
+  projects: {
+    title: string;
+    subtitle: string;
+  };
   learning: Section<LearningItem>;
+  contact: Contact;
   footer: Footer;
 }
 
@@ -17,10 +21,12 @@ export interface Meta {
   url?: string;
 }
 
-export interface Hero {
+export interface About {
   prompt: string;
   headline: string;
+  subtitle: string;
   subline: string;
+  availability?: string;
   cta: {
     primary: CTAButton;
     secondary: CTAButton;
@@ -43,7 +49,9 @@ export interface ExperienceItem {
   company: string;
   period: string;
   isCurrent?: boolean;
+  type: string;
   description: string;
+  bulletsHtml?: string[];
   stack: string[];
 }
 
@@ -57,10 +65,31 @@ export interface SkillCategory {
 export interface ProjectItem {
   name: string;
   description: string;
+  descriptionHtml?: string;
   image?: string;
   stack: string[];
   github?: string;
   badge?: string;
+}
+
+export interface ProjectDetail {
+  id: string;
+  name: string;
+  badge?: string;
+  year?: string;
+  description: string;
+  descriptionHtml?: string;
+  stack: string[];
+  github?: string;
+  live?: string;
+  image: string;
+  imageBadge?: string;
+  gallery?: string[];
+  longDescription: {
+    problem: string;
+    approach: string;
+    outcome: string;
+  };
 }
 
 export interface LearningItem {
@@ -87,4 +116,19 @@ export interface Footer {
 export interface CommandLink {
   text: string;
   url: string;
+}
+
+export interface ContactLink {
+  platform: string;
+  handle: string;
+  cta: string;
+  url: string | null;
+  tooltip: string;
+}
+
+export interface Contact {
+  headline: string;
+  paragraph: string;
+  email: string;
+  links: ContactLink[];
 }

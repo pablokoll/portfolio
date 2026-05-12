@@ -7,58 +7,40 @@
 ---
 
 <!-- Help overlay -->
-<div
-  id="kb-help"
-  class="fixed inset-0 z-[100] bg-ctp-crust/90 flex items-center justify-center hidden"
-  role="dialog"
-  aria-label="Keyboard shortcuts"
->
-  <div class="bg-ctp-surface0 rounded-lg p-8 max-w-md w-full mx-4 border border-ctp-surface1">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-lg font-semibold text-ctp-text">:help keyboard</h2>
-      <span class="text-xs text-ctp-overlay0">press ? or Esc to close</span>
+<div id="kb-help" class="kb-backdrop hidden" role="dialog" aria-label="Keyboard shortcuts">
+  <div class="kb-panel">
+    <div class="kb-header">
+      <span class="kb-title">:help keyboard</span>
+      <span class="kb-hint">press ? or Esc to close</span>
     </div>
 
-    <div class="space-y-4 text-sm">
-      <div>
-        <p class="text-ctp-blue font-medium mb-2">// navigation</p>
-        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
-          <kbd class="text-ctp-green">j / k</kbd>
-          <span class="text-ctp-subtext1">Scroll down / up</span>
-          <kbd class="text-ctp-green">d / u</kbd>
-          <span class="text-ctp-subtext1">Half page down / up</span>
-          <kbd class="text-ctp-green">gg</kbd>
-          <span class="text-ctp-subtext1">Go to top</span>
-          <kbd class="text-ctp-green">G</kbd>
-          <span class="text-ctp-subtext1">Go to bottom</span>
+    <div class="kb-body">
+      <div class="kb-group">
+        <p class="kb-group-label">// navigation</p>
+        <div class="kb-grid">
+          <kbd class="kb-key">j / k</kbd><span class="kb-desc">scroll down / up</span>
+          <kbd class="kb-key">d / u</kbd><span class="kb-desc">half page down / up</span>
+          <kbd class="kb-key">gg</kbd><span class="kb-desc">go to top</span>
+          <kbd class="kb-key">G</kbd><span class="kb-desc">go to bottom</span>
         </div>
       </div>
 
-      <div>
-        <p class="text-ctp-blue font-medium mb-2">// sections</p>
-        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
-          <kbd class="text-ctp-green">0</kbd>
-          <span class="text-ctp-subtext1">hero</span>
-          <kbd class="text-ctp-green">1</kbd>
-          <span class="text-ctp-subtext1">work_experience</span>
-          <kbd class="text-ctp-green">2</kbd>
-          <span class="text-ctp-subtext1">technical_stack</span>
-          <kbd class="text-ctp-green">3</kbd>
-          <span class="text-ctp-subtext1">featured_projects</span>
-          <kbd class="text-ctp-green">4</kbd>
-          <span class="text-ctp-subtext1">current_focus</span>
-          <kbd class="text-ctp-green">5</kbd>
-          <span class="text-ctp-subtext1">contact</span>
+      <div class="kb-group">
+        <p class="kb-group-label">// sections</p>
+        <div class="kb-grid">
+          <kbd class="kb-key">0</kbd><span class="kb-desc">about</span>
+          <kbd class="kb-key">1</kbd><span class="kb-desc">featured_projects</span>
+          <kbd class="kb-key">2</kbd><span class="kb-desc">work_experience</span>
+          <kbd class="kb-key">3</kbd><span class="kb-desc">current_focus</span>
+          <kbd class="kb-key">4</kbd><span class="kb-desc">contact</span>
         </div>
       </div>
 
-      <div>
-        <p class="text-ctp-blue font-medium mb-2">// actions</p>
-        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
-          <kbd class="text-ctp-green">t</kbd>
-          <span class="text-ctp-subtext1">Toggle theme</span>
-          <kbd class="text-ctp-green">?</kbd>
-          <span class="text-ctp-subtext1">Toggle this help</span>
+      <div class="kb-group">
+        <p class="kb-group-label">// actions</p>
+        <div class="kb-grid">
+          <kbd class="kb-key">t</kbd><span class="kb-desc">toggle theme</span>
+          <kbd class="kb-key">?</kbd><span class="kb-desc">toggle this help</span>
         </div>
       </div>
     </div>
@@ -66,13 +48,113 @@
 </div>
 
 <!-- Current mode indicator -->
-<div
-  id="kb-indicator"
-  class="fixed bottom-4 left-4 z-50 px-3 py-1.5 bg-ctp-surface0 rounded text-xs text-ctp-overlay0 opacity-0 transition-opacity duration-300"
-  aria-hidden="true"
->
+<div id="kb-indicator" class="kb-indicator" aria-hidden="true">
   <span id="kb-indicator-text">NORMAL</span>
 </div>
+
+<style>
+  .kb-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(var(--bg-rgb), 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kb-backdrop.hidden {
+    display: none;
+  }
+
+  .kb-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 16px;
+    font-family: var(--font-mono);
+  }
+
+  .kb-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .kb-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .kb-hint {
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+
+  .kb-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .kb-group-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--pk-sky);
+    margin: 0 0 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .kb-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 20px;
+    align-items: center;
+  }
+
+  .kb-key {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--pk-green);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 4px;
+    white-space: nowrap;
+    font-style: normal;
+  }
+
+  .kb-desc {
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+
+  .kb-indicator {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 50;
+    padding: 4px 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .kb-indicator.opacity-100 {
+    opacity: 1;
+  }
+</style>
 
 <script>
   const sections = ['experience', 'skills', 'projects', 'learning', 'contact'];
@@ -260,11 +342,11 @@
       return;
     }
 
-    // 0 = hero (top), 1-5 = jump to sections
+    // 0 = about (top), 1-5 = jump to sections
     if (key === '0') {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      showIndicator(':0 → hero');
+      showIndicator(':0 → about');
       return;
     }
 

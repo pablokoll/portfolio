@@ -1,0 +1,493 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import Icon from './Icon.astro';
+---
+
+<header id="navbar" class="navbar" role="banner">
+  <div class="navbar-inner">
+    <!-- Left: Brand -->
+    <BrandLogo tooltip='go_to("about")' />
+
+    <!-- Center: Nav links (desktop) -->
+    <nav class="navbar-links" aria-label="Main navigation">
+      <a href="#about"      class="nav-link" data-section="about"      data-spy="about"      data-tooltip='go_to("about")'>About</a>
+      <a href="#projects"   class="nav-link" data-section="projects"   data-spy="projects"   data-tooltip='go_to("projects")'>Projects</a>
+      <a href="#experience" class="nav-link" data-section="experience" data-spy="experience" data-tooltip='go_to("experience")'>Experience</a>
+      <a href="#learning"   class="nav-link" data-section="learning"   data-spy="learning"   data-tooltip='go_to("learning")'>Learning</a>
+      <a href="#contact"    class="nav-link" data-section="contact"    data-spy="contact"    data-tooltip='go_to("contact")'>Contact</a>
+    </nav>
+
+    <!-- Right: Action icons (desktop) + Hamburger (mobile) -->
+    <div class="navbar-actions">
+      <!-- Help — desktop only -->
+      <button
+        id="nav-help-btn"
+        type="button"
+        class="icon-btn nav-help-icon"
+        aria-label="Keyboard shortcuts"
+        data-tooltip="show_help()"
+      >
+        <Icon name="help-circle" class="w-[18px] h-[18px]" />
+      </button>
+
+      <!-- Resume -->
+      <a
+        href="/Pablo Koll CV.pdf"
+        download="Pablo_Koll_CV.pdf"
+        class="icon-btn"
+        aria-label="Download CV"
+        data-tooltip="download_cv()"
+      >
+        <Icon name="resume" class="w-[18px] h-[18px]" />
+      </a>
+
+      <!-- Theme toggle -->
+      <button
+        id="nav-theme-btn"
+        type="button"
+        class="icon-btn"
+        aria-label="Toggle theme"
+        data-tooltip="toggle_theme()"
+      >
+        <span id="nav-theme-icon-latte"><Icon name="coffee-empty" class="w-[18px] h-[18px]" /></span>
+        <span id="nav-theme-icon-mocha" style="display:none"><Icon name="coffee-full" class="w-[18px] h-[18px]" /></span>
+      </button>
+
+      <!-- Hamburger — mobile only -->
+      <button
+        id="nav-hamburger"
+        type="button"
+        class="icon-btn nav-hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        data-tooltip="open_menu()"
+      >
+        <span id="nav-hamburger-open">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </span>
+        <span id="nav-hamburger-close" style="display:none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="4" x2="20" y2="20"/>
+            <line x1="20" y1="4" x2="4" y2="20"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<div id="nav-overlay" class="nav-overlay" aria-hidden="true" aria-label="Navigation menu">
+  <!-- Close button -->
+  <button id="nav-overlay-close" class="overlay-close" type="button" aria-label="Close menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="4" x2="20" y2="20"/>
+      <line x1="20" y1="4" x2="4" y2="20"/>
+    </svg>
+  </button>
+
+  <nav class="nav-overlay-inner" aria-label="Mobile navigation">
+    <a href="#about"      class="overlay-link" data-section="about"      data-spy="about">About</a>
+    <a href="#projects"   class="overlay-link" data-section="projects"   data-spy="projects">Projects</a>
+    <a href="#experience" class="overlay-link" data-section="experience" data-spy="experience">Experience</a>
+    <a href="#learning"   class="overlay-link" data-section="learning"   data-spy="learning">Learning</a>
+    <a href="#contact"    class="overlay-link" data-section="contact"    data-spy="contact">Contact</a>
+  </nav>
+</div>
+
+<style>
+  /* ── Navbar shell ─────────────────────────────────── */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    z-index: 50;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background var(--duration-3) var(--ease),
+                border-color var(--duration-3) var(--ease),
+                backdrop-filter var(--duration-3) var(--ease);
+  }
+
+  .navbar.scrolled {
+    background: rgba(var(--bg-rgb), 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--border);
+  }
+
+  .navbar-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── Nav links (desktop center) ───────────────────── */
+  .navbar-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--duration-1) var(--ease);
+  }
+
+  .nav-link:hover {
+    color: var(--fg);
+  }
+
+  .nav-link[data-active="true"] {
+    color: var(--fg);
+  }
+
+  .nav-link[data-active="true"]::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--pk-steel);
+    border-radius: 1px;
+  }
+
+  /* Tooltips on nav links */
+  .nav-link::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-secondary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+    z-index: 10;
+  }
+
+  .nav-link:hover::before {
+    opacity: 1;
+  }
+
+  /* ── Action icons ─────────────────────────────────── */
+  .navbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    transition: background var(--duration-1) var(--ease),
+                color var(--duration-1) var(--ease);
+  }
+
+  .icon-btn:hover {
+    background: var(--bg-surface);
+    color: var(--fg);
+  }
+
+  /* Tooltips on icon buttons */
+  .icon-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-secondary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+    z-index: 10;
+  }
+
+  .icon-btn:hover::after {
+    opacity: 1;
+  }
+
+  /* ── Mobile overlay ───────────────────────────────── */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 51;
+    background: var(--bg);
+    transform: translateX(100%);
+    transition: transform 300ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-overlay.open {
+    transform: translateX(0);
+  }
+
+  .nav-overlay-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 40px 40px;
+    height: 100%;
+    gap: 8px;
+  }
+
+  .overlay-link {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fg-secondary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: color var(--duration-1) var(--ease);
+  }
+
+  .overlay-link:hover,
+  .overlay-link[data-active="true"] {
+    color: var(--fg);
+  }
+
+  .overlay-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: color var(--duration-1) var(--ease);
+  }
+
+  .overlay-close:hover {
+    color: var(--fg);
+  }
+
+  /* ── Responsive ───────────────────────────────────── */
+  .nav-hamburger {
+    display: none;
+  }
+
+  .nav-help-icon {
+    display: inline-flex;
+  }
+
+  @media (max-width: 767px) {
+    .navbar-inner {
+      padding: 0 24px;
+    }
+
+    .navbar {
+      height: 52px;
+    }
+
+    .navbar-links {
+      display: none;
+    }
+
+    .nav-hamburger {
+      display: inline-flex;
+    }
+
+    .nav-help-icon {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // ── Scroll: transparent → frosted ───────────────────
+  const navbar = document.getElementById('navbar');
+
+  function updateScrolled() {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateScrolled, { passive: true });
+  updateScrolled(); // run on load
+
+  // ── Theme toggle ─────────────────────────────────────
+  const html = document.documentElement;
+
+  function getTheme(): string {
+    return html.getAttribute('data-theme') || 'latte';
+  }
+
+  function applyThemeIcons(theme: string) {
+    const isLatteD = document.getElementById('nav-theme-icon-latte');
+    const isMochaD = document.getElementById('nav-theme-icon-mocha');
+
+    if (theme === 'mocha') {
+      if (isLatteD) isLatteD.style.display = 'none';
+      if (isMochaD) isMochaD.style.display = 'inline';
+    } else {
+      if (isLatteD) isLatteD.style.display = 'inline';
+      if (isMochaD) isMochaD.style.display = 'none';
+    }
+  }
+
+  function toggleTheme() {
+    const next = getTheme() === 'mocha' ? 'latte' : 'mocha';
+    document.body.classList.add('theme-transitioning');
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('pk-theme', next);
+    applyThemeIcons(next);
+    setTimeout(() => document.body.classList.remove('theme-transitioning'), 300);
+  }
+
+  applyThemeIcons(getTheme());
+
+  document.getElementById('nav-theme-btn')?.addEventListener('click', toggleTheme);
+
+  // ── Help popup ───────────────────────────────────────
+  document.getElementById('nav-help-btn')?.addEventListener('click', () => {
+    document.getElementById('kb-help')?.classList.toggle('hidden');
+  });
+
+  // ── Scroll-spy (IntersectionObserver) ────────────────
+  const spySections = ['about', 'projects', 'experience', 'learning', 'contact'];
+  const desktopLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[data-spy]');
+  const overlayLinks = document.querySelectorAll<HTMLAnchorElement>('.overlay-link[data-spy]');
+
+  let spyFrozen = false;
+  let spyFreezeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function setActive(sectionId: string) {
+    [...desktopLinks, ...overlayLinks].forEach((link) => {
+      link.dataset.active = link.dataset.spy === sectionId ? 'true' : 'false';
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (spyFrozen) return;
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: '-56px 0px 0px 0px', threshold: 0.2 }
+  );
+
+  spySections.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // ── Smooth scroll on nav link click ──────────────────
+  function scrollToId(id: string) {
+    if (id === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (id === 'projects') {
+      const divider = document.getElementById('about-divider');
+      if (divider) {
+        const top = divider.getBoundingClientRect().top + window.scrollY - 56 - 64;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  const isHome = window.location.pathname === '/';
+
+  [...desktopLinks, ...overlayLinks].forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const section = link.dataset.section || '';
+      if (!isHome) {
+        // Navigate to home with anchor — let browser handle it
+        window.location.href = `/#${section}`;
+        return;
+      }
+      e.preventDefault();
+      setActive(section);
+      spyFrozen = true;
+      if (spyFreezeTimer) clearTimeout(spyFreezeTimer);
+      spyFreezeTimer = setTimeout(() => { spyFrozen = false; }, 1000);
+      scrollToId(section);
+      closeOverlay();
+    });
+  });
+
+  // ── Mobile overlay ────────────────────────────────────
+  const overlay = document.getElementById('nav-overlay');
+  const hamburger = document.getElementById('nav-hamburger');
+  const hamOpen = document.getElementById('nav-hamburger-open');
+  const hamClose = document.getElementById('nav-hamburger-close');
+
+  function openOverlay() {
+    overlay?.classList.add('open');
+    overlay?.removeAttribute('aria-hidden');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    if (hamOpen) hamOpen.style.display = 'none';
+    if (hamClose) hamClose.style.display = 'inline';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeOverlay() {
+    overlay?.classList.remove('open');
+    overlay?.setAttribute('aria-hidden', 'true');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    if (hamOpen) hamOpen.style.display = 'inline';
+    if (hamClose) hamClose.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', () => {
+    overlay?.classList.contains('open') ? closeOverlay() : openOverlay();
+  });
+
+  document.getElementById('nav-overlay-close')?.addEventListener('click', closeOverlay);
+</script>

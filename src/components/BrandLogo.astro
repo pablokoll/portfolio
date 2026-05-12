@@ -1,0 +1,62 @@
+---
+interface Props {
+  tooltip?: string;
+}
+
+const { tooltip = 'scroll_to_top()' } = Astro.props;
+---
+
+<button type="button" class="brand-logo" data-tooltip={tooltip} aria-label="Go to top" id="brand-logo-btn">
+  PK<span class="brand-dot">.</span>
+</button>
+
+<script>
+  document.getElementById('brand-logo-btn')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+<style>
+  .brand-logo {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--fg);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .brand-dot {
+    color: var(--pk-steel);
+  }
+
+  /* Tooltip */
+  .brand-logo::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-secondary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+  }
+
+  .brand-logo:hover::after {
+    opacity: 1;
+  }
+</style>

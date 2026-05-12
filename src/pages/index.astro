@@ -1,17 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Navbar from '../components/Navbar.astro';
 import KeyboardNav from '../components/KeyboardNav.astro';
-import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
 import Section from '../components/Section.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
-import SkillCard from '../components/SkillCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import LearningCard from '../components/LearningCard.astro';
+import ConstellationGraph from '../components/ConstellationGraph.astro';
+import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { getPortfolioData } from '../lib/get-portfolio-data';
+import { getProjectsData } from '../lib/get-projects-data';
 
 const data = await getPortfolioData();
+const projects = getProjectsData();
 ---
 
 <Layout
@@ -28,31 +30,48 @@ const data = await getPortfolioData();
     Skip to content
   </a>
 
-  <ThemeToggle />
+  <Navbar />
   <KeyboardNav />
 
-  <main id="main-content" role="main">
-    <!-- Hero Section -->
-    <Hero data={data.hero} />
+  <main id="main-content" role="main" class="main-content">
+    <!-- About Section -->
+    <About data={data.about} />
 
-    <!-- Experience Section -->
+    <!-- Projects Section — 01 -->
     <Section
-      id="experience"
-      title={data.experience.title}
-      subtitle={data.experience.subtitle}
+      id="projects"
+      index={1}
+      title={data.projects.title}
+      subtitle={data.projects.subtitle}
+      class="section--first"
     >
-      <div class="space-y-6" role="list">
-        {data.experience.items.map((exp) => (
-          <div role="listitem">
-            <ExperienceCard experience={exp} />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch" role="list">
+        {projects.map((project, i) => (
+          <div role="listitem" class="flex">
+            <ProjectCard project={project} index={i + 1} />
           </div>
         ))}
       </div>
     </Section>
 
-    <!-- Skills Section -->
+    <!-- Experience Section — 02 -->
     <Section
+      id="experience"
+      index={2}
+      title={data.experience.title}
+      subtitle={data.experience.subtitle}
+    >
+      <div role="list">
+        {data.experience.items.map((exp) => (
+          <ExperienceCard experience={exp} />
+        ))}
+      </div>
+    </Section>
+
+    <!-- Skills Section — HIDDEN (to be redesigned) -->
+    {/* <Section
       id="skills"
+      index={3}
       title={data.skills.title}
       subtitle={data.skills.subtitle}
     >
@@ -63,39 +82,89 @@ const data = await getPortfolioData();
           </div>
         ))}
       </div>
-    </Section>
+    </Section> */}
 
-    <!-- Projects Section -->
-    <Section
-      id="projects"
-      title={data.projects.title}
-      subtitle={data.projects.subtitle}
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" role="list">
-        {data.projects.items.map((project) => (
-          <div role="listitem">
-            <ProjectCard project={project} />
-          </div>
-        ))}
-      </div>
-    </Section>
-
-    <!-- Learning Section -->
+    <!-- Learning Section — 03 -->
     <Section
       id="learning"
+      index={3}
       title={data.learning.title}
       subtitle={data.learning.subtitle}
+      dividerLabel="LEARNING"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" role="list">
-        {data.learning.items.map((item) => (
-          <div role="listitem">
-            <LearningCard item={item} />
-          </div>
-        ))}
+      <div class="learning-layout">
+        <div class="learning-about">
+          <p class="learning-about-text">
+            Always learning outside of what the day-to-day demands — currently deepening my expertise in <span style="color: var(--pk-sky)">Go</span>, using <span style="color: var(--pk-mint)">Vim</span> as my primary interface, managing knowledge with <span style="color: var(--pk-mauve)">Obsidian</span>, and exploring <span style="color: var(--pk-peach)">AI tools</span> pragmatically across development workflows.
+          </p>
+        </div>
+        <div class="learning-graph">
+          <ConstellationGraph items={data.learning.items} />
+        </div>
       </div>
+    </Section>
+
+    <!-- Contact Section — 04 -->
+    <Section
+      id="contact"
+      index={4}
+      title="Contact"
+      titleHtml={`Let's <a href="mailto:${data.contact.email}" class="contact-title-link">talk to</a> build something good.`}
+      subtitle={data.contact.subtitle}
+      class="section--contact"
+    >
+      <Contact data={data.contact} />
     </Section>
   </main>
 
   <!-- Footer -->
   <Footer data={data.footer} />
 </Layout>
+
+<style>
+  .main-content {
+    padding-top: 56px;
+  }
+
+  @media (max-width: 767px) {
+    .main-content {
+      padding-top: 52px;
+    }
+  }
+
+  .learning-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .learning-layout {
+      grid-template-columns: 45fr 55fr;
+      gap: 48px;
+      align-items: start;
+    }
+  }
+
+  .learning-about {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .learning-about-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--fg-secondary);
+    margin: 0;
+  }
+
+  .learning-graph {
+    min-height: 260px;
+  }
+
+  @media (max-width: 767px) {
+    .learning-graph {
+      min-height: 320px;
+    }
+  }
+</style>

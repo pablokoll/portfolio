@@ -1,72 +1,165 @@
 ---
-import { Image } from 'astro:assets';
-import type { ProjectItem } from '../lib/types';
-import Icon from './Icon.astro';
+import type { ProjectDetail } from '../lib/types';
 
 interface Props {
-  project: ProjectItem;
+  project: ProjectDetail;
+  index: number;
 }
 
-const { project } = Astro.props;
+const { project, index } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/*.png');
-const imageSrc = project.image ? images[`../assets/screenshots/${project.image}`] : null;
-const resolvedImage = imageSrc ? (await imageSrc()).default : null;
+const indexStr = String(index).padStart(2, '0');
+const href = `/projects/${project.id}`;
+const badgeColor = project.badge === 'freelance' ? 'green'
+  : project.badge === 'personal' ? 'sky'
+  : project.badge === 'open-source' ? 'mauve'
+  : 'muted';
 ---
 
-<article class="h-full p-6 md:p-7 bg-ctp-surface0 rounded card-hover flex flex-col">
-  <!-- Screenshot -->
-  <div class="bg-ctp-surface1 rounded h-44 mb-5 overflow-hidden">
-    {resolvedImage ? (
-      <Image
-        src={resolvedImage}
-        alt={`${project.name} screenshot`}
-        class="w-full h-full object-cover object-center"
-        loading="lazy"
-        widths={[400, 800]}
-        sizes="(max-width: 768px) 100vw, 50vw"
-      />
-    ) : (
-      <div class="flex items-center justify-center h-full">
-        <span class="text-xs text-ctp-overlay0">[Project Screenshot]</span>
-      </div>
+<a href={href} class="project-card">
+  <div class="project-top">
+    <span class="project-index">{indexStr}</span>
+    {project.badge && (
+      <span class={`project-badge project-badge--${badgeColor}`}>{project.badge}</span>
     )}
   </div>
 
-  <!-- Header: Title + Badge -->
-  <header class="flex items-center justify-between mb-3">
-    <h3 class="text-lg font-semibold text-ctp-text">
-      {project.name}
-    </h3>
-    {project.badge && (
-      <span class="px-2.5 py-1 text-[10px] font-medium bg-ctp-surface1 text-ctp-peach rounded uppercase">
-        {project.badge}
-      </span>
-    )}
-    {project.github && !project.badge && (
-      <a
-        href={project.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-ctp-surface2 hover:text-ctp-text transition-colors"
-        aria-label={`View ${project.name} on GitHub`}
-      >
-        <Icon name="github" class="w-5 h-5" />
-      </a>
-    )}
-  </header>
+  <h3 class="project-name">{project.name}</h3>
 
-  <!-- Description -->
-  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-4 flex-grow">
-    {project.description}
-  </p>
+  {project.descriptionHtml ? (
+    <p class="project-description" set:html={project.descriptionHtml} />
+  ) : (
+    <p class="project-description">{project.description}</p>
+  )}
 
-  <!-- Stack Tags -->
-  <footer class="flex flex-wrap gap-2">
+  <div class="project-stack">
     {project.stack.map((tech) => (
-      <span class="px-3 py-1.5 text-xs font-medium bg-ctp-surface1 text-ctp-green rounded">
-        {tech}
-      </span>
+      <span class="project-tag">{tech}</span>
     ))}
-  </footer>
-</article>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-surface);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color var(--duration-2) var(--ease);
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--pk-steel);
+    transition: width var(--duration-2) var(--ease);
+  }
+
+  .project-card:hover::after {
+    width: 100%;
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .project-index {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .project-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: transparent;
+    flex-shrink: 0;
+  }
+
+  .project-badge--green {
+    color: var(--pk-green);
+    border: 1px solid var(--pk-green);
+  }
+
+  .project-badge--sky {
+    color: var(--pk-sky);
+    border: 1px solid var(--pk-sky);
+  }
+
+  .project-badge--mauve {
+    color: var(--pk-mauve);
+    border: 1px solid var(--pk-mauve);
+  }
+
+  .project-badge--muted {
+    color: var(--fg-secondary);
+    border: 1px solid var(--border);
+  }
+
+  .project-description :global(strong) {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .project-description :global(em) {
+    color: var(--pk-steel);
+    font-style: normal;
+  }
+
+  .project-name {
+    font-family: var(--font-mono);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--fg);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .project-description {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    line-height: 1.55;
+    margin: 0 0 20px;
+    flex-grow: 1;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+  }
+
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+</style>

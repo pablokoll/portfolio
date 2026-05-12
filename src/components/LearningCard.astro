@@ -8,71 +8,148 @@ interface Props {
 
 const { item } = Astro.props;
 
-// Map color tokens to Tailwind classes
-const colorMap: Record<string, { text: string; bg: string; bar: string }> = {
-  'ctp-blue': {
-    text: 'text-ctp-blue',
-    bg: 'bg-ctp-blue/20',
-    bar: 'bg-ctp-blue',
-  },
-  'ctp-green': {
-    text: 'text-ctp-green',
-    bg: 'bg-ctp-green/20',
-    bar: 'bg-ctp-green',
-  },
-  'ctp-peach': {
-    text: 'text-ctp-peach',
-    bg: 'bg-ctp-peach/20',
-    bar: 'bg-ctp-peach',
-  },
-  'ctp-mauve': {
-    text: 'text-ctp-mauve',
-    bg: 'bg-ctp-mauve/20',
-    bar: 'bg-ctp-mauve',
-  },
-};
-
-const iconColors = colorMap[item.iconColor] || colorMap['ctp-blue'];
-const badgeColors = colorMap[item.badgeColor] || colorMap['ctp-blue'];
-
-// Progress bar color matches the icon color
-const barColor = iconColors.bar;
+const iconColorVar = `var(--${item.iconColor})`;
+const badgeColorVar = `var(--${item.badgeColor})`;
+const isSolid = item.badge === 'COMPLETE';
 ---
 
-<article class="h-full p-6 md:p-7 bg-ctp-surface0 rounded card-hover flex flex-col">
-  <!-- Badge -->
-  <div class="mb-4">
-    <span class:list={[
-      'px-3 py-1.5 text-[10px] font-medium rounded',
-      `bg-ctp-surface1 ${badgeColors.text}`
-    ]}>
+<article class="learning-card card card-hover">
+  <!-- Top row: icon + title | badge -->
+  <div class="learning-header">
+    <div class="learning-title-row">
+      <span class="learning-icon-wrap" style={`--icon-color: ${iconColorVar}`}>
+        <Icon name={item.icon} class="learning-icon" />
+      </span>
+      <h3 class="learning-name">{item.name}</h3>
+    </div>
+    <span
+      class:list={['learning-badge', isSolid ? 'learning-badge--solid' : 'learning-badge--outline']}
+      style={isSolid
+        ? `background: ${badgeColorVar}; border-color: ${badgeColorVar};`
+        : `color: ${badgeColorVar}; border-color: ${badgeColorVar};`}
+    >
       {item.badge}
     </span>
   </div>
 
-  <!-- Header: Icon + Title -->
-  <div class="flex items-center gap-3 mb-4">
-    <div class:list={[iconColors.text]}>
-      <Icon name={item.icon} class="w-7 h-7" />
-    </div>
-    <h3 class="text-lg font-semibold text-ctp-text">
-      {item.name}
-    </h3>
-  </div>
-
   <!-- Description -->
-  <p class="text-sm text-ctp-subtext1 leading-relaxed mb-5 flex-grow">
-    {item.description}
-  </p>
+  <p class="learning-description">{item.description}</p>
 
-  <!-- Progress Bar -->
-  <div class="mt-auto">
-    <p class="text-xs text-ctp-overlay0 mb-2">{item.progressComment}</p>
-    <div class="w-full h-1.5 bg-ctp-surface1 rounded overflow-hidden">
+  <!-- Progress -->
+  <div class="learning-progress">
+    <span class="learning-progress-label">{item.progressComment}</span>
+    <div class="learning-bar-track">
       <div
-        class:list={['h-full rounded', barColor]}
-        style={`width: ${item.progressPercent}%`}
+        class="learning-bar-fill"
+        style={`width: ${item.progressPercent}%; background: ${iconColorVar};`}
       ></div>
     </div>
   </div>
 </article>
+
+<style>
+  .learning-card {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .learning-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .learning-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .learning-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--bg-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--icon-color, var(--pk-sky));
+  }
+
+  .learning-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .learning-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .learning-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .learning-badge--outline {
+    background: transparent;
+  }
+
+  .learning-badge--solid {
+    color: var(--bg);
+  }
+
+  .learning-description {
+    font-size: 13px;
+    color: var(--fg-secondary);
+    line-height: 1.55;
+    margin: 0 0 16px;
+    flex-grow: 1;
+  }
+
+  .learning-progress {
+    margin-top: auto;
+  }
+
+  .learning-progress-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  .learning-bar-track {
+    height: 6px;
+    background: var(--bg-surface);
+    border-radius: 99px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .learning-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 600ms ease;
+  }
+</style>

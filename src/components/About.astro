@@ -1,0 +1,454 @@
+---
+import type { About as AboutType } from '../lib/types';
+
+interface Props {
+  data: AboutType;
+}
+
+const { data } = Astro.props;
+const avatarPath = '/avatar.png';
+---
+
+<section id="about" class="about-section">
+  <div class="about-inner">
+    <!-- Left: text content -->
+    <div class="about-content">
+      <p class="about-prompt"><span id="about-prompt" data-text={data.prompt}>{data.prompt}</span></p>
+
+      <h1 class="about-headline">
+        {data.headline}<span class="about-dot">.</span>
+      </h1>
+
+      <p class="about-subtitle">{data.subtitle}</p>
+
+      <p class="about-subline">{data.subline}</p>
+
+      <div class="about-ctas">
+        <button
+          type="button"
+          class="btn-primary"
+          data-scroll-to={data.cta.primary.href.replace('#', '')}
+          data-tooltip='go_to("projects")'
+        >
+          {data.cta.primary.text}
+        </button>
+        <button
+          type="button"
+          class="btn-secondary"
+          data-scroll-to={data.cta.secondary.href.replace('#', '')}
+          data-tooltip='go_to("contact")'
+        >
+          {data.cta.secondary.text}
+        </button>
+      </div>
+
+      <!-- Availability — mobile only (below CTAs) -->
+      {data.availability && (
+        <div class="about-availability about-availability--mobile" aria-hidden="true">
+          <span class="availability-dot"></span>
+          <span>{data.availability}</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Right: avatar + availability (desktop) -->
+    <div class="about-right">
+      <div class="about-avatar-wrap">
+        <div class="about-avatar">
+          <img
+            src={avatarPath}
+            alt="Pablo Koll"
+            class="about-avatar-img"
+            id="about-avatar-img"
+            onerror="this.style.display='none'; document.getElementById('about-avatar-fallback').style.display='flex';"
+          />
+          <div class="about-avatar-fallback" id="about-avatar-fallback" style="display:none">
+            <span class="about-avatar-initials">PK</span>
+          </div>
+        </div>
+      </div>
+
+      {data.availability && (
+        <div class="about-availability about-availability--desktop">
+          <span class="availability-dot"></span>
+          <span>{data.availability}</span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- First section divider pinned to bottom -->
+  <div id="about-divider" class="about-divider" aria-hidden="true">
+    <span class="about-divider-label">01 — Featured Projects</span>
+  </div>
+</section>
+
+<style>
+  /* ── Section shell ───────────────────────────────────── */
+  .about-section {
+    min-height: 100vh;
+    padding: 0 64px 100px;
+    scroll-margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .about-inner {
+    flex: 1;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+
+  /* ── Bottom divider ──────────────────────────────────── */
+  .about-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 8px;
+  }
+
+  .about-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 4px);
+    height: 1px;
+    background: var(--border);
+  }
+
+  .about-divider-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--bg);
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+
+
+  .about-content {
+    min-width: 0;
+  }
+
+  /* ── Typography ──────────────────────────────────────── */
+  .about-prompt {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin: 0 0 16px;
+  }
+
+  .about-headline {
+    font-family: var(--font-mono);
+    font-size: clamp(64px, 9vw, 100px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+    color: var(--fg);
+    margin: 0;
+  }
+
+  .about-dot {
+    color: var(--pk-steel);
+  }
+
+  .about-subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 500;
+    color: var(--fg-secondary);
+    margin: 12px 0 0;
+    letter-spacing: -0.01em;
+  }
+
+  .about-subline {
+    margin: 16px 0 0;
+    font-size: 15px;
+    color: var(--fg-muted);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* ── CTAs ────────────────────────────────────────────── */
+  .about-ctas {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    transition: background var(--duration-2) var(--ease),
+                color var(--duration-2) var(--ease),
+                border-color var(--duration-2) var(--ease);
+  }
+
+  .btn-primary {
+    border: 1px solid transparent;
+    background: var(--pk-steel);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--pk-steel-hover); }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg);
+  }
+  .btn-secondary:hover { background: var(--bg-surface); }
+
+  /* Tooltips on CTAs */
+  .btn-primary::after,
+  .btn-secondary::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 4px 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--fg-secondary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms ease;
+    z-index: 10;
+  }
+  .btn-primary:hover::after,
+  .btn-secondary:hover::after {
+    opacity: 1;
+  }
+
+  /* ── Availability ────────────────────────────────────── */
+  .about-availability {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-muted);
+    font-style: italic;
+  }
+
+  .availability-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 99px;
+    background: var(--pk-green);
+    flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.75); }
+  }
+
+  /* desktop: shown in right column below avatar; hidden in left column */
+  .about-availability--mobile  { display: none; }
+  .about-availability--desktop { display: flex; margin-top: 16px; justify-content: center; }
+
+  /* ── Right column ────────────────────────────────────── */
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Avatar ──────────────────────────────────────────── */
+  .about-avatar-wrap {
+    flex-shrink: 0;
+  }
+
+  .about-avatar {
+    width: 320px;
+    height: 320px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+  }
+
+  .about-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .about-avatar-fallback {
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-avatar-initials {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fg-muted);
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Avatar responsive sizes ────────────────────────── */
+  @media (min-width: 1000px) {
+    .about-avatar { width: 360px; height: 360px; }
+  }
+
+  /* ── No avatar (≤849px) ─────────────────────────────── */
+  @media (max-width: 849px) {
+    .about-section {
+      padding: 0 40px 80px;
+    }
+
+    .about-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .about-right {
+      display: none;
+    }
+
+    .about-availability--mobile {
+      display: flex;
+      margin-top: 28px;
+    }
+  }
+
+  /* ── Mobile ──────────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .about-section {
+      padding: 0 24px 72px;
+    }
+  }
+
+  /* ── Small mobile (320–425px) ────────────────────────── */
+  @media (max-width: 425px) {
+    .about-section {
+      padding: 0 20px 60px;
+    }
+
+    .about-headline {
+      font-size: clamp(38px, 11vw, 56px);
+    }
+
+    .about-subtitle {
+      font-size: 16px;
+    }
+
+    .about-subline {
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .about-ctas {
+      margin-top: 24px;
+      gap: 8px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      font-size: 13px;
+      padding: 9px 16px;
+    }
+
+    .about-availability {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-scroll-to]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.scrollTo!);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Matrix scramble on the prompt text
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+  const FRAME_DURATION = 40;   // ms per scramble frame
+  const SCRAMBLE_CYCLES = 8;   // random cycles per character before it locks
+
+  function scramble(el: HTMLElement) {
+    const target = el.dataset.text ?? el.textContent ?? '';
+    const len = target.length;
+    let frame = 0;
+    const resolved = new Array(len).fill(false);
+
+    const tick = () => {
+      let done = true;
+      let display = '';
+
+      for (let i = 0; i < len; i++) {
+        if (target[i] === ' ') { display += ' '; continue; }
+
+        const charFrame = frame - i * 2;
+        if (charFrame >= SCRAMBLE_CYCLES) {
+          resolved[i] = true;
+        }
+
+        if (resolved[i]) {
+          display += target[i];
+        } else if (charFrame >= 0) {
+          done = false;
+          display += CHARS[Math.floor(Math.random() * CHARS.length)];
+        } else {
+          done = false;
+          display += target[i];
+        }
+      }
+
+      el.textContent = display;
+      frame++;
+      if (!done) setTimeout(tick, FRAME_DURATION);
+      else el.textContent = target;
+    };
+
+    tick();
+  }
+
+  const promptEl = document.getElementById('about-prompt') as HTMLElement | null;
+  if (promptEl) {
+    setTimeout(() => scramble(promptEl), 500);
+    promptEl.addEventListener('mouseenter', () => scramble(promptEl));
+  }
+</script>
