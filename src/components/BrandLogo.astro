@@ -12,7 +12,7 @@ const { tooltip = 'scroll_to_top()' } = Astro.props;
 
 <script>
   document.getElementById('brand-logo-btn')?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.dispatchEvent(new CustomEvent('nav:goto', { detail: { section: 'about' } }));
   });
 </script>
 
