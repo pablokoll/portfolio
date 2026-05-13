@@ -78,18 +78,26 @@ const { data } = Astro.props;
     }
 
     .footer-row {
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 6px 16px;
     }
 
     .footer-tagline {
       padding: 0;
       text-align: left;
+      flex: 0 1 auto;
     }
 
     .footer-location {
       text-align: left;
+    }
+  }
+
+  @media (max-width: 510px) {
+    .footer-row {
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
     }
   }
 </style>
